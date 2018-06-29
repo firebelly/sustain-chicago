@@ -1,0 +1,98 @@
+// Grid
+
+$grid: 8px;
+$mobile-grid: 8px;
+
+$global-padding: 40px;
+$mobile-inset: 20px;
+
+$global-columns: 6;
+$column-width: 100% / $global-columns;
+
+// Quickie columns() function
+@function columns($num-columns, $parent-num-columns: $global-columns) {
+  @return $column-width * $num-columns * ($global-columns / $parent-num-columns);
+}
+@function grid($num) {
+  @return $grid * $num;
+}
+@function mobile-grid($num) {
+  @return $mobile-grid * $num;
+}
+
+.grid {
+  width: 100%;
+  display: block;
+  @include min-screen($breakpoint-md) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  &.-persist {
+    display: flex;
+  }
+}
+
+.grid.-persist {
+  .grid-item {
+    flex-basis: auto;
+  }
+  .one-fourth {
+    max-width: 25%;
+    flex-basis: 25%;
+  }
+  .one-third {
+    flex-basis: 33.3333333%;
+    max-width: 33.3333333%;
+  }
+  .one-half {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+  .two-thirds {
+    flex-basis: 66.6666667%;
+    max-width: 66.6666667%;
+  }
+}
+
+@include min-screen($breakpoint-md) {
+  .grid-item {
+    flex-basis: auto;
+  }
+  .one-fourth {
+    max-width: 25%;
+    flex-basis: 25%;
+  }
+  .one-third {
+    flex-basis: 33.3333333%;
+    max-width: 33.3333333%;
+  }
+  .one-half {
+    flex-basis: 50%;
+    max-width: 50%;
+  }
+  .two-thirds {
+    flex-basis: 66.6666667%;
+    max-width: 66.6666667%;
+  }
+}
+
+// This allows js to determine breakpoint
+#breakpoint-indicator {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+
+  &::after {
+    content: 'xs';
+    @include media-sm {
+      content: 'sm';
+    }
+    @include media-md {
+      content: 'md';
+    }
+    @include media-lg {
+      content: 'lg';
+    }
+  }
+}

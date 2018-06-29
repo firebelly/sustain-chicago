@@ -1,0 +1,28 @@
+/.env
+/.idea
+/.todo
+/vendor
+.DS_Store
+
+# Build
+node_modules
+*.js.map
+*.css.map
+
+# Letsencrypt
+.well-known
+
+# Fabfile
+*.pyc
+
+# Bower
+bower_components
+
+# Compiled Assets
+web/assets/dist
+
+# Licensed fonts
+web/assets/fonts
+
+# Treated images
+web/imager

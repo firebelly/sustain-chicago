@@ -1,0 +1,26 @@
+{
+  "name": "clx-assets",
+  "authors": [
+    "Firebelly <developer@firebellydesign.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "https://www.firebellydesign.com/",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "jquery.fitvids": "fitvids#^1.1.0",
+    "imagesloaded": "^4.1.1",
+    "jquery_lazyload": "jquery.lazyload#^1.9.7",
+    "flickity": "^2.1.2",
+    "velocity": "^2.0.5"
+  }
+}
