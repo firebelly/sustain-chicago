@@ -33,11 +33,11 @@
       {% endif %}
     </div>
 
-    {% if footerContent.partners|length %}
+    {% if footerContent.partners.all()|length %}
     <div class="med-one-half med-order-0">
       <ul class="partner-list">
-        {% for partner in footerContent.partners %}
-          {% set image = partner.partnerLogo.first().getUrl() %}
+        {% for partner in footerContent.partners.all() %}
+          {% set image = partner.partnerLogo.one().getUrl() %}
           {% set transformedImage = craft.imager.transformImage(image, { height: 120 }) %}
           <li><a href="{{ partner.partnerLink }}" target="_blank"><img src="{{ transformedImage.getUrl() }}" alt="{{ partner.partnerName }}"></a></li>
         {% endfor %}

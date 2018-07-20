@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a8ee4ed0c914a5d29e64a9f662a4192",
+    "content-hash": "807ca72f91eb8ebfc9d46a86255995aa",
     "packages": [
         {
             "name": "aelvan/imager",
-            "version": "v2.0.1.2",
+            "version": "v2.0.2",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aelvan/Imager-Craft/zipball/56c84bb0a7aabf2fc24abe70fe3ee82b3f86f39c",
-                "reference": "56c84bb0a7aabf2fc24abe70fe3ee82b3f86f39c",
+                "url": "https://api.github.com/repos/aelvan/Imager-Craft/zipball/703d82fb9f5f43b0bbb4a84b36b211f474c8fc6e",
+                "reference": "703d82fb9f5f43b0bbb4a84b36b211f474c8fc6e",
                 "shasum": ""
             },
             "require": {
@@ -67,15 +67,15 @@
                 "docs": "https://github.com/aelvan/Imager-Craft/blob/craft3/README.md",
                 "issues": "https://github.com/aelvan/Imager-Craft/issues"
             },
-            "time": "2018-06-12T19:59:07+00:00"
+            "time": "2018-07-13T14:33:34+00:00"
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.62.12",
+            "version": "3.63.3",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/53b59b0ab96c92aa6f5e52df00c4af1991c97c5d",
-                "reference": "53b59b0ab96c92aa6f5e52df00c4af1991c97c5d",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c90015c87088eb93718d4e1cc418b0a13d9d3356",
+                "reference": "c90015c87088eb93718d4e1cc418b0a13d9d3356",
                 "shasum": ""
             },
             "require": {
@@ -130,7 +130,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2018-07-10T00:18:49+00:00"
+            "time": "2018-07-18T20:14:07+00:00"
         },
         {
             "name": "cebe/markdown",
@@ -189,11 +189,11 @@
         },
         {
             "name": "clubstudioltd/craft-asset-rev",
-            "version": "6.0.0",
+            "version": "6.0.1",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/clubstudioltd/craft-asset-rev/zipball/c7468e84b23213d858385aa462427ab8ca9b8bb5",
-                "reference": "c7468e84b23213d858385aa462427ab8ca9b8bb5",
+                "url": "https://api.github.com/repos/clubstudioltd/craft-asset-rev/zipball/49113ac16d5f9ff956bfccc15da0031e72f56249",
+                "reference": "49113ac16d5f9ff956bfccc15da0031e72f56249",
                 "shasum": ""
             },
             "require": {
@@ -221,7 +221,7 @@
                 "MIT"
             ],
             "description": "A plugin to aid cache-busting in Craft 3",
-            "time": "2017-11-08T14:00:15+00:00"
+            "time": "2018-07-20T13:17:13+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -461,11 +461,11 @@
         },
         {
             "name": "craftcms/cms",
-            "version": "3.0.13.2",
+            "version": "3.0.16.1",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/cms/zipball/cadc71477c3e64a93038a900ea34877163d0af51",
-                "reference": "cadc71477c3e64a93038a900ea34877163d0af51",
+                "url": "https://api.github.com/repos/craftcms/cms/zipball/aef7f8472169bf412448dcf9a3238f23e661146e",
+                "reference": "aef7f8472169bf412448dcf9a3238f23e661146e",
                 "shasum": ""
             },
             "require": {
@@ -492,7 +492,8 @@
                 "php": ">=7.0.0",
                 "pixelandtonic/imagine": "~0.7.1.2",
                 "seld/cli-prompt": "^1.0.3",
-                "twig/twig": "^2.4.4",
+                "true/punycode": "^2.1.0",
+                "twig/twig": "^2.5.0",
                 "yiisoft/yii2": "~2.0.15.1",
                 "yiisoft/yii2-debug": "^2.0.10",
                 "yiisoft/yii2-queue": "^2.0.1",
@@ -506,12 +507,6 @@
                 "bower-asset/punycode": "1.3.*",
                 "bower-asset/yii2-pjax": "~2.0.1"
             },
-            "require-dev": {
-                "codeception/codeception": "^2.4",
-                "codeception/mockery-module": "~0.2.2",
-                "codeception/specify": "~0.4.6",
-                "codeception/verify": "~0.3.3"
-            },
             "suggest": {
                 "ext-iconv": "Adds support for more character encodings than PHP’s built-in mb_convert_encoding() function, which Craft will take advantage of when converting strings to UTF-8.",
                 "ext-imagick": "Adds support for more image processing formats and options.",
@@ -523,7 +518,6 @@
                     "craft\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "proprietary"
             ],
@@ -534,7 +528,15 @@
                 "craftcms",
                 "yii2"
             ],
-            "time": "2018-06-27T13:28:26+00:00"
+            "support": {
+                "email": "support@craftcms.com",
+                "issues": "https://github.com/craftcms/cms/issues?state=open",
+                "forum": "https://craftcms.stackexchange.com/",
+                "source": "https://github.com/craftcms/cms",
+                "docs": "https://github.com/craftcms/docs",
+                "rss": "https://github.com/craftcms/cms/releases.atom"
+            },
+            "time": "2018-07-18T22:38:28+00:00"
         },
         {
             "name": "craftcms/oauth2-craftid",
@@ -620,11 +622,11 @@
         },
         {
             "name": "craftcms/redactor",
-            "version": "2.1.0",
+            "version": "2.1.2",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/redactor/zipball/7d72a873e12ea7c92a8a6d00e025e303089d504e",
-                "reference": "7d72a873e12ea7c92a8a6d00e025e303089d504e",
+                "url": "https://api.github.com/repos/craftcms/redactor/zipball/d49309d7c251d15c729093e208dd21b9cfc05a19",
+                "reference": "d49309d7c251d15c729093e208dd21b9cfc05a19",
                 "shasum": ""
             },
             "require": {
@@ -666,15 +668,15 @@
                 "docs": "https://github.com/craftcms/redactor",
                 "rss": "https://github.com/craftcms/redactor/commits/master.atom"
             },
-            "time": "2018-05-15T21:58:54+00:00"
+            "time": "2018-07-14T09:42:21+00:00"
         },
         {
             "name": "craftcms/server-check",
-            "version": "1.1.1",
+            "version": "1.1.3",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/server-check/zipball/a39dea7f05c66751532a0ad09d51cae46da3f9cf",
-                "reference": "a39dea7f05c66751532a0ad09d51cae46da3f9cf",
+                "url": "https://api.github.com/repos/craftcms/server-check/zipball/85a1052f9501357edf6cb1aea12f526f27ac7683",
+                "reference": "85a1052f9501357edf6cb1aea12f526f27ac7683",
                 "shasum": ""
             },
             "type": "library",
@@ -683,7 +685,6 @@
                     "server/requirements"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -695,7 +696,7 @@
                 "requirements",
                 "yii2"
             ],
-            "time": "2017-12-15T16:00:57+00:00"
+            "time": "2018-07-18T23:31:44+00:00"
         },
         {
             "name": "creocoder/yii2-nested-sets",
@@ -1065,15 +1066,15 @@
         },
         {
             "name": "google/cloud",
-            "version": "v0.70.0",
+            "version": "v0.72.0",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/GoogleCloudPlatform/google-cloud-php/zipball/e41812b66d728bdb4f989a6b40c82bf245256415",
-                "reference": "e41812b66d728bdb4f989a6b40c82bf245256415",
+                "url": "https://api.github.com/repos/GoogleCloudPlatform/google-cloud-php/zipball/42e0b9f6a7d8da2e2a044bf776d0dd33cd7d73c1",
+                "reference": "42e0b9f6a7d8da2e2a044bf776d0dd33cd7d73c1",
                 "shasum": ""
             },
             "require": {
-                "google/gax": "^0.34",
+                "google/gax": "^0.36",
                 "guzzlehttp/guzzle": "^5.3|^6.0",
                 "guzzlehttp/psr7": "^1.2",
                 "monolog/monolog": "~1",
@@ -1083,34 +1084,35 @@
                 "rize/uri-template": "~0.3"
             },
             "replace": {
-                "google/cloud-bigquery": "1.2.4",
-                "google/cloud-bigquerydatatransfer": "0.6.1",
-                "google/cloud-bigtable": "0.5.1",
-                "google/cloud-container": "0.5.1",
-                "google/cloud-core": "1.20.7",
-                "google/cloud-dataproc": "0.5.1",
+                "google/cloud-bigquery": "1.4.0",
+                "google/cloud-bigquerydatatransfer": "0.6.2",
+                "google/cloud-bigtable": "0.5.3",
+                "google/cloud-container": "0.5.2",
+                "google/cloud-core": "1.21.1",
+                "google/cloud-dataproc": "0.5.3",
                 "google/cloud-datastore": "1.5.4",
-                "google/cloud-debugger": "0.12.1",
-                "google/cloud-dialogflow": "0.3.1",
-                "google/cloud-dlp": "0.11.0",
-                "google/cloud-error-reporting": "0.11.1",
-                "google/cloud-firestore": "0.11.2",
-                "google/cloud-iot": "0.3.1",
-                "google/cloud-kms": "0.1.0",
-                "google/cloud-language": "0.15.1",
-                "google/cloud-logging": "1.12.3",
-                "google/cloud-monitoring": "0.11.1",
-                "google/cloud-oslogin": "0.6.0",
-                "google/cloud-pubsub": "1.4.0",
-                "google/cloud-redis": "0.3.1",
-                "google/cloud-spanner": "1.6.1",
-                "google/cloud-speech": "0.15.1",
-                "google/cloud-storage": "1.5.2",
-                "google/cloud-tasks": "0.1.0",
-                "google/cloud-trace": "0.10.1",
+                "google/cloud-debugger": "0.12.2",
+                "google/cloud-dialogflow": "0.3.2",
+                "google/cloud-dlp": "0.11.2",
+                "google/cloud-error-reporting": "0.11.2",
+                "google/cloud-firestore": "0.12.0",
+                "google/cloud-iot": "0.3.2",
+                "google/cloud-kms": "0.2.0",
+                "google/cloud-language": "0.15.2",
+                "google/cloud-logging": "1.12.5",
+                "google/cloud-monitoring": "0.11.2",
+                "google/cloud-oslogin": "0.6.1",
+                "google/cloud-pubsub": "1.4.1",
+                "google/cloud-redis": "0.3.3",
+                "google/cloud-spanner": "1.6.2",
+                "google/cloud-speech": "0.15.2",
+                "google/cloud-storage": "1.6.0",
+                "google/cloud-tasks": "0.2.0",
+                "google/cloud-text-to-speech": "0.1.1",
+                "google/cloud-trace": "0.10.2",
                 "google/cloud-translate": "1.2.3",
-                "google/cloud-videointelligence": "1.0.2",
-                "google/cloud-vision": "0.14.2"
+                "google/cloud-videointelligence": "1.0.4",
+                "google/cloud-vision": "0.15.1"
             },
             "suggest": {
                 "opis/closure": "May be used to serialize closures to process jobs in the batch daemon. Please require version ^3.",
@@ -1159,6 +1161,7 @@
                     "Google\\Cloud\\Speech\\": "Speech/src",
                     "Google\\Cloud\\Storage\\": "Storage/src",
                     "Google\\Cloud\\Tasks\\": "Tasks/src",
+                    "Google\\Cloud\\TextToSpeech\\": "TextToSpeech/src",
                     "Google\\Cloud\\Trace\\": "Trace/src",
                     "Google\\Cloud\\Translate\\": "Translate/src",
                     "Google\\Cloud\\VideoIntelligence\\": "VideoIntelligence/src",
@@ -1175,6 +1178,7 @@
                     "GPBMetadata\\Google\\Cloud\\Redis\\": "Redis/metadata",
                     "GPBMetadata\\Google\\Cloud\\Speech\\": "Speech/metadata",
                     "GPBMetadata\\Google\\Cloud\\Tasks\\": "Tasks/metadata",
+                    "GPBMetadata\\Google\\Cloud\\Texttospeech\\": "TextToSpeech/metadata",
                     "GPBMetadata\\Google\\Cloud\\Videointelligence\\": "VideoIntelligence/metadata",
                     "GPBMetadata\\Google\\Cloud\\Vision\\": "Vision/metadata",
                     "GPBMetadata\\Google\\Devtools\\Clouddebugger\\": "Debugger/metadata",
@@ -1231,15 +1235,15 @@
                 "translation",
                 "vision"
             ],
-            "time": "2018-07-03T15:31:33+00:00"
+            "time": "2018-07-19T17:51:07+00:00"
         },
         {
             "name": "google/gax",
-            "version": "0.34.0",
+            "version": "0.36.0",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/faddb0bd14e63b2470fd71d5a66cf6a1416c6717",
-                "reference": "faddb0bd14e63b2470fd71d5a66cf6a1416c6717",
+                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/9dd3911738aaf61bafd861917820317402cba798",
+                "reference": "9dd3911738aaf61bafd861917820317402cba798",
                 "shasum": ""
             },
             "require": {
@@ -1272,7 +1276,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2018-06-08T22:24:35+00:00"
+            "time": "2018-07-18T21:57:44+00:00"
         },
         {
             "name": "google/protobuf",
@@ -2425,25 +2429,25 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v6.0.2",
+            "version": "v6.1.2",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/412333372fb6c8ffb65496a2bbd7321af75733fc",
-                "reference": "412333372fb6c8ffb65496a2bbd7321af75733fc",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/7d760881d266d63c5e7a1155cbcf2ac656a31ca8",
+                "reference": "7d760881d266d63c5e7a1155cbcf2ac656a31ca8",
                 "shasum": ""
             },
             "require": {
                 "egulias/email-validator": "~2.0",
                 "php": ">=7.0.0"
             },
-            "require-dev": {
-                "mockery/mockery": "~0.9.1",
-                "symfony/phpunit-bridge": "~3.3@dev"
+            "suggest": {
+                "ext-intl": "Needed to support internationalized email addresses",
+                "true/punycode": "Needed to support internationalized email addresses, if ext-intl is not installed"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.0-dev"
+                    "dev-master": "6.1-dev"
                 }
             },
             "autoload": {
@@ -2451,7 +2455,6 @@
                     "lib/swift_required.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -2465,13 +2468,13 @@
                 }
             ],
             "description": "Swiftmailer, free feature-rich PHP mailer",
-            "homepage": "http://swiftmailer.symfony.com",
+            "homepage": "https://swiftmailer.symfony.com",
             "keywords": [
                 "email",
                 "mail",
                 "mailer"
             ],
-            "time": "2017-09-30T22:39:41+00:00"
+            "time": "2018-07-13T07:04:35+00:00"
         },
         {
             "name": "symfony/console",
@@ -2677,6 +2680,55 @@
             "time": "2017-06-01T21:01:25+00:00"
         },
         {
+            "name": "symfony/polyfill-ctype",
+            "version": "v1.8.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/7cc359f1b7b80fc25ed7796be7d96adc9b354bae",
+                "reference": "7cc359f1b7b80fc25ed7796be7d96adc9b354bae",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                },
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                },
+                {
+                    "name": "Gert de Pagter",
+                    "email": "BackEndTea@gmail.com"
+                }
+            ],
+            "description": "Symfony polyfill for ctype functions",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "compatibility",
+                "ctype",
+                "polyfill",
+                "portable"
+            ],
+            "time": "2018-04-30T19:57:29+00:00"
+        },
+        {
             "name": "symfony/polyfill-mbstring",
             "version": "v1.8.0",
             "dist": {
@@ -2821,27 +2873,59 @@
             "time": "2017-07-19T12:26:04+00:00"
         },
         {
-            "name": "twig/twig",
-            "version": "v2.4.8",
+            "name": "true/punycode",
+            "version": "v2.1.1",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/7b604c89da162034bdf4bb66310f358d313dd16d",
-                "reference": "7b604c89da162034bdf4bb66310f358d313dd16d",
+                "url": "https://api.github.com/repos/true/php-punycode/zipball/a4d0c11a36dd7f4e7cd7096076cab6d3378a071e",
+                "reference": "a4d0c11a36dd7f4e7cd7096076cab6d3378a071e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "symfony/polyfill-mbstring": "^1.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "TrueBV\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Renan Gonçalves",
+                    "email": "renan.saddam@gmail.com"
+                }
+            ],
+            "description": "A Bootstring encoding of Unicode for Internationalized Domain Names in Applications (IDNA)",
+            "homepage": "https://github.com/true/php-punycode",
+            "keywords": [
+                "idna",
+                "punycode"
+            ],
+            "time": "2016-11-16T10:37:54+00:00"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v2.5.0",
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/6a5f676b77a90823c2d4eaf76137b771adf31323",
+                "reference": "6a5f676b77a90823c2d4eaf76137b771adf31323",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.0",
+                "symfony/polyfill-ctype": "^1.8",
                 "symfony/polyfill-mbstring": "~1.0"
-            },
-            "require-dev": {
-                "psr/container": "^1.0",
-                "symfony/debug": "^2.7",
-                "symfony/phpunit-bridge": "^3.3"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4-dev"
+                    "dev-master": "2.5-dev"
                 }
             },
             "autoload": {
@@ -2852,7 +2936,6 @@
                     "Twig\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2870,24 +2953,24 @@
                 },
                 {
                     "name": "Twig Team",
-                    "homepage": "http://twig.sensiolabs.org/contributors",
+                    "homepage": "https://twig.symfony.com/contributors",
                     "role": "Contributors"
                 }
             ],
             "description": "Twig, the flexible, fast, and secure template language for PHP",
-            "homepage": "http://twig.sensiolabs.org",
+            "homepage": "https://twig.symfony.com",
             "keywords": [
                 "templating"
             ],
-            "time": "2018-04-02T09:24:19+00:00"
+            "time": "2018-07-13T07:18:09+00:00"
         },
         {
             "name": "verbb/expanded-singles",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/verbb/expanded-singles/zipball/699d66d3ce1c7ce4244bd2173b1c21913d6df0c1",
-                "reference": "699d66d3ce1c7ce4244bd2173b1c21913d6df0c1",
+                "url": "https://api.github.com/repos/verbb/expanded-singles/zipball/0d5d80ff5fec1f2a8a70c0f981efa4650211a479",
+                "reference": "0d5d80ff5fec1f2a8a70c0f981efa4650211a479",
                 "shasum": ""
             },
             "require": {
@@ -2934,7 +3017,7 @@
                 "docs": "https://github.com/verbb/expanded-singles",
                 "rss": "https://github.com/verbb/expanded-singles/commits/v2.atom"
             },
-            "time": "2018-02-20T10:35:41+00:00"
+            "time": "2018-07-04T22:06:04+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -3187,18 +3270,15 @@
         },
         {
             "name": "yiisoft/yii2-composer",
-            "version": "2.0.6",
+            "version": "2.0.7",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/163419f1f197e02f015713b0d4f85598d8f8aa80",
-                "reference": "163419f1f197e02f015713b0d4f85598d8f8aa80",
+                "url": "https://api.github.com/repos/yiisoft/yii2-composer/zipball/1439e78be1218c492e6cde251ed87d3f128b9534",
+                "reference": "1439e78be1218c492e6cde251ed87d3f128b9534",
                 "shasum": ""
             },
             "require": {
                 "composer-plugin-api": "^1.0"
-            },
-            "require-dev": {
-                "composer/composer": "^1.0"
             },
             "type": "composer-plugin",
             "extra": {
@@ -3212,7 +3292,6 @@
                     "yii\\composer\\": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -3232,7 +3311,7 @@
                 "extension installer",
                 "yii2"
             ],
-            "time": "2018-03-21T16:15:55+00:00"
+            "time": "2018-07-05T15:44:47+00:00"
         },
         {
             "name": "yiisoft/yii2-debug",

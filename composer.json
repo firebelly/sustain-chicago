@@ -19,13 +19,13 @@
     "rss": "https://craftcms.com/changelog.rss"
   },
   "require": {
-    "craftcms/cms": "^3.0.0",
+    "craftcms/cms": "3.0.16.1",
     "vlucas/phpdotenv": "^2.4.0",
-    "verbb/expanded-singles": "1.0.3",
+    "verbb/expanded-singles": "1.0.4",
     "wbrowar/adminbar": "3.1.6",
-    "clubstudioltd/craft-asset-rev": "v6.0.0",
-    "craftcms/redactor": "2.1.0",
-    "aelvan/imager": "v2.0.1.2"
+    "clubstudioltd/craft-asset-rev": "6.0.1",
+    "craftcms/redactor": "2.1.2",
+    "aelvan/imager": "v2.0.2"
   },
   "autoload": {
     "psr-4": {
