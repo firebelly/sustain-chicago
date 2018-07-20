@@ -102,12 +102,13 @@ gulp.task('copy', function() {
 gulp.task('watch', ['build'], function() {
   // Init BrowserSync
   browserSync.init({
-    proxy: 'sustain-chicago.craft3',
-    notify: false,
+    proxy: 'sustain-chicago.localhost',
+    notify: true,
     open: false
   });
   gulp.watch('assets/scss/**/*.scss', ['styles']);
   gulp.watch('assets/js/**/*.js', ['scripts']);
+  gulp.watch('assets/svgs/**/*.svg', ['svgs']);
 });
 
 // `gulp jshint` - Lints configuration JSON and project JS.

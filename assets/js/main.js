@@ -12,14 +12,38 @@ var SC = (function($) {
       breakpoint_md,
       breakpoint_sm,
       breakpoint_xs,
-      page_at;
+      resizeTimer,
+      slideEasing = [0.65, 0, 0.35, 1],
+      page_at,
+      $siteNav,
+      $headerSearchForm,
+      transitionElements;
 
   /**
    * Initialize all functions
    */
   function _init() {
     page_at = window.location.pathname;
+    $siteNav = $('.site-nav-main');
+    $headerSearchForm = $('#header-search-form');
 
+    // Transition elements to enable/disable on resize
+    transitionElements = [$siteNav, $headerSearchForm];
+
+    // Keyboard-triggered functions
+    $(document).keyup(function(e) {
+      // Escape key
+      if (e.keyCode === 27) {
+        // Close Form
+
+      }
+    });
+
+    _initActiveToggle();
+    _initMobileNav();
+    _initSearchForm();
+    _initFormFunctions();
+    _initAccordions();
   }
 
   function _scrollBody(el, duration) {
@@ -27,6 +51,93 @@ var SC = (function($) {
     if ($(el).length) {
       $('html, body').animate({scrollTop: $(el).offset().top + headerOffset}, duration, 'easeInOutSine');
     }
+  }
+
+  function _initActiveToggle() {
+    $(document).on('click', '[data-active-toggle]', function(e) {
+      var $trigger = $(this);
+      var targets = $trigger.attr('data-active-toggle');
+
+      function setClass(target) {
+        if (target === 'self') {
+          $trigger.toggleClass('-active');
+        } else {
+          $(target).toggleClass('-active');
+        }
+      }
+
+      if (targets.indexOf(' ') !== -1) {
+        targets = targets.split(' ');
+        $.each(targets, function(index, value) {
+          setClass(value);
+        });
+      } else {
+        setClass(targets);
+      }
+    });
+  }
+
+  function _initMobileNav() {
+    $siteNav.on('click', '.nav-parent-label', function(e) {
+      e.preventDefault();
+
+      var $childNav = $(this).next('.nav-sub-level');
+
+      if ($(this).is('.-active')) {
+        $childNav.velocity('slideUp', { duration: 250, easing: 'easeOutSine' });
+      } else {
+        $siteNav.find('.nav-parent-label.-active + .nav-sub-level').velocity('slideUp', { duration: 250, easing: 'easeOutSine' });
+        $siteNav.find('.nav-parent-label.-active').not($(this)).removeClass('-active');
+        $childNav.velocity('slideDown', { duration: 250, easing: 'easeOutSine' });
+      }
+    });
+  }
+
+  function _initSearchForm() {
+    var $headerSearchForm = document.getElementById('header-search-form');
+    $('.search-toggle').on('click', function(e) {
+      if ($(this).is('.-active')) {
+        $('#header-search-form input').blur();
+      } else {
+        $headerSearchForm.addEventListener('transitionend', function(event) {
+          $('#header-search-form input').focus();
+        });
+      }
+    });
+  }
+
+  function _initFormFunctions() {
+    $('form .input-wrap input, form .input-wrap .form-cta, form .input-wrap button[type="submit"]').on('focus', function(e) {
+      $(this).closest('.input-wrap').addClass('-focus');
+    }).on('blur', function(e) {
+      $(this).closest('.input-wrap').removeClass('-focus');
+    });
+  }
+
+  function _initAccordions() {
+    $('.accordion').each(function() {
+      var $accordion = $(this),
+          $toggle = $accordion.find('.accordion-toggle'),
+          $content = $accordion.find('.accordion-content');
+
+      $toggle.on('click', function(e) {
+        $accordion.toggleClass('-active');
+        $content.slideToggle();
+      });
+    });
+  }
+
+  // Disabling transitions on certain elements on resize
+  function _disableTransitions() {
+    $.each(transitionElements, function() {
+      $(this).css('transition', 'none');
+    });
+  }
+
+  function _enableTransitions() {
+    $.each(transitionElements, function() {
+      $(this).attr('style', '');
+    });
   }
 
   /**
@@ -44,6 +155,22 @@ var SC = (function($) {
     breakpoint_md = breakpointIndicatorString === 'md' || breakpoint_lg;
     breakpoint_sm = breakpointIndicatorString === 'sm' || breakpoint_md;
     breakpoint_xs = breakpointIndicatorString === 'xs' || breakpoint_sm;
+
+    // Reset inline styles for navigation for medium breakpoint
+    if (breakpoint_md && $('.site-nav .nav-sub-level')[0].hasAttribute('style')) {
+      $('.site-nav .nav-parent-label.-active').removeClass('-active');
+      $('.site-nav .nav-sub-level[style]').attr('style', '');
+    }
+
+    // Disable transitions when resizing
+    _disableTransitions();
+
+    // Functions to run on resize end
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      // Re-enable transitions
+      _enableTransitions();    
+    }, 250);
   }
 
 

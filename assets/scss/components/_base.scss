@@ -1,0 +1,54 @@
+// Base Styles
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  @include p1;
+  overflow-x: hidden;
+  color: color(green-dark);
+  background-color: color(black);
+}
+
+.wrap {
+  margin: 0 auto;
+  max-width: 1440px;
+  padding: 0 #{$spacing * 2};
+
+  @include media-md {
+    padding: 0 #{$spacing * 10};
+  }
+}
+
+.site-main {
+  padding-bottom: #{$spacing * 8};
+  background-color: color(blue-light);
+}
+
+a {
+  color: inherit;
+}
+
+// Custom UL styles
+ul {
+  padding-left: 0;
+  list-style: none;
+
+  li {
+    &::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border: 5px solid;
+      position: relative;
+      border-radius: 50%;
+      margin-right: .5em;
+      display: inline-block;
+    }
+  }
+}

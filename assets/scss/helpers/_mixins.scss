@@ -25,6 +25,42 @@
   padding-top: #{$height / $width * 100%}; // aspect ratio
 }
 
+/// Vertical-spacing mixin used to define vertical spacing responsivley
+/// @param {string} $side - 'top', 'bottom', or 'both', which side the spacing is on
+/// @param {string} $amount ['single] - 'single', 'double', or 'triple' (the amount of $spacing)
+/// @param {string} $type ['margin'] - 'margin' or 'padding'
+/// @require {variable} $spacing
+/// @example scss - Single multiple of global-spacing margin below
+///   @include vertical-spacing('bottom', 'single')
+///   // returns `margin-bottom: 48px;`
+@mixin vertical-spacing($side, $amount: 'single', $type: 'margin') {
+    $small-spacing: $spacing;
+    $medium-spacing: $spacing;
+
+    @if $amount == 'double' {
+        $medium-spacing: #{$spacing * 2};
+    } @else if $amount == 'triple' {
+        $small-spacing: #{$spacing * 1.5};
+        $medium-spacing: #{$spacing * 3};
+    } @else if $amount == 'quadruple' {
+        $small-spacing: #{$spacing * 2};
+        $medium-spacing: #{$spacing * 4};
+    }
+
+    @if $side == 'top' or $side == 'both' {
+        #{$type}-top: $small-spacing;
+        @include breakpoint(medium) {
+            #{$type}-top: $spacing;
+        }
+    }
+    @if $side == 'bottom' or $side == 'both' {
+        #{$type}-bottom: $small-spacing;
+        @include breakpoint(medium) {
+            #{$type}-bottom: $spacing;
+        }
+    }
+}
+
 // Responsive mixins by Andy Richardson (@andimal): https://github.com/andimal/sass-responsive-mixin-madness
 @mixin media-xs() {
   @media screen and (max-width: $breakpoint-sm - 1) {
@@ -71,5 +107,31 @@
 @mixin min-screen($res) {
   @media screen and (min-width: $res) {
     @content;
+  }
+}
+
+// Global UI Transition
+@mixin transition($properties...) {
+  transition-duration: $transition;
+  transition-property: $properties;
+  transition-timing-function: ease-out;
+}
+
+// Hover State Mixin
+@mixin hover-style() {
+  position: relative;
+  outline: 0 solid transparent;
+  box-shadow: 0 0 0 0 transparent;
+  @include transition(background, outline-width, color, box-shadow);
+  
+  &:hover,
+  &:focus {  
+    z-index: 1;
+    outline-offset: 0;
+    fill: color(white);
+    color: color(white);
+    box-shadow: $box-shadow-hover;
+    background-color: color(blue);
+    outline: 10px solid color(blue);
   }
 }

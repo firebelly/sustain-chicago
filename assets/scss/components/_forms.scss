@@ -1,0 +1,89 @@
+// Forms
+
+form {
+  .input-wrap {
+    position: relative;
+
+    &.single-line {
+      display: flex;
+      border-radius: 5px;
+      @include transition(box-shadow);
+
+      input {
+        flex-grow: 1;
+        border-radius: 5px 0 0 5px;
+        &:hover,
+        &.-focus {
+          box-shadow: none;
+        }
+      }
+      .form-cta {
+        border-radius: 0 5px 5px 0;
+      }
+
+      &:hover,
+      &.-focus {
+        box-shadow: 0 0 0 5px color(blue);
+      }
+    }
+  }
+
+  input,
+  input[type="search"] {
+    @include p1;
+    border: none;
+    height: 55px;
+    appearance: none;
+    border-radius: 5px;
+    background-color: color(white);
+    padding: 12px #{$spacing * 2};
+
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+      box-shadow: 0 0 0 5px color(blue);
+    }
+  }
+
+  button[type="submit"] {
+    @include h4;
+    border: none;
+    outline: none;
+    appearance: none;
+  }
+
+  .form-cta {
+    cursor: pointer;
+    fill: color(green-dark);
+    color: color(green-dark);
+    padding: 12px #{$spacing * 2};
+    background-color: color(green-light);
+    @include transition(background-color, color);
+
+    &.-dark {
+      color: color(green-light);
+      background-color: color(green-dark);
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      bottom: -1px;
+      fill: inherit;
+      position: relative;
+      @include transition(fill);
+    }
+
+    &:hover,
+    &:focus {
+      fill: color(white);
+      color: color(white);
+      background-color: color(blue);
+    }
+
+    @include media-md {
+      padding: 12px #{$spacing * 4};
+    }
+  }
+}

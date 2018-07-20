@@ -1,0 +1,26 @@
+{% extends (craft.app.request.isAjax and not craft.app.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
+{% set query = craft.app.request.getParam('q') %}
+{% set title = 'Search: ' ~ query %}
+{% set results = craft.entries().search(query).order('score') %}
+
+{% block content %}
+
+  <h2 class="page-title">
+    {{ results|length }} result{{ results|length > 1 ? "s" : "" }} found for “{{ query }}”
+  </h2>  
+
+  {% include "partials/_search-form" with { 'query': query } %}
+  <div class="center-content">
+    <div class="news-posts article-grid">
+    {% if query %}
+      {% set entries = craft.entries.search(query).orderBy('score') %}
+        {% for entry in entries.all() %}
+          {% include 'search/_article' %}
+        {% else %}
+          <p class="no-results">No results found.</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+    </div>
+  </div>
+{% endblock %}

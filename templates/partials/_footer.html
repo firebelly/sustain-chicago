@@ -1,0 +1,51 @@
+<div class="site-pre-footer">
+  <div class="wrap grid right-aligned">
+    <div class="med-one-half">
+      <h4>Sign up for local sustainibility news.</h4>
+      <form id="newsletter-signup" action="">
+        <div class="input-wrap single-line">        
+          <input type="email" placeholder="Email address">
+          <button class="submit form-cta" type="submit"><span class="show-for-large-up">Subscribe</span><span class="hide-for-large-up"><svg class="icon icon-checkmark"><use xlink:href="#icon-checkmark" /></svg></span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer" role="site-info">
+  <div class="wrap grid -top">
+    <div class="med-one-half">
+      <h3 class="coc-logo"><a href="https://www.cityofchicago.org/"><span class="sr-only">City of Chicago</span></a></h3>
+    </div>
+    <div class="med-one-half">
+      {% include '/partials/_footer-nav' %}
+    </div>
+  </div>
+
+  <div class="wrap grid -bottom">
+
+    <div class="med-one-half med-order-1">
+      <div class="footer-content">
+        {{ footerContent.simpleContent }}
+      </div>
+      {% if footerContent.twitterHandle %}
+      <p class="twitter-link"><a class="inline-link" href="https://twitter.com/{{ footerContent.twitterHandle }}">Connect with us on Twitter</a></p>
+      {% endif %}
+    </div>
+
+    {% if footerContent.partners|length %}
+    <div class="med-one-half med-order-0">
+      <ul class="partner-list">
+        {% for partner in footerContent.partners %}
+          {% set image = partner.partnerLogo.first().getUrl() %}
+          {% set transformedImage = craft.imager.transformImage(image, { height: 120 }) %}
+          <li><a href="{{ partner.partnerLink }}" target="_blank"><img src="{{ transformedImage.getUrl() }}" alt="{{ partner.partnerName }}"></a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+  </div>
+</footer>
+
+<script src="{{ rev('js/main.js') }}"></script>

@@ -1,80 +1,90 @@
 // Grid
 
-$grid: 8px;
-$mobile-grid: 8px;
-
-$global-padding: 40px;
-$mobile-inset: 20px;
-
-$global-columns: 6;
-$column-width: 100% / $global-columns;
+$columns: 12;
+$column-width: 100% / $columns;
 
 // Quickie columns() function
-@function columns($num-columns, $parent-num-columns: $global-columns) {
-  @return $column-width * $num-columns * ($global-columns / $parent-num-columns);
+@function columns($num-columns, $parent-num-columns: $columns) {
+  @return $column-width * $num-columns * ($columns / $parent-num-columns);
 }
-@function grid($num) {
-  @return $grid * $num;
-}
-@function mobile-grid($num) {
-  @return $mobile-grid * $num;
+
+// Base column classes
+.column {
+
+  @include media-md {
+    &-primary {
+      width: columns(7);
+    }
+    &-secondary {
+      width: columns(5);
+    }
+  }
 }
 
 .grid {
   width: 100%;
-  display: block;
-  @include min-screen($breakpoint-md) {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
+
+  > * {
+    width: 100%;
+    max-width: 100%;
+    flex-basis: 100%;
   }
-  &.-persist {
-    display: flex;
+
+  &.right-aligned {
+    flex-direction: row-reverse;
   }
 }
 
-.grid.-persist {
+.grid-item {
+  flex-basis: auto;
+}
+.one-fourth {
+  max-width: 25%;
+  flex-basis: 25%;
+}
+.one-third {
+  flex-basis: 33.3333333%;
+  max-width: 33.3333333%;
+}
+.one-half {
+  flex-basis: 50%;
+  max-width: 50%;
+}
+.two-thirds {
+  flex-basis: 66.6666667%;
+  max-width: 66.6666667%;
+}
+
+@include media-md {
   .grid-item {
     flex-basis: auto;
   }
-  .one-fourth {
+  .med-one-fourth {
     max-width: 25%;
     flex-basis: 25%;
   }
-  .one-third {
+  .med-one-third {
     flex-basis: 33.3333333%;
     max-width: 33.3333333%;
   }
-  .one-half {
+  .med-one-half {
     flex-basis: 50%;
     max-width: 50%;
   }
-  .two-thirds {
+  .med-two-thirds {
     flex-basis: 66.6666667%;
     max-width: 66.6666667%;
+  }
+  // Order classes
+  @for $i from 0 through 6 {
+    .med-order-#{$i} {
+      order: $i;
+    }
   }
 }
 
-@include min-screen($breakpoint-md) {
-  .grid-item {
-    flex-basis: auto;
-  }
-  .one-fourth {
-    max-width: 25%;
-    flex-basis: 25%;
-  }
-  .one-third {
-    flex-basis: 33.3333333%;
-    max-width: 33.3333333%;
-  }
-  .one-half {
-    flex-basis: 50%;
-    max-width: 50%;
-  }
-  .two-thirds {
-    flex-basis: 66.6666667%;
-    max-width: 66.6666667%;
-  }
-}
 
 // This allows js to determine breakpoint
 #breakpoint-indicator {

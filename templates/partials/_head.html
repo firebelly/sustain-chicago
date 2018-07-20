@@ -1,0 +1,32 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <title>{% if seoTitle is defined %}{{ seoTitle }}{% elseif title is defined %}{{ title }} | {{ siteName }}{% else %}{{ siteName }}{% endif %}</title>
+  <link rel="canonical" href="{{ siteUrl }}">
+  <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:800,800i|Space+Mono:400,400i,700,700i" rel="stylesheet">
+
+  <meta property="og:title" content="{% if seoTitle is defined %}{{ seoTitle }}{% elseif title is defined %}{{ title }} | {{ siteName }}{% else %}{{ siteName }}{% endif %}" />
+  {% if mainImage is defined %}
+    <meta property="og:image" content="{{ mainImage.url }}"/>
+  {% else %}
+    <meta property="og:image" content=""/>
+  {% endif %}
+
+  <link rel="stylesheet" href="{{ rev('css/main.css') }}">
+  <link rel="shortcut icon" type="image/ico" href="{{ rev('images/favicon.png') }}">
+  <!-- <script src="{{ rev('js/modernizr.custom.js') }}"></script> -->
+
+  <!-- Inject SVGs Defs for SVG icon use -->
+  <script>
+    var ajax = new XMLHttpRequest();
+    ajax.open("GET", "{{ rev('svgs-defs.svg') }}", true);
+    ajax.send();
+    ajax.onload = function(e) {
+      var div = document.createElement("div");
+      div.className += "svg-defs hidden";
+      div.innerHTML = ajax.responseText;
+      document.body.insertBefore(div, document.body.childNodes[0]);
+    }
+  </script>
+</head>

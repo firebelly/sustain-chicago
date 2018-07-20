@@ -21,6 +21,6 @@
     "imagesloaded": "^4.1.1",
     "jquery_lazyload": "jquery.lazyload#^1.9.7",
     "flickity": "^2.1.2",
-    "velocity": "^2.0.5"
+    "velocity": "1.5.1"
   }
 }

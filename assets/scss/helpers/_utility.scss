@@ -35,3 +35,51 @@
     display: none !important;
   }
 }
+.show-for-large-up {
+  display: none;
+  @include media-lg {
+    display: block;
+    &.-inline {
+      display: inline-block;
+    }
+  }
+}
+.hide-for-large-up {
+  @include media-lg {
+    display: none !important;
+  }
+}
+
+// Semantic List
+.semantic-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li::before {
+    margin: 0;
+    width: auto;
+    border: none;
+    height: auto;
+    display: none;
+    border-radius: 0;
+    position: static;
+  }
+}
+
+// Transitions-disabled
+.no-transitions {
+  transition: none;
+}
+
+// Utility Style classes
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}

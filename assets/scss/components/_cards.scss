@@ -1,0 +1,241 @@
+// Cards
+
+.card {
+  width: 100%;
+  display: flex;
+  min-height: 200px;
+  position: relative;
+  flex-direction: column;
+  fill: color(green-dark);
+  background-color: color(white);
+  outline: 1px solid color(blue-light);
+  outline-offset: -1px;
+  padding: #{$spacing * 2};
+
+  .icon {
+    transition: fill .1s ease-out;
+  }
+
+  @include media-md {
+    max-width: 50%;
+    flex-basis: 50%;
+  }
+
+  &-header {
+    h1,h2,h3,h4 {
+      margin: 0;
+    }
+
+    &.with-action {
+      display: flex;
+
+      .card-title {
+        flex-grow: 1;
+        padding-right: #{$spacing * 2};
+      }
+    }
+
+    .header-action {
+      display: flex;
+      margin-bottom: 0;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      a {
+        @include h4;
+        color: inherit;
+        line-height: 1;
+        @extend .inline-link;
+        @include fontweight-bold;
+      }
+      .icon {
+        width: 20px;
+        height: 20px;
+        bottom: -2px;
+        fill: inherit;
+        position: relative;
+        margin-left: #{$spacing * 2};
+      }
+    }
+
+    + .card-content,
+    + .card-links,
+    + .card-action {
+      margin-top: #{($spacing * 5) - capline('p1') - baseline('h3')};
+    }
+  }
+
+  &-tag {
+    @include h5;
+    margin-bottom: 0;
+  }
+
+  &-title {
+    @include h2;
+    margin-top: 0;
+  }
+
+  &-content,
+  &-description,
+  &-links,
+  &-action {
+    flex-grow: 1;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  &-content {
+    ul, ol {
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      @extend .inline-link;
+    }
+  }
+
+  &-description {
+    margin-top: #{$spacing * 5};
+
+    @include media-md {
+      margin-top: #{$spacing * 13};
+    }
+  }
+
+  &-links {
+    ul, ol {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    a {
+      @include h4;
+      position: relative;
+      @extend .inline-link;
+      @include fontweight-bold;
+
+      .icon {
+        width: 20px;
+        height: 20px;
+        bottom: -2px;
+        fill: inherit;
+        position: relative;
+        margin-left: #{$spacing * 2};
+      }
+    }
+  }
+
+  &-action {
+    width: 100%;
+    margin-bottom: 0;
+
+    a {
+      width: 100%;
+      @include h4;
+      @extend .inline-link;
+      @include fontweight-bold;
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      fill: inherit;
+    }
+
+    &.social-links {
+      a {
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        margin-left: #{$spacing * 2};
+        outline: 5px solid transparent;
+        @include transition(background-color, outline);
+        &:first-of-type {
+          margin-left: 0;
+        }
+
+        .icon {
+          vertical-align: top;
+          @include transition(fill);
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+          fill: color(white);
+          color: color(white);
+        }
+      }
+    }
+  }
+
+  // Card Variations
+  &.-small {
+    max-width: 50%;
+    flex-basis: 50%;
+
+    .card-title {
+      @include h3;
+    }
+
+    @include media-md {
+      max-width: 25%;
+      flex-basis: 25%;
+    }
+
+  }
+
+  &.stat {
+    .stat-figure {
+      @include h1;
+      margin: 0 0 $spacing;
+    }
+
+    &.-small {
+      
+      .stat-figure {
+        @include h2;
+      }
+
+    }
+  }
+
+  &.profile {
+    .card-image {
+      height: 200px;
+      position: relative;
+      background-size: cover;
+      background-position: center center;
+      width: calc(100% + #{$spacing * 4});
+      margin: #{$spacing * 2} 0 -#{$spacing * 2} -#{$spacing * 2};
+    }
+  }
+
+  // Color Variations
+  &.dark {
+    @extend .color-green-light;
+    outline: 0 solid transparent;
+    @extend .background-green-dark;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  &.light {
+    @extend .color-green-dark;
+    outline: 0 solid transparent;
+    @extend .background-green-light;
+  }
+
+  // Hover State
+  &.with-hover {
+    @include hover-style;
+
+    a {
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+}

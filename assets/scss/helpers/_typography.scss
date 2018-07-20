@@ -1,97 +1,230 @@
 // Typography
 
+// font-face
 @font-face {
-  font-family: 'gt-sectra-regular';
-  src: url('/assets/fonts/gt-sectra-regular-webfont.woff2') format('woff2'),
-       url('/assets/fonts/gt-sectra-regular-webfont.woff') format('woff');
-  font-weight: normal;
+  font-family: 'HK Grotesk';
+  src: url('/assets/fonts/HKGrotesk-Medium.woff2') format('woff2'),
+       url('/assets/fonts/HKGrotesk-Medium.woff') format('woff');
+  font-weight: 500;
   font-style: normal;
 }
 @font-face {
-  font-family: 'gt-sectra-regular';
-  src: url('/assets/fonts/gt-sectra-regular-italic-webfont.woff2') format('woff2'),
-       url('/assets/fonts/gt-sectra-regular-italic-webfont.woff') format('woff');
-  font-weight: normal;
+  font-family: 'HK Grotesk';
+  src: url('/assets/fonts/HKGrotesk-MediumItalic.woff2') format('woff2'),
+       url('/assets/fonts/HKGrotesk-MediumItalic.woff') format('woff');
+  font-weight: 500;
   font-style: italic;
 }
 @font-face {
-  font-family: 'gt-sectra-regular';
-  src: url('/assets/fonts/gt-sectra-bold-webfont.woff2') format('woff2'),
-       url('/assets/fonts/gt-sectra-bold-webfont.woff') format('woff');
-  font-weight: bold;
+  font-family: 'HK Grotesk';
+  src: url('/assets/fonts/HKGrotesk-Bold.woff2') format('woff2'),
+       url('/assets/fonts/HKGrotesk-Bold.woff') format('woff');
+  font-weight: 700;
   font-style: normal;
 }
 @font-face {
-  font-family: 'gt-sectra-regular';
-  src: url('/assets/fonts/gt-sectra-bold-italic-webfont.woff2') format('woff2'),
-       url('/assets/fonts/gt-sectra-bold-italic-webfont.woff') format('woff');
-  font-weight: bold;
+  font-family: 'HK Grotesk';
+  src: url('/assets/fonts/HKGrotesk-BoldItalic.woff2') format('woff2'),
+       url('/assets/fonts/HKGrotesk-BoldItalic.woff') format('woff');
+  font-weight: 700;
   font-style: italic;
 }
 
-// Fonts
-$font-display: 'Space Mono', monospace;
-$font-header: 'gt-sectra-regular', serif;
-$font-regular: 'gt-sectra-regular', serif;
-
-@mixin type-display {
-  font: 16px/1.375 $font-display;
-  @include smooth;
-}
-@mixin type-subhead {
-  text-transform: uppercase;
-  font: bold 16px/1.375 $font-display;
-  letter-spacing: .1em;
-  @include smooth;
+// Font-family mixins
+@mixin font-display {
+  font-style: normal;
+  font-weight: normal;
+  font-family: 'Barlow Condensed', sans-serif;
 }
 
-h1,h2,h3,h4 {
-  @include smooth;
+@mixin font-mono {
+  font-style: normal;
+  font-weight: normal;
+  font-family: 'Space Mono', monospace;
 }
 
-ul,
-ol,
-p {
-  font: 18px/1.388888889 $font-regular;
-  margin: 0 0 grid(4);
+@mixin font-copy {
+  font-style: normal;
+  font-weight: normal;
+  font-family: 'HK Grotesk', sans-serif;
 }
 
+@mixin fontweight-bold {
+  font-weight: 700;
+}
 
-h1,
+@function barlow-capline($font-size,$line-height) {
+  @return (0.085*$font-size + ($line-height - $font-size)/2) + 0px;
+}
+@function barlow-baseline($font-size,$line-height) {
+  @return (0.195*$font-size + ($line-height - $font-size)/2) + 0px;
+}
+@function space-capline($font-size,$line-height) {
+  @return (0.085*$font-size + ($line-height - $font-size)/2) + 0px;
+}
+@function space-baseline($font-size,$line-height) {
+  @return (0.195*$font-size + ($line-height - $font-size)/2) + 0px;
+}
+@function hkgrotesk-capline($font-size,$line-height) {
+  @return (0.085*$font-size + ($line-height - $font-size)/2) + 0px;
+}
+@function hkgrotesk-baseline($font-size,$line-height) {
+  @return (0.195*$font-size + ($line-height - $font-size)/2) + 0px;
+}
+
+// Baseline Measurements
+$baseline: (
+  "h1": barlow-baseline(50, 40),
+  "h1-medium": barlow-baseline(90, 75),
+  "h2": barlow-baseline(30, 30),
+  "h2-medium": barlow-baseline(50, 40),
+  "h3": barlow-baseline(30, 30),
+  "stat": barlow-baseline(200, 200),
+  "h4": space-baseline(18, 30),
+  "h5": space-baseline(14, 20),
+  "p1": hkgrotesk-baseline(20, 30),
+  "p2": hkgrotesk-baseline(16, 20)
+);
+
+@function baseline($type-name) {
+  @if not map-has-key($baseline, $type-name) {
+    @warn "No entry found for `#{$type-name}` in $baseline map. Property omitted.";
+  }
+  @return map-get($baseline, $type-name);
+}
+
+// Capline Measurements
+$capline: (
+  "h1": barlow-capline(50, 40),
+  "h1-medium": barlow-capline(90, 75),
+  "h2": barlow-capline(30, 30),
+  "h2-medium": barlow-capline(50, 40),
+  "h3": barlow-capline(30, 30),
+  "stat": barlow-capline(200, 200),
+  "h4": space-capline(18, 30),
+  "h5": space-capline(14, 20),
+  "p1": hkgrotesk-capline(20, 30),
+  "p2": hkgrotesk-capline(16, 20)
+);
+
+@function capline($type-name) {
+  @if not map-has-key($capline, $type-name) {
+    @warn "No entry found for `#{$type-name}` in $capline map. Property omitted.";
+  }
+  @return map-get($capline, $type-name);
+}
+
+/// Mixin to allow us to concisely define all aspects of a paragraph style (except for family.)
+/// @param {number} $size - Font size specified in pixels (without 'px')
+/// @param {number} $lh - Line height specified in pixels (without 'px')
+/// @param {number} $ls [0em] - Letter spacing
+/// @param {string} $tt [none] - Text transform
+/// @example scss - Used as a shortcut in defining a paragraph style...
+///   @mixin h1 {
+///     @include avenir-heavy; // The font face
+///     @include paragraph-style (12, 16, $ls: .075em, $tt: uppercase); // Other properties
+///   }
+@mixin paragraph-style ($size, $lh, $ls: 0em, $tt: none) {
+  font-size: #{$size}px;
+  line-height: ($lh / $size);
+  letter-spacing: $ls;
+  text-transform: $tt;
+}
+
+// Type Style Mixins
+@mixin h1 {
+  @include font-display;
+  @include paragraph-style(50, 40, .0104em, uppercase);
+
+  @include media-md {
+    @include paragraph-style(90, 75, .0055em, uppercase);
+  }
+}
+
+@mixin h2 {
+  @include font-display;
+  @include paragraph-style(30, 30, .0133em, uppercase);
+
+  @include media-md {
+    @include paragraph-style(50, 40, .0104em, uppercase);
+  }
+}
+
+@mixin h3 {
+  @include font-display;
+  @include paragraph-style(30, 30, .0133em, uppercase);
+}
+
+@mixin type-stat {
+  @include font-display;
+  @include paragraph-style(200, 200, 0, uppercase);
+}
+
+@mixin h4 {
+  @include font-mono;
+  @include paragraph-style(18, 30, .0694em, uppercase);
+}
+
+@mixin h5 {
+  @include font-mono;
+  @include paragraph-style(14, 20, .0892em, uppercase);
+}
+
+@mixin p1 {
+  @include font-copy;
+  @include paragraph-style(20, 30, .025em);
+}
+
+@mixin p2 {
+  @include font-copy;
+  @include paragraph-style(16, 20, .0312em);
+}
+
+/// Type based classes using type mixins
 .h1 {
-  font: 35px/1.2 $font-header;
-  margin: 0 0 grid(2);
-
-  @include media-md {
-    font: 60px/1.166666667 $font-header;
-  }
+  @include h1;
 }
 
-h2,
 .h2 {
-	font: 25px/1.4 $font-header;
-
-  @include media-md {
-    font: 40px/1.25 $font-header;
-  }
+  @include h2;
 }
 
-h3,
 .h3 {
-  font: 20px/1.75 $font-header;
-
-  @include media-md {
-    font: 30px/1.5 $font-header;
-  }
+  @include h3;
 }
 
-h4,
+.type-stat {
+  @include type-stat;
+}
+
 .h4 {
-	font: bold 16px/1.5625 $font-display;
-  &.subhead {
-    @include type-subhead;
-    span {
-      color: $red;
-    }
-  }
+  @include h4;
+}
+// Links with the h4 style are bold
+a.h4 {
+  @include h4;
+  font-weight: 700;
+}
+
+.h5 {
+  @include h5;
+}
+
+.p1 {
+  @include p1;
+}
+
+.p2 {
+  @include p2;
+}
+
+// Type Resets
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-top: 0;
 }

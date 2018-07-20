@@ -1,0 +1,42 @@
+// Section Nav
+
+.section-navigation {
+  width: 100%;
+  color: color(green-dark);
+  background-color: color(white);
+
+  h4 {
+    margin: 0;
+    @include h3;
+    padding: 0 20px;
+    line-height: 60px;
+  }
+
+  .accordion-toggle {
+    &::before,
+    &::after {
+      top: 30px;
+      right: 20px;
+    }
+  }
+
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      border-top: 1px solid color(green-dark);
+
+      a {
+        @include h4;
+        display: block;
+        padding: 0 20px;
+        line-height: 60px;
+        text-decoration: none;
+        
+        @include hover-style;
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+// Accordions
+
+.accordion {
+
+  .accordion-toggle {
+    position: relative;
+    padding-right: 40px;
+
+    .expand-contract {
+      top: 50%;
+      position: absolute;
+      right: #{$spacing * 2};
+      transform: translateY(-50%);
+    }
+  }
+
+}

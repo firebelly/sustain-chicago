@@ -1,0 +1,248 @@
+{% extends (craft.app.request.isAjax and not craft.app.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
+
+{% block content %}
+
+<section class="column-primary">
+  <p class="h1">Testing testing testing</p>
+  <p class="h2">Testing testing testing</p>
+  <p class="h3">Testing testing testing</p>
+  <p class="h4">Testing testing testing</p>
+  <p><a href="#" class="h4">Testing testing testing</a></p>
+  <p class="h5">Testing testing testing</p>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt blanditiis deleniti quas, quaerat, quasi neque sapiente! Ipsam dolorum optio recusandae maiores perspiciatis! Delectus aspernatur ad aliquam, dignissimos dolorem commodi ipsam?</p>
+  <p class="p2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis cupiditate maxime sed itaque in libero voluptates ipsum deleniti perspiciatis velit magnam atque, ducimus aspernatur doloremque eum voluptatem, natus earum corporis.</p>
+  <p class="type-stat">99,123</p>
+</section>
+
+<section class="column-primary">
+
+  <h2 class="h2">Cards:</h2>
+
+  <div class="grid">
+
+    <div class="card with-hover light">
+      <header class="card-header">
+        <h4 class="card-tag">Card Tag</h4>
+        <h3 class="card-title">H2 Card Headline Lorem Ipsum Dolor</h3>
+      </header>
+      <div class="card-description">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil repellat quas optio sit fugit nesciunt ducimus reiciendis ipsa et qui quidem, dolorum provident, tempore laboriosam molestias corporis eveniet ad, doloribus!</p>
+      </div>
+      <p class="card-action"><a href="#" >Call to action ></a></p>
+    </div>
+
+    <div class="card with-hover dark">
+      <header class="card-header">
+        <h4 class="card-tag">Card Tag</h4>
+        <h3 class="card-title">H2 Card Headline Lorem Ipsum Dolor</h3>
+      </header>
+      <p class="card-action"><a href="#" >Call to action ></a></p>
+    </div>
+
+    <div class="card with-hover -small">
+      <header class="card-header">
+        <h4 class="card-tag">Card Tag</h4>
+        <h3 class="card-title">Card Title</h3>
+      </header>
+      <p class="card-action"><a href="#">Call to action ></a></p>
+    </div>
+    <div class="card with-hover -small dark">
+      <header class="card-header">
+        <h4 class="card-tag">Card Tag</h4>
+        <h3 class="card-title">Card Title</h3>
+      </header>
+      <p class="card-action"><a href="#">Call to action ></a></p>
+    </div>
+    <div class="card with-hover -small">
+      <header class="card-header">
+        <h3 class="card-title">Card Title</h3>
+        <h4 class="card-tag">Card Tag</h4>
+      </header>
+      <p class="card-action"><a href="#">Call to action ></a></p>
+    </div>
+    <div class="card with-hover -small light">
+      <header class="card-header">
+        <h3 class="card-title">Card Title</h3>
+        <h4 class="card-tag">Card Tag</h4>
+      </header>
+      <p class="card-action"><a href="#">Call to action ></a></p>
+    </div>
+
+    <div class="card stat">
+      <h3 class="stat-figure">99,000</h3>
+      <div class="stat-caption">Stat caption Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+    </div>
+    <div class="card stat light -small">
+      <h3 class="stat-figure">99,000</h3>
+      <div class="stat-caption">Stat caption Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+    </div>
+    <div class="card stat dark -small">
+      <h3 class="stat-figure">99,000</h3>
+      <div class="stat-caption">Stat caption Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
+    </div>
+    
+    <div class="card dark -small">
+      <header class="card-header">
+        <h3 class="card-title">Card Title</h3>
+        <h4 class="card-tag">Person title lorem ipsum</h4>
+      </header>
+      <p class="card-action social-links">
+        <a href="#"><svg class="icon icon-facebook"><use xlink:href="#icon-facebook" /></svg><span class="sr-only">Facebook</span></a> 
+        <a href="#"><svg class="icon icon-twitter"><use xlink:href="#icon-twitter" /></svg><span class="sr-only">Twitter</span></a> 
+        <a href="#"><svg class="icon icon-instagram"><use xlink:href="#icon-instagram" /></svg><span class="sr-only">Instagram</span></a> 
+      </p>
+    </div>
+    <div class="card light -small">
+      <header class="card-header">
+        <h3 class="card-title">Card Title</h3>
+        <h4 class="card-tag">Person title lorem ipsum</h4>
+      </header>
+      <p class="card-action social-links">
+        <a href="#"><svg class="icon icon-facebook"><use xlink:href="#icon-facebook" /></svg><span class="sr-only">Facebook</span></a> 
+        <a href="#"><svg class="icon icon-twitter"><use xlink:href="#icon-twitter" /></svg><span class="sr-only">Twitter</span></a> 
+        <a href="#"><svg class="icon icon-instagram"><use xlink:href="#icon-instagram" /></svg><span class="sr-only">Instagram</span></a> 
+      </p>
+    </div>
+    <div class="card">
+      <header class="card-header">
+        <h3 class="card-title">Card Title</h3>
+        <h4 class="card-tag">Person title lorem ipsum</h4>
+      </header>
+      <p class="card-action social-links">
+        <a href="#"><svg class="icon icon-facebook"><use xlink:href="#icon-facebook" /></svg><span class="sr-only">Facebook</span></a> 
+        <a href="#"><svg class="icon icon-twitter"><use xlink:href="#icon-twitter" /></svg><span class="sr-only">Twitter</span></a> 
+        <a href="#"><svg class="icon icon-instagram"><use xlink:href="#icon-instagram" /></svg><span class="sr-only">Instagram</span></a> 
+      </p>
+    </div>
+
+    <div class="card dark">
+      <header class="card-header">
+        <h3 class="card-title">Ways to Live Green</h3>
+      </header>
+      <div class="card-content">
+        <ul>
+          <li>First way to live green Lorem ipsum dolor sit amet.</li>
+          <li>Second way to live green Lorem ipsum dolor sit amet.</li>
+          <li>Third way to live green Lorem ipsum dolor sit amet.</li>
+          <li>Fourth way to live green Lorem ipsum dolor sit amet.</li>
+          <li>Fifth way to live green Lorem ipsum dolor sit amet.</li>
+        </ul>
+      </div>
+      <p class="card-action"><a href="#">Call to action ></a></p>
+    </div>
+    <div class="card">
+      <header class="card-header">
+        <h3 class="card-title">Ways to Live Green</h3>
+      </header>
+      <div class="card-links">
+        <ul class="semantic-list">
+          <li><a href="#">First Project Name<svg class="icon icon-star"><use xlink:href="#icon-star"/></svg></a></li>
+          <li><a href="#" target="_blank">Second Project Name<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg></a></li>
+          <li><a href="#" target="_blank">Third Project Name<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg></a></li>
+  <!--         <li><a href="#" target="_blank">Fourth Project Name<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg></a></li>
+          <li><a href="#" target="_blank">Fifth Project Name<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg></a></li>
+          <li><a href="#" target="_blank">Sixth Project Name<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg></a></li>
+          <li><a href="#" target="_blank">Seventh Project Name<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg></a></li> -->
+        </ul>
+      </div>
+    </div>
+
+    <div class="card dark">
+      <header class="card-header with-action">
+        <h3 class="card-title">Latest</h3>
+        <p class="header-action"><a href="https://twitter.com/{{ footerContent.twitterHandle }}">See all<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg></a></p>
+      </header>
+      <div class="card-content">
+        <a class="twitter-timeline" data-tweet-limit="3" data-link-color="#6eedaa" data-chrome="noheader nofooter noborders" href="https://twitter.com/{{ footerContent.twitterHandle }}?ref_src=twsrc%5Etfw">Tweets by {{ footerContent.twitterHandle }}</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<section>
+
+  <div class="grid profile-grid">
+    {% set obamaImage = rev('images/obama.jpg') %}
+    {% set hidalgoImage = rev('images/hidalgo.jpg') %}
+    {% set davisImage = rev('images/naomi-davis.jpg') %}
+    {% set zelechowskiImage = rev('images/elise-zelechowski.jpg') %}
+    {% set obama = craft.imager.transformImage(obamaImage, { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
+    {% set hidalgo = craft.imager.transformImage(hidalgoImage, { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
+    {% set davis = craft.imager.transformImage(davisImage, { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
+    {% set zelechowski = craft.imager.transformImage(zelechowskiImage, { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
+
+    <div class="card profile dark -small">
+      <header class="card-header">
+        <h3 class="card-title">President Barack Obama</h3>
+        <h4 class="card-tag">44th President of The United States</h4>
+      </header>
+      <p class="card-action social-links">
+        <a href="#"><svg class="icon icon-facebook"><use xlink:href="#icon-facebook" /></svg><span class="sr-only">Facebook</span></a> 
+        <a href="#"><svg class="icon icon-twitter"><use xlink:href="#icon-twitter" /></svg><span class="sr-only">Twitter</span></a> 
+        <a href="#"><svg class="icon icon-instagram"><use xlink:href="#icon-instagram" /></svg><span class="sr-only">Instagram</span></a> 
+      </p>
+      <div class="card-image" style="background-image:url('{{ obama.getUrl() }}');"></div>
+    </div>
+    <div class="card profile light -small">
+      <header class="card-header">
+        <h3 class="card-title">Anne Hidalgo</h3>
+        <h4 class="card-tag">Mayor of Paris, Chair of C40 Cities Climate Leadership Group</h4>
+      </header>
+      <p class="card-action social-links">
+        <a href="#"><svg class="icon icon-facebook"><use xlink:href="#icon-facebook" /></svg><span class="sr-only">Facebook</span></a> 
+        <a href="#"><svg class="icon icon-twitter"><use xlink:href="#icon-twitter" /></svg><span class="sr-only">Twitter</span></a> 
+        <a href="#"><svg class="icon icon-instagram"><use xlink:href="#icon-instagram" /></svg><span class="sr-only">Instagram</span></a> 
+      </p>
+      <div class="card-image" style="background-image:url('{{ hidalgo.getUrl() }}');"></div>
+    </div>
+    <div class="card profile with-hover dark -small">
+      <header class="card-header">
+        <h3 class="card-title">Naomi Davis</h3>
+        <h4 class="card-tag">President, BIG: Blacks in Green™</h4>
+      </header>
+      <p class="card-action"><a href="#">Meet Naomi ></a></p>
+      <div class="card-image" style="background-image:url('{{ davis.getUrl() }}');"></div>
+    </div>
+    <div class="card profile with-hover light -small">
+      <header class="card-header">
+        <h3 class="card-title">Elise Zelechowski</h3>
+        <h4 class="card-tag">Wearer of Many Hats, Elevated chicago, ThoughtWorks, Rebuilding Exchange, Cellar Door Provisions</h4>
+      </header>
+      <p class="card-action"><a href="#">Meet Elise ></a></p>
+      <div class="card-image" style="background-image:url('{{ zelechowski.getUrl() }}');"></div>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="column-secondary">
+    
+  <nav class="section-navigation accordion">
+    <h4 class="accordion-toggle">Jump to <span class="expand-contract"></span></h4>
+    <ol class="accordion-content">
+      <li><a href="#">Energy</a></li>
+      <li><a href="#">Waste + Recycling</a></li>
+      <li><a href="#">Water</a></li>
+      <li><a href="#">Transportation</a></li>
+      <li><a href="#">Food + Compost</a></li>
+      <li><a href="#">Development</a></li>
+      <li><a href="#">Green Space +</a></li>
+      <li><a href="#">Preparedness</a></li>
+    </ol>
+  </nav>
+
+</section>
+  
+<div class="background-image">
+  {% set image = rev('images/big-sur_coast_01.jpg') %}
+  {% set transformedImage = craft.imager.transformImage(image, {
+    effects: { modulate: [100, 0, 100], clut: 'gradient:#163B37-#E2E8EA' } 
+  }) %}
+  <img src="{{ transformedImage.getUrl() }}" alt="">
+</div>
+
+
+{% endblock %}

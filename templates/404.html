@@ -1,0 +1,11 @@
+{% extends (craft.app.request.isAjax and not craft.app.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
+{% set title = "404" %}
+{% set bodyId = "fourohfour-page" %}
+
+{% block content %}
+  <div class="single-entry user-content">
+    <h4 class="h1"><span>Page Not Found</span></h4>
+    <h1 class="h2">404</h1>
+    <p>Sorry, we couldn't find the page you're looking for.</p>
+  </div>
+{% endblock %}

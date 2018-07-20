@@ -1,0 +1,61 @@
+// Common UI Components
+
+.expand-contract {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  display: inline-block;
+
+  &::before,
+  &::after {
+    top: 9px;
+    right: 0;
+    width: 20px;
+    content: '';
+    height: 2px;
+    position: absolute;
+    border-top: 2px solid;
+    @include transition(transform);
+  }
+
+  &::after {
+    transform: rotate(-90deg);
+    transform-origin: center;
+  }
+
+  &.-active {
+    &::after {
+      transform: none;
+    }
+  }
+}
+
+// Inline link styles
+.inline-link {
+  z-index: 1;
+  position: relative;
+  display: inline-block;
+  &::after {
+    top: 50%;
+    z-index: -1;
+    content: '';
+    left: -.25em;
+    right: -.2em;
+    height: 1.5em;
+    position: absolute;
+    transform-origin: left;
+    background-color: color(blue);
+    @include transition(transform);
+    transform: scaleX(0) translateY(-50%);
+  }
+
+  &:hover,
+  &:focus {
+    fill: color(white)!important;
+    color: color(white)!important;
+
+    &::after {
+      transform: scaleX(1) translateY(-50%);
+    }
+  }
+}

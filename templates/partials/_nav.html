@@ -1,0 +1,56 @@
+{% set mainEntries = craft.entries.section('navigation').slug('main').one().children().level(2) %}
+{% set utilityEntries = craft.entries.section('navigation').slug('utility').one().children().level(2) %}
+
+<nav class="site-nav-main site-nav">
+
+  <ul>
+
+    <div class="nav-main nav-top-level">
+      {% nav item in mainEntries.all() %}
+        {% set mappedEntry = item.mappedEntry.one() %}
+        {% set mappedEntryChildren = mappedEntry.children().level(2) %}
+        <li>
+          {% if mappedEntryChildren|length %}
+          <div class="nav-parent-label{{ entry is defined and entry.slug == mappedEntry.slug ? ' -current' : '' }}" data-active-toggle="self">{{ mappedEntry.title }}<span class="expand-contract" aria-hidden="true"></span></div>
+          <ul class="nav-sub-level">
+            {% for child in mappedEntryChildren.all() %}
+              <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <a href="{{ mappedEntry.url }}">{{ mappedEntry.title }}</a>
+          {% endif %}
+        </li>
+      {% endnav %}
+
+      <button class="search-toggle" data-active-toggle="#header-search-form self"><svg class="icon icon-search"><use xlink:href="#icon-search" /></svg><svg class="icon icon-close"><use xlink:href="#icon-close"/></svg></button>
+    </div>
+
+    <div class="nav-utility">
+      <div class="wrap nav-top-level">
+        {% nav item in utilityEntries.all() %}
+          {% set mappedEntry = item.mappedEntry.one() %}
+          <li><a href="{{ mappedEntry.url }}"{{ entry is defined and entry.slug == mappedEntry.slug ? ' class="-current"' : '' }}>{{ mappedEntry.title }}</a></li>
+        {% endnav %}
+        <li id="site-language-select" class="site-language-select">
+          <div class="nav-parent-label" data-active-toggle="self">Language: <span class="current-language">English</span><span class="expand-contract" aria-hidden="true"><svg class="icon icon-arrow"><use xlink:href="#icon-arrow"/></svg></span></div>
+          <ul class="nav-sub-level">
+            <li><a href="{{ craft.request.getUrl() }}">English</a></li>
+            <li><a href="http://translate.google.com/translate?hl=en&sl=en&tl=es&u={{ craft.request.getUrl() }}">Español</a></li>
+            <li><a href="http://translate.google.com/translate?hl=en&sl=en&tl=zh-CN&u={{ craft.request.getUrl() }}">简体中文</a></li>
+            <li><a href="http://translate.google.com/translate?hl=en&sl=en&tl=pl&u={{ craft.request.getUrl() }}">Polski</a></li>
+            <li><a href="http://translate.google.com/translate?hl=en&sl=en&tl=ar&u={{ craft.request.getUrl() }}">عربي</a></li>
+          </ul>
+        </li>
+      </div>
+    </div>
+
+  </ul>
+
+  <div id="header-search-form">
+    {% include "partials/_search-form" with { 'query': '' } %}
+  </div>
+
+</nav>
+
+<button class="nav-toggle" data-active-toggle=".site-nav-main self"><svg class="icon icon-hamburger"><use xlink:href="#icon-hamburger" /></svg><svg class="icon icon-close"><use xlink:href="#icon-close" /></svg></button>

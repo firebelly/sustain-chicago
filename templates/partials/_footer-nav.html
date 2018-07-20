@@ -1,0 +1,14 @@
+{% set entries = craft.entries.section('navigation').slug('footer').one().children().level(2) %}
+
+<nav class="site-nav-footer site-nav">
+
+  <ul>
+  {% nav entry in entries.all() %}
+    {% set mappedEntry = entry.mappedEntry.one() %}
+    <li>
+      <a href="{{ mappedEntry.url }}">{{ mappedEntry.title }}</a>
+    </li>
+  {% endnav %}
+  </ul>
+
+</nav>
