@@ -35,7 +35,8 @@ var SC = (function($) {
       // Escape key
       if (e.keyCode === 27) {
         // Close Form
-
+        _closeMobileNav();
+        _closeSearchForm();
       }
     });
 
@@ -93,17 +94,29 @@ var SC = (function($) {
     });
   }
 
+  function _closeMobileNav() {
+    $siteNav.removeClass('-active');
+    $('.nav-toggle').removeClass('-active');
+  }
+
   function _initSearchForm() {
-    var $headerSearchForm = document.getElementById('header-search-form');
     $('.search-toggle').on('click', function(e) {
       if ($(this).is('.-active')) {
-        $('#header-search-form input').blur();
+        $headerSearchForm.find('input').blur();
       } else {
-        $headerSearchForm.addEventListener('transitionend', function(event) {
-          $('#header-search-form input').focus();
-        });
+        $headerSearchForm[0].addEventListener('transitionend', function(e) {
+          if (e.propertyName === 'transform') {
+            $headerSearchForm.find('input').focus();
+          }
+        }, false);
       }
     });
+  }
+
+  function _closeSearchForm() {
+    $headerSearchForm.find('input').blur();
+    $headerSearchForm.removeClass('-active');
+    $('.search-toggle').removeClass('-active');
   }
 
   function _initFormFunctions() {
