@@ -13,6 +13,7 @@ form {
         flex-grow: 1;
         border-radius: 5px 0 0 5px;
         &:hover,
+        &:focus,
         &.-focus {
           box-shadow: none;
         }
@@ -22,6 +23,7 @@ form {
       }
 
       &:hover,
+      &:focus,
       &.-focus {
         box-shadow: 0 0 0 5px color(blue);
       }

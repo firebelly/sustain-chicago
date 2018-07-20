@@ -41,11 +41,11 @@ body {
   .site-title {
     margin: 0;
     z-index: 11;
-    @include h3; 
+    @include h3;
     @include smooth;
     position: relative;
-    padding: 0 #{$spacing};
     box-shadow: $box-shadow;
+    padding: 0 #{$spacing * 2};
     line-height: $mainNavHeightSm;
     background-color: color(black);
 
@@ -56,6 +56,7 @@ body {
     }
 
     @include min-screen($breakpoint-nav) {
+      padding: 0;
       float: left;
       box-shadow: none;
       line-height: $mainNavHeightMd;
@@ -490,7 +491,7 @@ body {
     right: #{$spacing * 10};
     height: $mainNavHeightMd;
     transform: translateX(100%);
-    @include transition(transform);
+    transition: transform .3s $slide-easing;
     padding-left: calc(10% + #{$spacing * 10});
 
     &.-active {
