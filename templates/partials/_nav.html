@@ -11,7 +11,7 @@
         {% set mappedEntryChildren = mappedEntry.children().level(2) %}
         <li>
           {% if mappedEntryChildren|length %}
-          <div class="nav-parent-label{{ entry is defined and entry.slug == mappedEntry.slug ? ' -current' : '' }}" data-active-toggle="self">{{ mappedEntry.title }}<span class="expand-contract" aria-hidden="true"></span></div>
+          <div class="nav-parent-label{{ entry is defined and entry.slug == mappedEntry.slug ? ' -current' : '' }}" data-active-toggle="">{{ mappedEntry.title }}<span class="expand-contract" aria-hidden="true"></span></div>
           <ul class="nav-sub-level">
             {% for child in mappedEntryChildren.all() %}
               <li><a href="{{ child.url }}">{{ child.title }}</a></li>
@@ -23,7 +23,7 @@
         </li>
       {% endnav %}
 
-      <button class="search-toggle" data-active-toggle="#header-search-form self"><svg class="icon icon-search"><use xlink:href="#icon-search" /></svg><svg class="icon icon-close"><use xlink:href="#icon-close"/></svg></button>
+      <button class="search-toggle" data-active-toggle="#header-search-form"><svg class="icon icon-search"><use xlink:href="#icon-search" /></svg><svg class="icon icon-close"><use xlink:href="#icon-close"/></svg></button>
     </div>
 
     <div class="nav-utility">
@@ -33,7 +33,7 @@
           <li><a href="{{ mappedEntry.url }}"{{ entry is defined and entry.slug == mappedEntry.slug ? ' class="-current"' : '' }}>{{ mappedEntry.title }}</a></li>
         {% endnav %}
         <li id="site-language-select" class="site-language-select">
-          <div class="nav-parent-label" data-active-toggle="self">Language: <span class="current-language">English</span><span class="expand-contract" aria-hidden="true"><svg class="icon icon-arrow"><use xlink:href="#icon-arrow"/></svg></span></div>
+          <div class="nav-parent-label" data-active-toggle="">Language: <span class="current-language">English</span><span class="expand-contract" aria-hidden="true"><svg class="icon icon-arrow"><use xlink:href="#icon-arrow"/></svg></span></div>
           <ul class="nav-sub-level">
             <li><a href="{{ craft.app.request.absoluteUrl }}">English</a></li>
             <li><a href="http://translate.google.com/translate?hl=en&sl=en&tl=es&u={{ craft.app.request.absoluteUrl }}">Español</a></li>
@@ -53,4 +53,4 @@
 
 </nav>
 
-<button class="nav-toggle" data-active-toggle=".site-nav-main self"><svg class="icon icon-hamburger"><use xlink:href="#icon-hamburger" /></svg><svg class="icon icon-close"><use xlink:href="#icon-close" /></svg></button>
+<button class="nav-toggle" data-active-toggle=".site-nav-main"><svg class="icon icon-hamburger"><use xlink:href="#icon-hamburger" /></svg><svg class="icon icon-close"><use xlink:href="#icon-close" /></svg></button>

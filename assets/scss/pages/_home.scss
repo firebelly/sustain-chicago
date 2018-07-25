@@ -1,0 +1,37 @@
+// Homepage
+
+body.page-home {
+
+  .page-banner {  
+    .banner-image {
+      &::after {
+        left: 0;
+        bottom: 0;
+        height: 35%;
+        width: 100%;
+        content: '';
+        position: absolute;
+        background: linear-gradient(to top, rgba(color(blue-light),1), rgba(color(blue-light),0));
+      }
+
+      @include media-md {
+        padding-bottom: 46.1538%;
+      }
+    }
+
+    .page-banner-nav {
+
+      @include media-md {
+        margin-top: -#{$spacing * 20};
+        background-color: color(green-light);
+      }
+    }
+  }
+
+  .page-header {
+    @include media-md {
+      min-height: #{$spacing * 20};
+      margin-top: -#{$spacing * 20};
+    }
+  }
+}

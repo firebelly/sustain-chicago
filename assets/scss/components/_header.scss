@@ -9,11 +9,22 @@ $mainNavHeightMd: 100px;
 body {
   padding-top: $mainNavHeightSm;
 
+  @include media-md {
+    padding-top: $mainNavHeightMd;
+  }
+
   @include min-screen($breakpoint-nav) {
     padding-top: $mainNavHeightMd + $utilityNavHeight;  
 
-    &.scrolled {
-      padding-top: $mainNavHeightMd;
+    &.nav-up {
+
+      .site-header {
+        padding-top: 0;
+      }
+
+      .nav-utility {
+        transform: translateY(-100%);
+      }
     }
   }
 }
@@ -23,6 +34,7 @@ body {
   z-index: 20;
   width: 100%;
   position: fixed;
+  @include transition(padding);
   background-color: color(black);
 
   > .wrap {
@@ -55,11 +67,15 @@ body {
       text-decoration: none;
     }
 
+    @include media-md {
+      padding: 0 #{$spacing * 10};
+      line-height: $mainNavHeightMd;
+    }
+
     @include min-screen($breakpoint-nav) {
       padding: 0;
       float: left;
       box-shadow: none;
-      line-height: $mainNavHeightMd;
       margin: 0 #{$spacing * 5} 0 0;
     }
   }
@@ -103,6 +119,11 @@ body {
       }
     }
 
+    @include media-md {
+      width: $mainNavHeightMd;
+      height: $mainNavHeightMd;
+    }
+
     @include min-screen($breakpoint-nav) {
       display: none;
     }
@@ -133,6 +154,10 @@ body {
 
     li {
       border-top: 1px solid color(green-dark);
+    }
+
+    @include media-md {
+      top: $mainNavHeightMd;
     }
 
     @include min-screen($breakpoint-nav) {
@@ -225,6 +250,7 @@ body {
       color: color(white);
       height: $utilityNavHeight;
       padding: 0 #{$spacing * 10 };
+      @include transition(transform);
       background-color: color(green-dark);
 
       > .wrap {

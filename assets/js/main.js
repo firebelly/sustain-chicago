@@ -3,11 +3,14 @@
 
 //=include "../bower_components/jquery/dist/jquery.js"
 //=include "../bower_components/flickity/dist/flickity.pkgd.min.js"
+//=include "../bower_components/flickity-bg-lazyload/bg-lazyload.js"
 //=include "../bower_components/velocity/velocity.min.js"
 
 // Good Design for Good Reason for Good Namespace
 var SC = (function($) {
-  var breakpointIndicatorString,
+  var $window = $(window),
+      $body = $('body'),
+      breakpointIndicatorString,
       breakpoint_lg,
       breakpoint_md,
       breakpoint_sm,
@@ -17,7 +20,11 @@ var SC = (function($) {
       page_at,
       $siteNav,
       $headerSearchForm,
-      transitionElements;
+      transitionElements,
+      userScrolled,
+      lastScrollTop = 0,
+      downwardScrollDelta = 6,
+      upwardScrollDelta = 120;
 
   /**
    * Initialize all functions
@@ -37,13 +44,29 @@ var SC = (function($) {
         // Close Form
         _closeMobileNav();
         _closeSearchForm();
+        _closeActionDropdown();
       }
     });
 
+    // Update userScrolled var
+    $(window).scroll(function(event){
+      userScrolled = true;
+    });
+
+    // Run functions to fire on scroll
+    setInterval(function() {
+      if (userScrolled) {
+        _showHideNavigation();
+        userScrolled = false;
+      }
+    }, 250);
+
     _initActiveToggle();
-    _initMobileNav();
+    _initClickToDeactivate();
+    _initMobileNav(); 
     _initSearchForm();
     _initFormFunctions();
+    _initFlickity();
     _initAccordions();
   }
 
@@ -56,26 +79,58 @@ var SC = (function($) {
 
   function _initActiveToggle() {
     $(document).on('click', '[data-active-toggle]', function(e) {
-      var $trigger = $(this);
-      var targets = $trigger.attr('data-active-toggle');
-
-      function setClass(target) {
-        if (target === 'self') {
-          $trigger.toggleClass('-active');
-        } else {
-          $(target).toggleClass('-active');
-        }
-      }
-
-      if (targets.indexOf(' ') !== -1) {
-        targets = targets.split(' ');
-        $.each(targets, function(index, value) {
-          setClass(value);
-        });
-      } else {
-        setClass(targets);
+      $(this).toggleClass('-active');
+      if ($(this).attr('data-active-toggle') !== '') {
+        $($(this).attr('data-active-toggle')).toggleClass('-active');
       }
     });
+  }
+
+  function _initClickToDeactivate() {
+    if ($('.action-dropdown').length) {    
+      $body.on('click', function(e) {
+        var clickTarget = $(e.target);
+        if ($('.action-dropdown-container').is('.-active') && !clickTarget.parents('.action-dropdown').length) {
+          _closeActionDropdown();
+        }
+      });
+    }
+  }
+
+  function _closeActionDropdown() {
+    $('.action-dropdown-container, .action-dropdown-toggle').removeClass('-active');
+  }
+
+  function _showHideNavigation() {
+      var st = $window.scrollTop();
+
+      // Check to see if the nav is open
+      if ($siteNav.is('.-active')) {
+          return;
+      }
+
+      if (st < $('.site-header').outerHeight()) {
+        $body.removeClass('nav-up');
+        return;
+      }
+
+      if (st > lastScrollTop && st > 40) {
+          // Scrolled down
+          // Make sure they scroll down more than downwardScrollDelta
+          if (Math.abs(lastScrollTop - st) <= downwardScrollDelta) {
+              return;
+          }
+          $body.removeClass('nav-down').addClass('nav-up');
+      } else if (st + $window.height() < $(document).height() - 40 && !$('.velocity-animating').length) {
+          // Scrolled up
+          // Make sure they scroll up more than upwardScrollDelta
+          if (Math.abs(lastScrollTop - st) <= upwardScrollDelta) {
+              return;
+          }
+          $body.removeClass('nav-up').addClass('nav-down');
+      }
+
+      lastScrollTop = st;
   }
 
   function _initMobileNav() {
@@ -127,6 +182,41 @@ var SC = (function($) {
     });
   }
 
+  function _initFlickity() {
+    var $bannerImageCarousel = $('.banner-image-carousel'),
+        $bannerTextCarousel = $('.banner-text-carousel');
+
+    var bannerImageCarousel = $bannerImageCarousel.flickity({
+      pageDots: false,
+      bgLazyLoad: 1,
+      wrapAround: true,
+      cellAlign: 'left',
+      prevNextButtons: false,
+      cellSelector: '.flickity-item'
+    });
+
+    var bannerTextCarousel = $bannerTextCarousel.flickity({
+      pageDots: false,
+      wrapAround: true,
+      draggable: false,
+      cellAlign: 'left',
+      adaptiveHeight: true,
+      prevNextButtons: false,
+      cellSelector: '.flickity-item',
+      asNavFor: '.banner-image-carousel'
+    });
+
+    $(document).on('click', '.page-banner-nav button', function() {
+      if ($(this).is('.previous')) {
+        bannerTextCarousel.flickity('previous'); 
+        bannerImageCarousel.flickity('previous'); 
+      } else {
+        bannerTextCarousel.flickity('next');
+        bannerImageCarousel.flickity('next');
+      }
+    });
+  }
+
   function _initAccordions() {
     $('.accordion').each(function() {
       var $accordion = $(this),
@@ -175,7 +265,7 @@ var SC = (function($) {
       $('.site-nav .nav-sub-level[style]').attr('style', '');
     }
 
-    // Disable transitions when resizing
+    // Disable transitions when resizing  
     _disableTransitions();
 
     // Functions to run on resize end

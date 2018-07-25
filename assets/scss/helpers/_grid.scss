@@ -56,6 +56,10 @@ $column-width: 100% / $columns;
   flex-basis: 66.6666667%;
   max-width: 66.6666667%;
 }
+.three-fourths {
+  flex-basis: 75%;
+  max-width: 75%; 
+}
 
 @include media-md {
   .grid-item {
@@ -76,6 +80,10 @@ $column-width: 100% / $columns;
   .med-two-thirds {
     flex-basis: 66.6666667%;
     max-width: 66.6666667%;
+  }
+  .med-three-fourths {
+    flex-basis: 75%;
+    max-width: 75%;
   }
   // Order classes
   @for $i from 0 through 6 {

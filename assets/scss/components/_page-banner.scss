@@ -1,0 +1,132 @@
+// Page Banner
+
+.page-banner {
+  padding: 0;
+  position: relative;
+  background-color: color(blue-light);
+
+  @include media-md {
+    padding-right: #{$spacing * 10};
+  }
+
+  .banner-item {
+    width: 100%;
+  }
+
+  .banner-image {
+    height: 0;
+    width: 100%;
+    position: relative;
+    padding-bottom: 50%;
+    background-size: cover;
+
+    @include media-md {
+      padding-bottom: 30.7692%;
+    }
+  }
+
+  .banner-text-container {
+    margin-top: -60px;
+    padding-left: #{$spacing * 2};
+
+    @include media-md {
+      z-index: 2;
+      width: 25%;
+      float: right;
+      margin-top: 0;
+      padding-left: 0;
+      position: relative;
+    }
+  }
+
+  .banner-text-carousel {
+    border-left: 1px solid color(green-dark);
+  }
+
+  .banner-text {
+    width: 100%;
+    background-color: color(blue-light);
+    padding: #{$spacing * 2} #{$spacing * 2} 0;
+
+    .banner-title {
+      margin: 0;
+      @include h3;
+    }
+
+    p {
+      @include p2;
+      margin: $spacing 0 0;
+    }
+  }
+
+  // Navigation
+  .page-banner-nav {
+    @include clearfix;
+    position: relative;
+    display: inline-block;
+    vertical-align: bottom;
+    background-color: color(green-light);
+
+    @include media-md {
+      display: block;
+    }
+
+    button {
+      padding: 0;
+      float: left;
+      width: 60px;
+      border: none;
+      height: 60px;
+      display: flex;
+      position: relative;
+      background-color: color(green-light);
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      margin: auto;
+      fill: color(green-dark);
+    }
+
+    .previous {
+      margin-right: 1px;
+      .icon {
+        transform: rotate(180deg);
+      }
+      &::after {
+        right: 0;
+        top: 10px;
+        width: 1px;
+        z-index: 1;
+        content: '';
+        height: 40px;
+        position: absolute;
+        pointer-events: none;
+        transform: translateX(1px);
+        background-color: color(green-dark);
+      }
+    }
+
+  }
+}
+
+.page-header {
+  z-index: 1;
+  position: relative;
+  margin-top: #{$spacing * 2};
+  background-color: color(blue-light);
+
+  .page-title {
+    @include h1;
+  }
+
+  @include media-md {
+    min-height: #{$spacing * 6};
+    margin-top: -#{$spacing * 6};
+    padding: #{$spacing * 2} calc(25% + #{$spacing * 12.5}) #{$spacing * 2} #{$spacing * 2};
+  }
+}
