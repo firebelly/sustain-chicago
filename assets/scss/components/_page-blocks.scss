@@ -20,6 +20,9 @@
       p {
         margin: 0;
       }
+      a {
+        @extend .inline-link;
+      }
     }
 
   }

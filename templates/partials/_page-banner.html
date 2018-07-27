@@ -4,7 +4,7 @@
   {% set subtitle = entry.pageSubtitle %}
 {% endif %}
 
-{% if entry.pageBanner is not defined and entry.pageBanner.all()|length %}
+{% if entry.pageBanner.all()|length %}
 <div class="page-banner wrap">
   <div class="banner-image-carousel">    
     {% for pageBanner in entry.pageBanner.all() %}
