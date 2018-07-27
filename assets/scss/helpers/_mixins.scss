@@ -124,9 +124,8 @@
   box-shadow: 0 0 0 0 transparent;
   @include transition(background, outline-width, color, box-shadow);
   
-  &:hover,
-  &:focus {  
-    z-index: 1;
+  &:hover {  
+    z-index: 2;
     outline-offset: 0;
     fill: color(white);
     color: color(white);

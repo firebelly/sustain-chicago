@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "807ca72f91eb8ebfc9d46a86255995aa",
+    "content-hash": "873c6c1d2751fd699f2071104493831a",
     "packages": [
         {
             "name": "aelvan/imager",
@@ -461,11 +461,11 @@
         },
         {
             "name": "craftcms/cms",
-            "version": "3.0.16.1",
+            "version": "3.0.17.1",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/cms/zipball/aef7f8472169bf412448dcf9a3238f23e661146e",
-                "reference": "aef7f8472169bf412448dcf9a3238f23e661146e",
+                "url": "https://api.github.com/repos/craftcms/cms/zipball/7619e6fd236dfdbbbbcc0006113c6796dd7d95ed",
+                "reference": "7619e6fd236dfdbbbbcc0006113c6796dd7d95ed",
                 "shasum": ""
             },
             "require": {
@@ -536,7 +536,7 @@
                 "docs": "https://github.com/craftcms/docs",
                 "rss": "https://github.com/craftcms/cms/releases.atom"
             },
-            "time": "2018-07-18T22:38:28+00:00"
+            "time": "2018-07-24T20:54:02+00:00"
         },
         {
             "name": "craftcms/oauth2-craftid",
@@ -622,11 +622,11 @@
         },
         {
             "name": "craftcms/redactor",
-            "version": "2.1.2",
+            "version": "2.1.3",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/craftcms/redactor/zipball/d49309d7c251d15c729093e208dd21b9cfc05a19",
-                "reference": "d49309d7c251d15c729093e208dd21b9cfc05a19",
+                "url": "https://api.github.com/repos/craftcms/redactor/zipball/3ba43bd591c7246220859e8e36838e5deede80f3",
+                "reference": "3ba43bd591c7246220859e8e36838e5deede80f3",
                 "shasum": ""
             },
             "require": {
@@ -668,7 +668,7 @@
                 "docs": "https://github.com/craftcms/redactor",
                 "rss": "https://github.com/craftcms/redactor/commits/master.atom"
             },
-            "time": "2018-07-14T09:42:21+00:00"
+            "time": "2018-07-25T09:56:15+00:00"
         },
         {
             "name": "craftcms/server-check",
@@ -887,19 +887,15 @@
         },
         {
             "name": "elvanto/litemoji",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/elvanto/litemoji/zipball/7c0276dd0e5004bc78b7865e12030f3d2b6b8d0e",
-                "reference": "7c0276dd0e5004bc78b7865e12030f3d2b6b8d0e",
+                "url": "https://api.github.com/repos/elvanto/litemoji/zipball/b30d679cad29531ec16ca1afadebc78c4495fa10",
+                "reference": "b30d679cad29531ec16ca1afadebc78c4495fa10",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4"
-            },
-            "require-dev": {
-                "milesj/emojibase": "*",
-                "phpunit/phpunit": "^5.0"
             },
             "type": "library",
             "autoload": {
@@ -907,7 +903,6 @@
                     "LitEmoji\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -916,7 +911,7 @@
                 "emoji",
                 "php-emoji"
             ],
-            "time": "2018-05-25T04:37:05+00:00"
+            "time": "2018-07-24T06:21:15+00:00"
         },
         {
             "name": "enshrined/svg-sanitize",

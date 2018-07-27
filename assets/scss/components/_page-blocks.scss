@@ -1,0 +1,64 @@
+// Page Blocks
+
+.image-with-stat  {
+  position: relative;
+
+  + .block {
+    margin-top: #{$spacing * 4};
+  }
+
+  .stat {
+    margin: 0;
+    padding: #{$spacing * 2};
+    background-color: color(blue-light);
+    
+    h5 {
+      @include type-stat;
+    }
+    figcaption {
+      @include p2;
+      p {
+        margin: 0;
+      }
+    }
+
+  }
+
+  @include media-md {
+    padding-top: #{$spacing * 10};
+
+    + .block {
+      margin-top: -#{$spacing * 16};
+    }
+
+    .stat {
+      top: 0;
+      right: 0;
+      z-index: 1;
+      width: 50%;
+      position: absolute;
+    }
+
+  }
+}
+
+.next-page-link-block {
+  margin-top: #{$spacing * 8};
+
+  p {
+    margin: 0;
+    @include h1;
+  }
+
+  a {
+    @extend .inline-link;
+    &::after {
+      top: 65%;
+      height: 1.1em;
+    }
+  }
+
+  @include media-md {
+    text-align: right;
+  }
+}

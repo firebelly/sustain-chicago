@@ -1,0 +1,7 @@
+{% for block in entry.pageBlocks.all() %}
+
+  {% if block.type == "imageWithStat" %}
+    {% include "_image-with-stat" %}
+  {% endif %}
+
+{% endfor %}

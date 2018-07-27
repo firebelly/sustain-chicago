@@ -1,5 +1,7 @@
 {% extends (craft.app.request.isAjax and not craft.app.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
 
+{% set colors = ['dark', 'light', 'white'] %}
+
 {% block content %}
 
   {% if entry.actionDropdown is not empty %}
@@ -8,6 +10,82 @@
       {% include 'partials/_action-dropdown' %}
     </div>
   </div>
+  {% endif %}
+
+  {% if entry.homepageStats|length %}
+    {% include "partials/_image-with-stat" with { 'block' : entry.homepageStats.one() } %}
+  {% endif %}
+
+  {% if entry.featuredPages is not empty %}
+    <div class="block grid">
+    {% for page in entry.featuredPages.all() %}
+      {% set colorIndex = loop.index - 1 %}
+      {% if colorIndex > colors|length - 1 %} 
+        {% set colorIndex = colorIndex % colors|length %}
+      {% endif %}
+      <div class="card with-hover {{ colors[colorIndex] }}">
+        <header class="card-header">
+          <h3 class="card-title">{{ page.headline is not empty ? page.headline : page.entry.title }}</h3>
+        </header>
+        <div class="card-description">
+          <p>{{ page.description }}</p>
+        </div>
+        <p class="card-action"><a href="{{ page.entry.one().url }}" >{{ page.entry.one().title }} ></a></p>
+      </div>
+    {% endfor %}
+    </div>
+  {% endif %}
+
+  {% if entry.homepageStats|length == 2 %}
+    {% include "partials/_image-with-stat" with { 'block' : entry.homepageStats.nth(1) } %}
+  {% endif %}
+
+  <div class="block grid align-flex-start">
+
+    <div class="grid med-one-half med-order-1">
+      {% set dollarlotsImage = rev('images/Development_LargeLots.jpg') %}
+      {% set zelechowskiImage = rev('images/elise-zelechowski.jpg') %}
+      {% set dollarlots = craft.imager.transformImage(dollarlotsImage, { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
+      {% set zelechowski = craft.imager.transformImage(zelechowskiImage, { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
+
+      <div class="card profile with-hover light -small one-half">
+        <header class="card-header">
+          <h4 class="card-tag">Featured Project</h4>
+          <h3 class="card-title">$1 Large Lots Land Sale Program</h3>
+        </header>
+        <p class="card-action"><a href="#">Learn more ></a></p>
+        <div class="card-image" style="background-image:url('{{ dollarlots.getUrl() }}');"></div>
+      </div>
+      <div class="card profile with-hover white -small one-half">
+        <header class="card-header">
+          <h4 class="card-tag">People</h4>
+          <h3 class="card-title">Elise Zelechowski</h3>
+        </header>
+        <p class="card-action"><a href="#">Meet Elise ></a></p>
+        <div class="card-image" style="background-image:url('{{ zelechowski.getUrl() }}');"></div>
+      </div>
+
+    </div>
+    
+    <div class="card dark med-order-0">
+      <header class="card-header with-action">
+        <h3 class="card-title -small">Latest</h3>
+        <p class="header-action"><a href="https://twitter.com/{{ footerContent.twitterHandle }}">See all<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg></a></p>
+      </header>
+      <div class="card-content">
+        <a class="twitter-timeline" data-tweet-limit="3" data-link-color="#6eedaa" data-chrome="noheader nofooter noborders" href="https://twitter.com/{{ footerContent.twitterHandle }}?ref_src=twsrc%5Etfw">Tweets by {{ footerContent.twitterHandle }}</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+      </div>
+    </div>
+
+  </div>
+
+  {% if entry['nextPageLink'] is defined and entry['nextPageLink'] is not empty %}
+    <div class="next-page-link-block block">
+      {% if entry['nextPageLinkIntro'] is defined and entry['nextPageLinkIntro'] is not empty %}
+        <p>{{ entry.nextPageLinkIntro }}</p>
+      {% endif %}
+      <p class="next-page-link"><a href="{{ entry.nextPageLink.one().url }}">{{ entry.nextPageLink.one().title }} ></a></p>
+    </div>
   {% endif %}
 
 {% endblock %}

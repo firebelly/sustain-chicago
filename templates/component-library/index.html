@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<section class="column-primary">
+<section>
   <p class="h1">Testing testing testing</p>
   <p class="h2">Testing testing testing</p>
   <p class="h3">Testing testing testing</p>
@@ -14,7 +14,7 @@
   <p class="type-stat">99,123</p>
 </section>
 
-<section class="column-primary">
+<section>
 
   <h2 class="h2">Cards:</h2>
 
@@ -39,28 +39,28 @@
       <p class="card-action"><a href="#" >Call to action ></a></p>
     </div>
 
-    <div class="card with-hover -small">
+    <div class="card with-hover -small one-half med-one-fourth">
       <header class="card-header">
         <h4 class="card-tag">Card Tag</h4>
         <h3 class="card-title">Card Title</h3>
       </header>
       <p class="card-action"><a href="#">Call to action ></a></p>
     </div>
-    <div class="card with-hover -small dark">
+    <div class="card with-hover -small one-half med-one-fourth dark">
       <header class="card-header">
         <h4 class="card-tag">Card Tag</h4>
         <h3 class="card-title">Card Title</h3>
       </header>
       <p class="card-action"><a href="#">Call to action ></a></p>
     </div>
-    <div class="card with-hover -small">
+    <div class="card with-hover -small one-half med-one-fourth">
       <header class="card-header">
         <h3 class="card-title">Card Title</h3>
         <h4 class="card-tag">Card Tag</h4>
       </header>
       <p class="card-action"><a href="#">Call to action ></a></p>
     </div>
-    <div class="card with-hover -small light">
+    <div class="card with-hover -small one-half med-one-fourth light">
       <header class="card-header">
         <h3 class="card-title">Card Title</h3>
         <h4 class="card-tag">Card Tag</h4>
@@ -72,16 +72,16 @@
       <h3 class="stat-figure">99,000</h3>
       <div class="stat-caption">Stat caption Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
     </div>
-    <div class="card stat light -small">
+    <div class="card stat light -small one-half med-one-fourth">
       <h3 class="stat-figure">99,000</h3>
       <div class="stat-caption">Stat caption Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
     </div>
-    <div class="card stat dark -small">
+    <div class="card stat dark -small one-half med-one-fourth">
       <h3 class="stat-figure">99,000</h3>
       <div class="stat-caption">Stat caption Lorem ipsum dolor sit amet, consectetur adipisicing elit.</div>
     </div>
     
-    <div class="card dark -small">
+    <div class="card dark -small one-half med-one-fourth">
       <header class="card-header">
         <h3 class="card-title">Card Title</h3>
         <h4 class="card-tag">Person title lorem ipsum</h4>
@@ -92,7 +92,7 @@
         <a href="#"><svg class="icon icon-instagram"><use xlink:href="#icon-instagram" /></svg><span class="sr-only">Instagram</span></a> 
       </p>
     </div>
-    <div class="card light -small">
+    <div class="card light -small one-half med-one-fourth">
       <header class="card-header">
         <h3 class="card-title">Card Title</h3>
         <h4 class="card-tag">Person title lorem ipsum</h4>
@@ -173,7 +173,7 @@
     {% set davis = craft.imager.transformImage(davisImage, { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
     {% set zelechowski = craft.imager.transformImage(zelechowskiImage, { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
 
-    <div class="card profile dark -small">
+    <div class="card profile dark -small one-half med-one-fourth">
       <header class="card-header">
         <h3 class="card-title">President Barack Obama</h3>
         <h4 class="card-tag">44th President of The United States</h4>
@@ -185,7 +185,7 @@
       </p>
       <div class="card-image" style="background-image:url('{{ obama.getUrl() }}');"></div>
     </div>
-    <div class="card profile light -small">
+    <div class="card profile light -small one-half med-one-fourth">
       <header class="card-header">
         <h3 class="card-title">Anne Hidalgo</h3>
         <h4 class="card-tag">Mayor of Paris, Chair of C40 Cities Climate Leadership Group</h4>
@@ -197,7 +197,7 @@
       </p>
       <div class="card-image" style="background-image:url('{{ hidalgo.getUrl() }}');"></div>
     </div>
-    <div class="card profile with-hover dark -small">
+    <div class="card profile with-hover dark -small one-half med-one-fourth">
       <header class="card-header">
         <h3 class="card-title">Naomi Davis</h3>
         <h4 class="card-tag">President, BIG: Blacks in Green™</h4>
@@ -205,7 +205,7 @@
       <p class="card-action"><a href="#">Meet Naomi ></a></p>
       <div class="card-image" style="background-image:url('{{ davis.getUrl() }}');"></div>
     </div>
-    <div class="card profile with-hover light -small">
+    <div class="card profile with-hover light -small one-half med-one-fourth">
       <header class="card-header">
         <h3 class="card-title">Elise Zelechowski</h3>
         <h4 class="card-tag">Wearer of Many Hats, Elevated chicago, ThoughtWorks, Rebuilding Exchange, Cellar Door Provisions</h4>

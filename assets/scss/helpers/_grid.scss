@@ -35,6 +35,10 @@ $column-width: 100% / $columns;
   &.right-aligned {
     flex-direction: row-reverse;
   }
+
+  &.align-flex-start {
+    align-items: flex-start;
+  }
 }
 
 .grid-item {

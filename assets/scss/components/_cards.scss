@@ -17,8 +17,11 @@
   }
 
   @include media-md {
-    max-width: 50%;
-    flex-basis: 50%;
+
+    &:not(.med-one-fourth) {
+      max-width: 50%;
+      flex-basis: 50%;
+    }
   }
 
   &-header {
@@ -73,6 +76,10 @@
   &-title {
     @include h2;
     margin-top: 0;
+
+    &.-small {
+      @include h3;
+    }
   }
 
   &-content,
@@ -173,16 +180,9 @@
 
   // Card Variations
   &.-small {
-    max-width: 50%;
-    flex-basis: 50%;
 
     .card-title {
       @include h3;
-    }
-
-    @include media-md {
-      max-width: 25%;
-      flex-basis: 25%;
     }
 
   }

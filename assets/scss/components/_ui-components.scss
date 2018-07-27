@@ -62,6 +62,8 @@
 
 // Acdtion Dropdown
 .action-dropdown {
+  z-index: 2;
+  position: relative;
   padding: #{$spacing * 2};
   background-color: color(green-light);
 
@@ -78,6 +80,7 @@
 
     @include media-md {
       margin-bottom: 0;
+      line-height: 55px;
       white-space: nowrap;
       margin-right: #{$spacing * 2};
     }
@@ -96,6 +99,16 @@
       position: relative;
       box-shadow: $box-shadow;
       background-color: color(white);
+      @include transition(box-shadow);
+
+      &:hover,
+      &:focus {
+        box-shadow: 0 0 0 5px color(blue);
+        button {
+          fill: color(white);
+          background-color: color(blue);
+        }
+      }
 
       .null-action {
         line-height: 55px;
@@ -113,6 +126,12 @@
         fill: color(green-light);
         border-radius: 0 5px 5px 0;
         background-color: color(green-dark);
+        @include transition(fill, background-color);
+
+        &:hover {
+          fill: color(white);
+          background-color: color(blue);
+        }
 
         &:focus {
           outline: none;

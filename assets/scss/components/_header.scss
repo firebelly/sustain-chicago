@@ -76,6 +76,7 @@ body {
       padding: 0;
       float: left;
       box-shadow: none;
+      background-color: transparent;
       margin: 0 #{$spacing * 5} 0 0;
     }
   }
@@ -158,6 +159,7 @@ body {
 
     @include media-md {
       top: $mainNavHeightMd;
+      height: calc(100% - #{$mainNavHeightMd});
     }
 
     @include min-screen($breakpoint-nav) {
@@ -192,6 +194,123 @@ body {
         border-top: none;
       }
     }
+
+    .nav-utility {
+      margin: 0;
+
+      > .wrap {
+        padding: 0;
+      }
+
+      li {
+        background-color: color(white);
+      }
+
+      .site-language-select {
+        .nav-parent-label {
+          .icon {
+            width: 15px;
+            height: 15px;
+            fill: inherit;
+            display: none;
+            transform: rotate(90deg);
+          }
+        }
+      }
+
+      @include min-screen($breakpoint-nav) {
+        top: 0;
+        left: 0;
+        right: 0;
+        text-align: right;
+        fill: color(white);
+        position: absolute;
+        color: color(white);
+        height: $utilityNavHeight;
+        @include transition(transform);
+        background-color: color(green-dark);
+
+        > .wrap {
+          padding: 0 #{$spacing * 10 };
+        }
+
+        li {
+          background-color: transparent;
+        }
+
+        a {
+          &:hover,
+          &:focus,
+          &:active {
+            text-decoration: underline;
+          }
+        }
+
+        .site-language-select {
+          padding-right: #{$spacing * 4 - ($spacing * 1.5)};
+
+          .nav-parent-label {
+            .expand-contract {
+              top: auto;
+              right: auto;
+              width: 15px;
+              height: 15px;
+              transform: none;
+              position: relative;
+              display: inline-block;
+              margin-left: $spacing;
+
+              &::before,
+              &::after {
+                display: none;
+              }
+            }
+            .icon {
+              display: block;
+            }
+          }
+        }
+
+        .nav-top-level {
+          > li {
+            float: none;
+            display: inline-block;
+            margin-left: #{$spacing * 3};
+
+            &::before {
+              top: 50%;
+              width: 1px;
+              content: '';
+              height: 1em;
+              display: block;
+              position: absolute;
+              left: -#{$spacing * 1.5};
+              background-color: color(white);
+              transform: translate(-50%, -50%);
+            }
+
+            &:first-of-type {
+              margin-left: 0;
+
+              &::before {
+                display: none;
+              }
+            }
+
+            a {
+              line-height: $utilityNavHeight;
+            }
+          }
+        }
+
+        .nav-sub-level {
+          a {
+            background-color: color(green-light);
+            @include hover-style;
+          }
+        }
+      }
+    }
   }
 
   .nav-main {
@@ -215,121 +334,6 @@ body {
       }
     }
 
-  }
-
-  .nav-utility {
-    margin: 0;
-
-    > .wrap {
-      padding: 0;
-    }
-
-    li {
-      background-color: color(white);
-    }
-
-    .site-language-select {
-      .nav-parent-label {
-        .icon {
-          width: 15px;
-          height: 15px;
-          fill: inherit;
-          display: none;
-          transform: rotate(90deg);
-        }
-      }
-    }
-
-    @include min-screen($breakpoint-nav) {
-      top: 0;
-      left: 0;
-      right: 0;
-      text-align: right;
-      fill: color(white);
-      position: absolute;
-      color: color(white);
-      height: $utilityNavHeight;
-      padding: 0 #{$spacing * 10 };
-      @include transition(transform);
-      background-color: color(green-dark);
-
-      > .wrap {
-        display: inline-block;
-      }
-
-      li {
-        background-color: transparent;
-      }
-
-      a {
-        &:hover,
-        &:focus,
-        &:active {
-          text-decoration: underline;
-        }
-      }
-
-      .site-language-select {
-        padding-right: #{$spacing * 4 - ($spacing * 1.5)};
-
-        .nav-parent-label {
-          .expand-contract {
-            top: auto;
-            right: auto;
-            width: 15px;
-            height: 15px;
-            transform: none;
-            position: relative;
-            display: inline-block;
-            margin-left: $spacing;
-
-            &::before,
-            &::after {
-              display: none;
-            }
-          }
-          .icon {
-            display: block;
-          }
-        }
-      }
-
-      .nav-top-level {
-        > li {
-          margin-left: #{$spacing * 3};
-
-          &::before {
-            top: 50%;
-            width: 1px;
-            content: '';
-            height: 1em;
-            display: block;
-            position: absolute;
-            left: -#{$spacing * 1.5};
-            background-color: color(white);
-            transform: translate(-50%, -50%);
-          }
-
-          &:first-of-type {
-            margin-left: 0;
-
-            &::before {
-              display: none;
-            }
-          }
-
-          a {
-            line-height: $utilityNavHeight;
-          }
-        }
-      }
-
-      .nav-sub-level {
-        a {
-          background-color: color(green-light);
-        }
-      }
-    }
   }
 
   @include min-screen($breakpoint-nav) {

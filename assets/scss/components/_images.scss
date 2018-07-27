@@ -26,12 +26,12 @@
   }
 
   &::before {
-    top: 0;
+    top: -1px;
     background: linear-gradient(to bottom, rgba(color(blue-light),1), rgba(color(blue-light),0));
   }
 
   &::after {
-    bottom: 0;
+    bottom: -1px;
     background: linear-gradient(to top, rgba(color(blue-light),1), rgba(color(blue-light),0));
   }
 }

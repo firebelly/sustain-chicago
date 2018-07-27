@@ -79,9 +79,10 @@ $baseline: (
   "h2": barlow-baseline(30, 30),
   "h2-medium": barlow-baseline(50, 40),
   "h3": barlow-baseline(30, 30),
-  "stat": barlow-baseline(200, 200),
   "h4": space-baseline(18, 30),
   "h5": space-baseline(14, 20),
+  "stat": barlow-baseline(90, 75),
+  "stat-medium": barlow-baseline(200, 200),
   "p1": hkgrotesk-baseline(20, 30),
   "p2": hkgrotesk-baseline(16, 20)
 );
@@ -100,9 +101,10 @@ $capline: (
   "h2": barlow-capline(30, 30),
   "h2-medium": barlow-capline(50, 40),
   "h3": barlow-capline(30, 30),
-  "stat": barlow-capline(200, 200),
   "h4": space-capline(18, 30),
   "h5": space-capline(14, 20),
+  "stat": barlow-capline(90, 75),
+  "stat-medium": barlow-capline(200, 200),
   "p1": hkgrotesk-capline(20, 30),
   "p2": hkgrotesk-capline(16, 20)
 );
@@ -155,11 +157,6 @@ $capline: (
   @include paragraph-style(30, 30, .0133em, uppercase);
 }
 
-@mixin type-stat {
-  @include font-display;
-  @include paragraph-style(200, 200, 0, uppercase);
-}
-
 @mixin h4 {
   @include font-mono;
   @include paragraph-style(18, 30, .0694em, uppercase);
@@ -168,6 +165,16 @@ $capline: (
 @mixin h5 {
   @include font-mono;
   @include paragraph-style(14, 20, .0892em, uppercase);
+}
+
+@mixin type-stat {
+  margin: 0;
+  @include font-display;
+  @include paragraph-style(90, 75, .0055em, uppercase);
+
+  @include media-md {
+    @include paragraph-style(200, 200, 0, uppercase);
+  }
 }
 
 @mixin p1 {
