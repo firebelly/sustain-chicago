@@ -1,0 +1,161 @@
+// Priorities Showcase
+
+.priorities-showcase {
+  background-color: color(white);
+
+  > h4 {
+    @include h5;
+    margin-bottom: #{$spacing * 6};
+    padding: #{$spacing * 2} #{$spacing * 2} 0;
+  }
+
+  .priorities-nav {
+    position: relative;
+    @extend .semantic-list;
+
+    &::after {
+      top: 0;
+      right: 0;
+      content: '';
+      width: 120px;
+      height: 100%;
+      position: absolute;
+      pointer-events: none;
+      background: linear-gradient(to right, rgba(color(white), 0), rgba(color(white), 1));
+
+      @include media-md {
+        right: 120px;
+      }
+    }
+
+    li {
+      width: auto;
+      @include h5;
+      cursor: pointer;
+      white-space: nowrap;
+      display: inline-block;
+      padding: 0 #{$spacing * 2};
+      line-height: #{$spacing * 6};
+      border-right: 1px solid color(green-dark);
+
+      &:hover,
+      &.-active {
+
+        &.dark {        
+          color: color(green-light);
+          background-color: color(green-dark);
+        }
+
+        &.light {
+          color: color(green-dark);
+          background-color: color(green-light);
+        }
+      }
+    }
+
+    // Flickity styles
+    .flickity-button {
+      left: auto;
+      top: -99px;
+      z-index: 1;
+      right: auto;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      transform: none;
+      border-radius: 0;
+      background-color: color(green-light);
+
+      @include hover-style;
+      position: absolute;
+
+      &:active {
+        opacity: 1;
+      }
+
+      &:hover {
+        &::before {
+          display: none;
+        }
+      }
+
+      &.previous {
+        right: 60px;
+      }
+      &.next {
+        right: 0;
+
+        &::before {
+          left: 0;
+          width: 1px;
+          content: '';
+          top: $spacing;
+          bottom: $spacing;
+          position: absolute;
+          transform: translateX(-50%);
+          background-color: color(green-dark);
+        }
+      }
+
+      svg {
+        top: auto;
+        left: auto;
+        width: 20px;
+        height: 20px;
+        margin: auto;
+        fill: inherit;
+        position: relative;
+      }
+
+      @include media-md {
+        top: 0;
+      }
+    }
+  }
+
+  .priority {
+    display: none;
+
+    &.-active {
+      display: flex;
+    }
+
+    .priority-featured-project {
+      position: relative;
+
+      &.dark {
+        &::before {
+          background-color: color(green-light);
+        }
+      }
+      &.light {
+        &::before {
+          background-color: color(green-dark);
+        }
+      }
+
+      &::before {
+        top: 0;
+        z-index: 1;
+        height: 1px;
+        content: '';
+        position: absolute;
+        left: #{$spacing * 2};
+        right: #{$spacing * 2};
+        transform: translateY(-50%);
+      }
+
+      @include media-md {
+        &::before {
+          left: 0;
+          width: 1px;
+          right: auto;
+          height: auto;
+          top: #{$spacing * 2};
+          bottom: #{$spacing * 2};
+          transform: translateX(-50%);
+        }
+      }
+    }
+  }
+}

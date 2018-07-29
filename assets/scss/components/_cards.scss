@@ -202,6 +202,47 @@
     }
   }
 
+  // Split with image
+  &.-split {
+
+    .split-container {
+
+      &.-image {
+        height: 0;
+        padding-bottom: 50%;
+        background-size: cover;
+        background-position: center;
+        width: calc(100% + #{$spacing * 4});
+        margin: #{$spacing * 2} 0 -#{$spacing * 2} -#{$spacing * 2};
+      }
+
+    }
+
+    @include media-md {
+      flex-direction: row;
+
+      .split-container {      
+        max-width: 50%;
+        flex-basis: 50%;
+
+        &:first-of-type {
+          display: flex;
+          flex-direction: column;
+          padding-right: #{$spacing * 2};
+        }
+
+        &.-image {
+          padding: 0;
+          height: auto;
+          max-width: none;
+          width: calc(50% + #{$spacing * 2});
+          flex-basis: calc(50% + #{$spacing * 2});
+          margin: -#{$spacing * 2} -#{$spacing * 2} -#{$spacing * 2} 0;
+        }
+      }
+    }
+  }
+
   &.profile {
     .card-image {
       height: 200px;
