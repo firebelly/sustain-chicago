@@ -506,6 +506,27 @@ body {
   }
 }
 
+.header-search-wrap {
+  @include min-screen($breakpoint-nav) {
+    max-width: 1440px;
+    left: 50%;
+    width: 100%;
+    position: absolute;
+    transform: translateX(-50%);
+
+    &::after {
+      z-index: 1;
+      left: 100%;
+      width: 100%;
+      content: '';
+      bottom: 100%;
+      position: absolute;
+      background: color(black);
+      height: $mainNavHeightMd;
+    }
+  }
+}
+
 #header-search-form {
   background-color: color(black);
 
