@@ -32,9 +32,9 @@
           {% set colorIndex = colorIndex % prioritiesColors|length %}
         {% endif %}
         <div class="priority grid{{ loop.index == 1 ? ' -active' : '' }}" id="{{ priority.slug }}">
-          <div class="priority-overfiew card {{ prioritiesColors[colorIndex] }}">          
+          <div class="priority-overfiew card with-hover {{ prioritiesColors[colorIndex] }}">          
             <header class="card-header">
-              <h3 class="card-title">{{ priority.title }}</h3>
+              <h3 class="card-title"><a href="{{ priority.url }}" >{{ priority.title }}</a></h3>
             </header>
             <div class="card-description">
               <p>{{ priority.pageDescription }}</p>
@@ -42,14 +42,14 @@
             <p class="card-action"><a href="{{ priority.url }}" >Learn More ></a></p>
           </div>
 
-          <div class="priority-featured-project card -small -split {{ prioritiesColors[colorIndex] }}">
+          <div class="priority-featured-project card with-hover -small -split {{ prioritiesColors[colorIndex] }}">
             {% if craft.entries.section('projects').relatedTo(priority).all()|length %}
               {% set featuredProject = craft.entries.section('projects').relatedTo(priority).one() %}
               {% set treatedImage = craft.imager.transformImage(featuredProject.pageBanner.one().bannerImage.one(), { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
               <div class="split-container">              
                 <header class="card-header">
                   <h4 class="card-tag">Featured Project</h4>
-                  <h3 class="card-title">{{ featuredProject.title }}</h3>
+                  <h3 class="card-title"><a href="{{ featuredProject.url }}">{{ featuredProject.title }}</a></h3>
                 </header>
                 <p class="card-action"><a href="{{ featuredProject.url }}">Learn more ></a></p>
               </div>

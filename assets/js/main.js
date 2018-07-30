@@ -242,6 +242,10 @@ var SC = (function($) {
       if ( typeof cellIndex == 'number' ) {
         $prioritiesNavCarousel.flickity( 'select', cellIndex );
       }
+    }).on( 'change.flickity', function( event, index ) {
+      var $priority = $($('.priorities-nav li').eq(index).attr('data-priority'));
+      setActivePriority($priority);
+      $('.priorities-nav li').eq(index).toggleClass('-active');
     });
 
     // Activate showcase when clicked relative nav item
@@ -252,11 +256,16 @@ var SC = (function($) {
         return;
       }
 
-      $prioritiesNav.find('li.-active').not($(this)).removeClass('-active');
-      $prioritiesContent.find('.priority.-active').not($priority).removeClass('-active');
+      setActivePriority($priority);
+
       $(this).toggleClass('-active');
-      $priority.toggleClass('-active');
     });
+
+    function setActivePriority($priority) {
+      $prioritiesNav.find('li.-active').removeClass('-active');
+      $prioritiesContent.find('.priority.-active').not($priority).removeClass('-active');
+      $priority.toggleClass('-active');
+    }
   }
 
   function _initAccordions() {

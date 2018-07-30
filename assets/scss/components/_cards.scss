@@ -77,6 +77,10 @@
     @include h2;
     margin-top: 0;
 
+    a {
+      text-decoration: none;
+    }
+
     &.-small {
       @include h3;
     }

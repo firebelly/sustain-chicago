@@ -38,7 +38,11 @@
       line-height: #{$spacing * 6};
       border-right: 1px solid color(green-dark);
 
-      &:hover,
+      &:hover {
+        color: color(white);
+        background-color: color(blue);
+      }
+
       &.-active {
 
         &.dark {        
@@ -123,6 +127,12 @@
     .priority-featured-project {
       position: relative;
 
+      &:hover {
+        &::before {
+          opacity: 0;
+        }
+      }
+
       &.dark {
         &::before {
           background-color: color(green-light);
@@ -137,12 +147,14 @@
       &::before {
         top: 0;
         z-index: 1;
+        opacity: 1;
         height: 1px;
         content: '';
         position: absolute;
         left: #{$spacing * 2};
         right: #{$spacing * 2};
         transform: translateY(-50%);
+        @include transition(opacity);
       }
 
       @include media-md {
