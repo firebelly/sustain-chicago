@@ -24,7 +24,8 @@ var SC = (function($) {
       userScrolled,
       lastScrollTop = 0,
       downwardScrollDelta = 6,
-      upwardScrollDelta = 120;
+      upwardScrollDelta = 120,
+      utils = window.fizzyUIUtils;
 
   /**
    * Initialize all functions
@@ -228,7 +229,7 @@ var SC = (function($) {
     var $prioritiesNav = $('.priorities-nav'),
         $prioritiesContent = $('.priorities-content');
 
-    var prioritiesNavCarousel = $prioritiesNav.flickity({
+    var $prioritiesNavCarousel = $prioritiesNav.flickity({
       pageDots: false,
       wrapAround: true,
       cellAlign: 'left',
@@ -236,6 +237,14 @@ var SC = (function($) {
       arrowShape: 'M99.5,11.4v76.8c0,6.3-5.1,11.4-11.4,11.4c-1.8,0-3.5-0.4-5.1-1.2L6.3,59.9c-5.6-2.8-7.9-9.6-5.1-15.2 c1.1-2.2,2.9-4,5.1-5.1L83.1,1.2c5.6-2.8,12.4-0.5,15.2,5.1C99.1,7.9,99.5,9.6,99.5,11.4z'
     });
 
+    // Scroll to the nav item when clicked
+    $prioritiesNavCarousel.on( 'staticClick.flickity', function( event, pointer, cellElement, cellIndex ) {
+      if ( typeof cellIndex == 'number' ) {
+        $prioritiesNavCarousel.flickity( 'select', cellIndex );
+      }
+    });
+
+    // Activate showcase when clicked relative nav item
     $(document).on('click', '.priorities-nav li', function(e) {
       var $priority = $($(this).attr('data-priority'));
 
