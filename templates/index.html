@@ -92,27 +92,32 @@
   <div class="block grid align-flex-start">
 
     <div class="grid med-one-half med-order-1">
-      {% set dollarlotsImage = rev('images/Development_LargeLots.jpg') %}
-      {% set zelechowskiImage = rev('images/elise-zelechowski.jpg') %}
-      {% set dollarlots = craft.imager.transformImage(dollarlotsImage, { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
-      {% set zelechowski = craft.imager.transformImage(zelechowskiImage, { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
 
-      <div class="card profile with-hover light -small one-half">
-        <header class="card-header">
-          <h4 class="card-tag">Featured Project</h4>
-          <h3 class="card-title">$1 Large Lots Land Sale Program</h3>
-        </header>
-        <p class="card-action"><a href="#">Learn more ></a></p>
-        <div class="card-image" style="background-image:url('{{ dollarlots.getUrl() }}');"></div>
-      </div>
-      <div class="card profile with-hover white -small one-half">
-        <header class="card-header">
-          <h4 class="card-tag">People</h4>
-          <h3 class="card-title">Elise Zelechowski</h3>
-        </header>
-        <p class="card-action"><a href="#">Meet Elise ></a></p>
-        <div class="card-image" style="background-image:url('{{ zelechowski.getUrl() }}');"></div>
-      </div>
+      {% if craft.entries.section('projects').search('featured:1')|length %}
+        {% set featuredProject = random(craft.entries.section('projects').search('featured:1')) %}
+        {% set projectImage = craft.imager.transformImage(featuredProject.pageBanner.one().bannerImage.one(), { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
+        <div class="card profile with-hover light -small one-half">
+          <header class="card-header">
+            <h4 class="card-tag">Featured Project</h4>
+            <h3 class="card-title"><a href="{{ featuredProject.url }}">{{ featuredProject.title }}</a></h3>
+          </header>
+          <p class="card-action"><a href="{{ featuredProject.url }}">Learn more ></a></p>
+          <div class="card-image" style="background-image:url('{{ projectImage.getUrl() }}');"></div>
+        </div>
+      {% endif %}
+
+      {% if craft.entries.section('people')|length %}
+        {% set person = random(craft.entries.section('people')) %}
+        {% set personImage = craft.imager.transformImage(person.postImage.one(), { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
+        <div class="card profile with-hover white -small one-half">
+          <header class="card-header">
+            <h4 class="card-tag">People</h4>
+            <h3 class="card-title"><a href="{{ person.url }}">{{ person.title }}</a></h3>
+          </header>
+          <p class="card-action"><a href="{{ person.url }}">Meet {{ person.firstName }} ></a></p>
+          <div class="card-image" style="background-image:url('{{ personImage.getUrl() }}');"></div>
+        </div>
+      {% endif %}
 
     </div>
     
