@@ -6,6 +6,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var cssnano      = require('gulp-cssnano');
 var include      = require('gulp-include');
 var rev          = require('gulp-rev');
+var revdel       = require('gulp-rev-delete-original');
 var sourcemaps   = require('gulp-sourcemaps');
 var runSequence  = require('run-sequence');
 var notify       = require('gulp-notify');
