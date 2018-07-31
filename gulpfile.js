@@ -6,6 +6,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var cssnano      = require('gulp-cssnano');
 var include      = require('gulp-include');
 var rev          = require('gulp-rev');
+var revAll       = require('gulp-rev-all');
 var revdel       = require('gulp-rev-delete-original');
 var sourcemaps   = require('gulp-sourcemaps');
 var runSequence  = require('run-sequence');
@@ -18,6 +19,11 @@ var svgmin       = require('gulp-svgmin');
 var rename       = require('gulp-rename');
 var argv         = require('minimist')(process.argv.slice(2));
 var jshint       = require('gulp-jshint');
+
+// Various config
+var conf = {
+  siteUrl: 'sustain-chicago.localhost'
+};
 
 // CLI options
 var enabled = {
@@ -85,10 +91,10 @@ gulp.task('scripts', ['jshint'], function() {
 gulp.task('rev', function() {
   if (!enabled.rev) return;
   return gulp.src(['web/assets/dist/**/*.{css,js,jpg,png,gif}'])
-    .pipe(rev())
+    .pipe(revAll.revision())
     .pipe(revdel())
     .pipe(gulp.dest('web/assets/dist'))
-    .pipe(rev.manifest())
+    .pipe(revAll.manifestFile())
     .pipe(gulp.dest('web/assets/dist'));
 });
 
@@ -104,7 +110,7 @@ gulp.task('copy', function() {
 gulp.task('watch', ['build'], function() {
   // Init BrowserSync
   browserSync.init({
-    proxy: 'sustain-chicago.localhost',
+    proxy: conf.siteUrl,
     notify: true,
     open: false
   });
