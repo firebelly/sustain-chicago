@@ -90,7 +90,7 @@ var SC = (function($) {
 
   function _initClickToDeactivate() {
     if ($('.action-dropdown').length) {    
-      $body.on('click', function(e) {
+      $body.on('click touchend', function(e) {
         var clickTarget = $(e.target);
         if ($('.action-dropdown-container').is('.-active') && !clickTarget.parents('.action-dropdown').length) {
           _closeActionDropdown();

@@ -33,8 +33,8 @@
       {% endif %}
     </div>
 
-    {% if footerContent.partners.all()|length %}
     <div class="med-one-half med-order-0">
+      {% if footerContent.partners.all()|length %}
       <ul class="partner-list">
         {% for partner in footerContent.partners.all() %}
           {% set image = partner.partnerLogo.one().getUrl() %}
@@ -42,8 +42,8 @@
           <li><a href="{{ partner.partnerLink }}" target="_blank"><img src="{{ transformedImage.getUrl() }}" alt="{{ partner.partnerName }}"></a></li>
         {% endfor %}
       </ul>
+      {% endif %}
     </div>
-    {% endif %}
 
   </div>
 </footer>

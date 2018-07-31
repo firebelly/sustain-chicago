@@ -4,6 +4,41 @@
 $utilityNavHeight: 60px;
 $mainNavHeightSm: 60px;
 $mainNavHeightMd: 100px;
+$adminbarHeightSm: 56px;
+$adminbarHeightMd: 49px;
+
+// Compensate for the craft adminbar
+html.adminbar-on {
+  body {
+    padding-top: $mainNavHeightSm + $adminbarHeightSm;
+  }
+
+  #adminbar {    
+    top: 0;
+    width: 100%;
+    position: fixed;
+  }
+
+  .site-header {
+    top: $adminbarHeightSm;
+  }
+
+  @include min-screen(600px) {
+    body {
+      padding-top: $mainNavHeightSm + $adminbarHeightMd;
+    }
+
+    .site-header {
+      top: $adminbarHeightMd;
+    }
+  }
+
+  @include min-screen($breakpoint-nav) {
+    body {
+      padding-top: $mainNavHeightMd + $adminbarHeightMd;
+    }
+  }
+}
 
 // Compensate on body for fixed header
 body {

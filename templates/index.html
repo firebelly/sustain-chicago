@@ -74,12 +74,12 @@
       {% endif %}
       <div class="card with-hover {{ featuredPageColors[colorIndex] }}">
         <header class="card-header">
-          <h3 class="card-title">{{ page.headline is not empty ? page.headline : page.entry.title }}</h3>
+          <h3 class="card-title"><a href="{{ page.entry.one().url }}">{{ page.headline is not empty ? page.headline : page.entry.title }}</a></h3>
         </header>
         <div class="card-description">
           <p>{{ page.description }}</p>
         </div>
-        <p class="card-action"><a href="{{ page.entry.one().url }}" >{{ page.entry.one().title }} ></a></p>
+        <p class="card-action"><a href="{{ page.entry.one().url }}">{{ page.entry.one().title }} ></a></p>
       </div>
     {% endfor %}
     </div>
