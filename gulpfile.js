@@ -83,8 +83,9 @@ gulp.task('scripts', ['jshint'], function() {
 // Revision files for production assets
 gulp.task('rev', function() {
   if (!enabled.rev) return;
-  return gulp.src(['web/assets/dist/**/*.{css,js,jpg,png,svg,gif}'])
+  return gulp.src(['web/assets/dist/**/*.{css,js,jpg,png,gif}'])
     .pipe(rev())
+    .pipe(revdel())
     .pipe(gulp.dest('web/assets/dist'))
     .pipe(rev.manifest())
     .pipe(gulp.dest('web/assets/dist'));
