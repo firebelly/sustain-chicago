@@ -31,13 +31,13 @@
     margin: 0 0 #{$spacing * 4};
 
     a {
-      height: 0;
-      width: 100%;
-      padding-bottom: 24%;
+      max-width: 250px;
       vertical-align: top;
       display: inline-block;
-      background-image: url('../images/coc-logo.png');
-      background-size: cover;
+
+      img {
+        max-width: 100%;
+      }
     }
 
     @include media-md {
