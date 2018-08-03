@@ -4,7 +4,7 @@
 
   {% include '/partials/_head' %}
 
-  <body class="{% if currentUser %}logged-in {% endif %}{% if bodyClass is defined %}{{ bodyClass }} {% endif %}page-{{ craft.app.request.getSegment(1) ? craft.app.request.getSegment(1) : 'home' }}"{% if bodyId is defined %} id="{{ bodyId }}"{% endif %}>
+  <body class="{% if currentUser %}logged-in {% endif %}{% if bodyClass is defined %}{{ bodyClass }} {% endif %}{{ craft.app.request.getSegment(1) ? craft.app.request.getSegment(1) : 'page-home' }}{% block pageClass %}{% endblock %}"{% if bodyId is defined %} id="{{ bodyId }}"{% endif %}>
     <div id="breakpoint-indicator"></div>
     {{ adminbar({ sticky: false }) }}
 
@@ -18,12 +18,23 @@
 
       </header>
 
-      {% include '/partials/_page-banner' %}
+      {% include '/partials/_page-header' %}
 
       <main class="site-main" role="main">
-        <div class="wrap">
+
           {% block content %}{% endblock %}
-        </div>
+        
+          {% if entry['nextPageLink'] is defined and entry['nextPageLink'] is not empty %}
+            <div class="wrap">    
+              <div class="next-page-link-block block">
+                {% if entry['nextPageLinkIntro'] is defined and entry['nextPageLinkIntro'] is not empty %}
+                  <p>{{ entry.nextPageLinkIntro }}</p>
+                {% endif %}
+                <p class="next-page-link"><a href="{{ entry.nextPageLink.one().url }}">{{ entry.nextPageLink.one().title }} ></a></p>
+              </div>
+            </div>
+          {% endif %}
+
       </main>
 
       {% include '/partials/_footer' %}

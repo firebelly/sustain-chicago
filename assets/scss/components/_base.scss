@@ -17,11 +17,24 @@ body {
 
 .wrap {
   margin: 0 auto;
-  max-width: 1440px;
+  max-width: 1400px;
   padding: 0 #{$spacing * 2};
 
+  &.-extended {
+    padding: 0;
+    max-width: 1400px;
+  }
+
   @include media-md {
-    padding: 0 #{$spacing * 10};
+    &, &.-extended {
+      padding: 0 #{$spacing * 10};
+    }
+  }
+}
+
+.page-content {
+  @include media-md {
+    padding: 0 #{$spacing * 2};
   }
 }
 

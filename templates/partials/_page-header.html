@@ -1,0 +1,48 @@
+{% if entry['pageBanner'] is defined and entry['pageBanner'] is not empty %}
+<div class="page-banner wrap">
+  <div class="banner-image-carousel">    
+    {% for pageBanner in entry.pageBanner.all() %}
+      {% set bannerImage = craft.imager.transformImage(pageBanner.bannerImage.one(), { width: 1400, position: pageBanner.bannerImage.one().getFocalPoint(), effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
+      <div class="banner-image flickity-item" data-flickity-bg-lazyload="{{ bannerImage.getUrl() }}"></div>
+    {% endfor %}
+  </div>
+  <div class="banner-text-container{{ entry.pageBanner.all|length > 1 ? ' with-nav' : '' }}">
+    {% if entry.pageBanner.all|length > 1 %}
+    <div class="page-banner-nav">
+      <button class="previous"><svg class="icon icon-arrow"><use xlink:href="#icon-arrow"/></svg></button>
+      <button class="next"><svg class="icon icon-arrow"><use xlink:href="#icon-arrow"/></svg></button>
+    </div>
+    {% endif %}
+    <div class="banner-text-carousel">    
+      {% for pageBanner in entry.pageBanner.all() %}
+        <div class="banner-text flickity-item">      
+          {% if pageBanner.imageTitle %}
+          <h4 class="banner-title">{{ pageBanner.imageTitle }}</h4>
+          {% endif %}
+          {% if pageBanner.imageCaption %}
+          <p>{{ pageBanner.imageCaption }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<div class="wrap clearfix">  
+  <div class="page-header{{ entry['pageBanner'] is not defined or entry['pageBanner'] is empty ? ' no-pagebanner' : '' }}">
+    <div class="-inner">
+      {% include 'partials/_breadcrumbs' %}
+      <h1 class="page-title">
+        {% if entry['alternateHeadline'] is defined and entry['alternateHeadline'] is not empty %}
+         {{ entry.alternateHeadline|nl2br }}
+        {% else %}
+         {% block pageTitlePrefix %}{% endblock %}{{ entry.title }}
+        {% endif %}
+      </h1>
+      {% if entry['pageIntro'] is defined and entry['pageIntro'] is not empty %}
+        <div class="page-intro user-content">{{ entry.pageIntro }}</div>
+      {% endif %}
+    </div>
+  </div>
+</div>

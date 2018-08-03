@@ -14,6 +14,10 @@ $column-width: 100% / $columns;
   @include media-md {
     &-primary {
       width: columns(7);
+
+      &.-extended {
+        width: columns(9);
+      }
     }
     &-secondary {
       width: columns(5);

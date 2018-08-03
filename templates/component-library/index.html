@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<section>
+<div class="block wrap">
   <p class="h1">Testing testing testing</p>
   <p class="h2">Testing testing testing</p>
   <p class="h3">Testing testing testing</p>
@@ -12,9 +12,9 @@
   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt blanditiis deleniti quas, quaerat, quasi neque sapiente! Ipsam dolorum optio recusandae maiores perspiciatis! Delectus aspernatur ad aliquam, dignissimos dolorem commodi ipsam?</p>
   <p class="p2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis cupiditate maxime sed itaque in libero voluptates ipsum deleniti perspiciatis velit magnam atque, ducimus aspernatur doloremque eum voluptatem, natus earum corporis.</p>
   <p class="type-stat">99,123</p>
-</section>
+</div>
 
-<section>
+<div class="block wrap -extended">
 
   <h2 class="h2">Cards:</h2>
 
@@ -159,9 +159,9 @@
 
   </div>
 
-</section>
+</div>
 
-<section>
+<div class="block wrap -extended">
 
   <div class="grid profile-grid">
     {% set obamaImage = rev('images/obama.jpg') %}
@@ -216,27 +216,30 @@
 
   </div>
 
-</section>
+</div>
 
-<section class="column-secondary">
-    
-  <nav class="section-navigation accordion">
-    <h4 class="accordion-toggle">Jump to <span class="expand-contract"></span></h4>
-    <ol class="accordion-content">
-      <li><a href="#">Energy</a></li>
-      <li><a href="#">Waste + Recycling</a></li>
-      <li><a href="#">Water</a></li>
-      <li><a href="#">Transportation</a></li>
-      <li><a href="#">Food + Compost</a></li>
-      <li><a href="#">Development</a></li>
-      <li><a href="#">Green Space +</a></li>
-      <li><a href="#">Preparedness</a></li>
-    </ol>
-  </nav>
+<div class="wrap">
+  <div class="column-secondary">
+      
+    <nav class="section-navigation accordion">
+      <h4 class="accordion-toggle">Jump to <span class="expand-contract"></span></h4>
+      <ol class="accordion-content">
+        <li><a href="#">Energy</a></li>
+        <li><a href="#">Waste + Recycling</a></li>
+        <li><a href="#">Water</a></li>
+        <li><a href="#">Transportation</a></li>
+        <li><a href="#">Food + Compost</a></li>
+        <li><a href="#">Development</a></li>
+        <li><a href="#">Green Space +</a></li>
+        <li><a href="#">Preparedness</a></li>
+      </ol>
+    </nav>
 
-</section>
+  </div>
+</div>
+
   
-<div class="background-image">
+<div class="block background-image">
   {% set image = rev('images/big-sur_coast_01.jpg') %}
   {% set transformedImage = craft.imager.transformImage(image, {
     effects: { modulate: [100, 0, 100], clut: 'gradient:#163B37-#E2E8EA' } 

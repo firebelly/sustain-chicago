@@ -15,6 +15,7 @@
 
 // Components
 @import "components/base";
+@import "components/user-content";
 @import "components/ui-components";
 @import "components/images";
 @import "components/forms";
@@ -24,9 +25,11 @@
 @import "components/accordions";
 @import "components/header";
 @import "components/footer";
-@import "components/page-banner";
+@import "components/page-header";
+@import "components/breadcrumbs";
 @import "components/section-nav";
 @import "components/priorities-showcase";
 
 // Pages
 @import "pages/home";
+@import "pages/single-person";

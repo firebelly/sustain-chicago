@@ -1,0 +1,38 @@
+// Single Person
+
+body.page-single-person {
+  .site-main {
+
+    .portrait {
+      margin: #{$spacing * 7} 0;
+
+      img {
+        max-width: 100%;
+        vertical-align: top;
+      }
+
+      figcaption {
+        @include p2;
+        margin-top: $spacing;
+      }
+
+      @include media-md {
+        @include clearfix;
+        margin: #{$spacing * 8} 0;
+
+        .image-container {
+          float: left;
+          width: columns(9);
+          padding-right: #{$spacing * 2};
+        }
+
+        figcaption {
+          float: left;
+          margin-top: 0;
+          width: columns(3);
+        }
+      }
+    }
+
+  }
+}

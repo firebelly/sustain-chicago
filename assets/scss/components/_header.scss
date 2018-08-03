@@ -103,8 +103,8 @@ body {
     }
 
     @include media-md {
-      padding: 0 #{$spacing * 10};
       line-height: $mainNavHeightMd;
+      padding: 0 #{$spacing * 10} 0 #{$spacing * 12};
     }
 
     @include min-screen($breakpoint-nav) {
@@ -112,7 +112,7 @@ body {
       float: left;
       box-shadow: none;
       background-color: transparent;
-      margin: 0 #{$spacing * 5} 0 0;
+      margin: 0 #{$spacing * 5} 0 #{$spacing * 2};
     }
   }
 
@@ -186,6 +186,10 @@ body {
     .nav-parent-label {
       line-height: 60px;
       padding: 0 #{$spacing * 2};
+
+      &.-current {
+        text-decoration: underline;
+      }
     }
 
     li {
@@ -257,6 +261,7 @@ body {
         top: 0;
         left: 0;
         right: 0;
+        z-index: 1;
         text-align: right;
         fill: color(white);
         position: absolute;
@@ -543,9 +548,9 @@ body {
 
 .header-search-wrap {
   @include min-screen($breakpoint-nav) {
-    max-width: 1440px;
     left: 50%;
     width: 100%;
+    max-width: 1440px;
     position: absolute;
     transform: translateX(-50%);
 
@@ -558,6 +563,7 @@ body {
       position: absolute;
       background: color(black);
       height: $mainNavHeightMd;
+      margin-left: -#{$spacing * 2};
     }
   }
 }
@@ -587,7 +593,7 @@ body {
     .search-form {
       width: 100%;
       margin: auto 0;
-      padding: 0 #{$spacing * 2} 0 0;
+      padding: 0 #{$spacing * 4} 0 0;
     }
 
     .input-wrap {

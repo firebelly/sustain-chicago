@@ -1,0 +1,38 @@
+// Breadcrumbs
+
+.breadcrumbs {
+  @include clearfix;
+  @extend .semantic-list;
+
+  li {
+    @include h5;
+    float: left;
+    position: relative;
+    padding: 0 #{$spacing * 1.5};
+
+    &::before {
+      left: 0;
+      content: '/';
+      position: absolute;
+      display: inline-block;
+      transform: translateX(-50%);
+    }
+
+    &:first-of-type {
+      padding-left: 0;
+      &::before {
+        display: none;
+      }
+    }
+
+    a {
+      text-decoration: none;
+
+      &:hover,
+      &:focus,
+      &:active {
+        text-decoration: underline;
+      }
+    }
+  }
+}

@@ -6,140 +6,136 @@
 {% block content %}
 
   {% if entry.actionDropdown is not empty %}
-  <div class="grid right-aligned">
-    <div class="med-three-fourths">      
-      {% include 'partials/_action-dropdown' %}
+  <div class="wrap -extended">  
+    <div class="grid right-aligned">
+      <div class="med-three-fourths">      
+        {% include 'partials/_action-dropdown' %}
+      </div>
     </div>
   </div>
   {% endif %}
 
-  <div class="priorities-showcase block">
-    <h4>Our priorities</h4>
-    <ul class="priorities-nav">
-      {% for priority in craft.entries.section('priorities').level(2).all() %}
-        {% set colorIndex = loop.index - 1 %}
-        {% if colorIndex > prioritiesColors|length - 1 %} 
-          {% set colorIndex = colorIndex % prioritiesColors|length %}
-        {% endif %}
-        <li data-priority="#{{ priority.slug }}" class="{{ prioritiesColors[colorIndex] }} {{ loop.index == 1 ? ' -active' : '' }}">{{ priority.title }}</li>
-      {% endfor %}
-    </ul>
+  <div class="wrap -extended">
 
-    <div class="priorities-content">
-      {% for priority in craft.entries.section('priorities').level(2).all() %}
-        {% set colorIndex = loop.index - 1 %}
-        {% if colorIndex > prioritiesColors|length - 1 %} 
-          {% set colorIndex = colorIndex % prioritiesColors|length %}
-        {% endif %}
-        <div class="priority grid{{ loop.index == 1 ? ' -active' : '' }}" id="{{ priority.slug }}">
-          <div class="priority-overfiew card with-hover {{ prioritiesColors[colorIndex] }}">          
-            <header class="card-header">
-              <h3 class="card-title"><a href="{{ priority.url }}" >{{ priority.title }}</a></h3>
-            </header>
-            <div class="card-description">
-              <p>{{ priority.pageDescription }}</p>
-            </div>
-            <p class="card-action"><a href="{{ priority.url }}" >Learn More ></a></p>
-          </div>
+    <div class="priorities-showcase block">
+      <h4>Our priorities</h4>
+      <ul class="priorities-nav">
+        {% for priority in craft.entries.section('priorities').level(2).all() %}
+          {% set colorIndex = loop.index - 1 %}
+          {% if colorIndex > prioritiesColors|length - 1 %} 
+            {% set colorIndex = colorIndex % prioritiesColors|length %}
+          {% endif %}
+          <li data-priority="#{{ priority.slug }}" class="{{ prioritiesColors[colorIndex] }} {{ loop.index == 1 ? ' -active' : '' }}">{{ priority.title }}</li>
+        {% endfor %}
+      </ul>
 
-          <div class="priority-featured-project card with-hover -small -split {{ prioritiesColors[colorIndex] }}">
-            {% if craft.entries.section('projects').relatedTo(priority).all()|length %}
-              {% set featuredProject = craft.entries.section('projects').relatedTo(priority).one() %}
-              {% set treatedImage = craft.imager.transformImage(featuredProject.pageBanner.one().bannerImage.one(), { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
-              <div class="split-container">              
-                <header class="card-header">
-                  <h4 class="card-tag">Featured Project</h4>
-                  <h3 class="card-title"><a href="{{ featuredProject.url }}">{{ featuredProject.title }}</a></h3>
-                </header>
-                <p class="card-action"><a href="{{ featuredProject.url }}">Learn more ></a></p>
+      <div class="priorities-content">
+        {% for priority in craft.entries.section('priorities').level(2).all() %}
+          {% set colorIndex = loop.index - 1 %}
+          {% if colorIndex > prioritiesColors|length - 1 %} 
+            {% set colorIndex = colorIndex % prioritiesColors|length %}
+          {% endif %}
+          <div class="priority grid{{ loop.index == 1 ? ' -active' : '' }}" id="{{ priority.slug }}">
+            <div class="priority-overfiew card with-hover {{ prioritiesColors[colorIndex] }}">          
+              <header class="card-header">
+                <h3 class="card-title"><a href="{{ priority.url }}" >{{ priority.title }}</a></h3>
+              </header>
+              <div class="card-description">
+                <p>{{ priority.pageDescription }}</p>
               </div>
-              <div class="split-container -image" style="background-image:url('{{ treatedImage.getUrl() }}')"></div>
-            {% endif %}
+              <p class="card-action"><a href="{{ priority.url }}" >Learn More ></a></p>
+            </div>
+
+            <div class="priority-featured-project card with-hover -small -split {{ prioritiesColors[colorIndex] }}">
+              {% if craft.entries.section('projects').relatedTo(priority).all()|length %}
+                {% set featuredProject = craft.entries.section('projects').relatedTo(priority).one() %}
+                {% set treatedImage = craft.imager.transformImage(featuredProject.pageBanner.one().bannerImage.one(), { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
+                <div class="split-container">              
+                  <header class="card-header">
+                    <h4 class="card-tag">Featured Project</h4>
+                    <h3 class="card-title"><a href="{{ featuredProject.url }}">{{ featuredProject.title }}</a></h3>
+                  </header>
+                  <p class="card-action"><a href="{{ featuredProject.url }}">Learn more ></a></p>
+                </div>
+                <div class="split-container -image" style="background-image:url('{{ treatedImage.getUrl() }}')"></div>
+              {% endif %}
+            </div>
           </div>
-        </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
     </div>
+
   </div>
 
   {% if entry.homepageStats|length %}
-    {% include "partials/_image-with-stat" with { 'block' : entry.homepageStats.one() } %}
+    <div class="wrap">
+      {% include "partials/_image-with-stat" with { 'block' : entry.homepageStats.one() } %}
+    </div>
   {% endif %}
 
   {% if entry.featuredPages is not empty %}
-    <div class="block grid">
-    {% for page in entry.featuredPages.all() %}
-      {% set colorIndex = loop.index - 1 %}
-      {% if colorIndex > featuredPageColors|length - 1 %} 
-        {% set colorIndex = colorIndex % featuredPageColors|length %}
-      {% endif %}
-      <div class="card with-hover {{ featuredPageColors[colorIndex] }}">
-        <header class="card-header">
-          <h3 class="card-title"><a href="{{ page.entry.one().url }}">{{ page.headline is not empty ? page.headline : page.entry.title }}</a></h3>
-        </header>
-        <div class="card-description">
-          <p>{{ page.description }}</p>
+    <div class="wrap -extended">
+      <div class="block grid">
+      {% for page in entry.featuredPages.all() %}
+        {% set colorIndex = loop.index - 1 %}
+        {% if colorIndex > featuredPageColors|length - 1 %} 
+          {% set colorIndex = colorIndex % featuredPageColors|length %}
+        {% endif %}
+        <div class="card with-hover {{ featuredPageColors[colorIndex] }}">
+          <header class="card-header">
+            <h3 class="card-title"><a href="{{ page.entry.one().url }}">{{ page.headline is not empty ? page.headline : page.entry.title }}</a></h3>
+          </header>
+          <div class="card-description">
+            <p>{{ page.description }}</p>
+          </div>
+          <p class="card-action"><a href="{{ page.entry.one().url }}">{{ page.entry.one().title }} ></a></p>
         </div>
-        <p class="card-action"><a href="{{ page.entry.one().url }}">{{ page.entry.one().title }} ></a></p>
+      {% endfor %}
       </div>
-    {% endfor %}
     </div>
   {% endif %}
 
   {% if entry.homepageStats|length == 2 %}
-    {% include "partials/_image-with-stat" with { 'block' : entry.homepageStats.nth(1) } %}
+    <div class="wrap">
+      {% include "partials/_image-with-stat" with { 'block' : entry.homepageStats.nth(1) } %}
+    </div>
   {% endif %}
 
-  <div class="block grid align-flex-start">
+  <div class="wrap -extended">
 
-    <div class="grid med-one-half med-order-1">
+    <div class="block grid align-flex-start">
 
-      {% if craft.entries.section('projects').search('featured:1')|length %}
-        {% set featuredProject = random(craft.entries.section('projects').search('featured:1')) %}
-        {% set projectImage = craft.imager.transformImage(featuredProject.pageBanner.one().bannerImage.one(), { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
-        <div class="card profile with-hover light -small one-half">
-          <header class="card-header">
-            <h4 class="card-tag">Featured Project</h4>
-            <h3 class="card-title"><a href="{{ featuredProject.url }}">{{ featuredProject.title }}</a></h3>
-          </header>
-          <p class="card-action"><a href="{{ featuredProject.url }}">Learn more ></a></p>
-          <div class="card-image" style="background-image:url('{{ projectImage.getUrl() }}');"></div>
-        </div>
-      {% endif %}
+      <div class="grid med-one-half med-order-1">
 
-      {% if craft.entries.section('people')|length %}
-        {% set person = random(craft.entries.section('people')) %}
-        {% set personImage = craft.imager.transformImage(person.postImage.one(), { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
-        <div class="card profile with-hover white -small one-half">
-          <header class="card-header">
-            <h4 class="card-tag">People</h4>
-            <h3 class="card-title"><a href="{{ person.url }}">{{ person.title }}</a></h3>
-          </header>
-          <p class="card-action"><a href="{{ person.url }}">Meet {{ person.firstName }} ></a></p>
-          <div class="card-image" style="background-image:url('{{ personImage.getUrl() }}');"></div>
-        </div>
-      {% endif %}
+        {% if craft.entries.section('projects').search('featured:1')|length %}
+          {% set featuredProject = random(craft.entries.section('projects').search('featured:1')) %}
+          {% set projectImage = craft.imager.transformImage(featuredProject.pageBanner.one().bannerImage.one(), { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
+          <div class="card profile with-hover light -small one-half">
+            <header class="card-header">
+              <h4 class="card-tag">Featured Project</h4>
+              <h3 class="card-title"><a href="{{ featuredProject.url }}">{{ featuredProject.title }}</a></h3>
+            </header>
+            <p class="card-action"><a href="{{ featuredProject.url }}">Learn more ></a></p>
+            <div class="card-image" style="background-image:url('{{ projectImage.getUrl() }}');"></div>
+          </div>
+        {% endif %}
 
-    </div>
-    
-    <div class="card dark med-order-0">
-      <header class="card-header with-action">
-        <h3 class="card-title -small">Latest</h3>
-        <p class="header-action"><a href="https://twitter.com/{{ footerContent.twitterHandle }}">See all<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg></a></p>
-      </header>
-      <div class="card-content">
-        <a class="twitter-timeline" data-tweet-limit="3" data-link-color="#6eedaa" data-chrome="noheader nofooter noborders" href="https://twitter.com/{{ footerContent.twitterHandle }}?ref_src=twsrc%5Etfw">Tweets by {{ footerContent.twitterHandle }}</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        {% include 'partials/_random-person' %}
+
       </div>
+      
+      <div class="card dark med-order-0">
+        <header class="card-header with-action">
+          <h3 class="card-title -small">Latest</h3>
+          <p class="header-action"><a href="https://twitter.com/{{ footerContent.twitterHandle }}">See all<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg></a></p>
+        </header>
+        <div class="card-content">
+          <a class="twitter-timeline" data-tweet-limit="3" data-link-color="#6eedaa" data-chrome="noheader nofooter noborders" href="https://twitter.com/{{ footerContent.twitterHandle }}?ref_src=twsrc%5Etfw">Tweets by {{ footerContent.twitterHandle }}</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+      </div>
+
     </div>
 
   </div>
-
-  {% if entry['nextPageLink'] is defined and entry['nextPageLink'] is not empty %}
-    <div class="next-page-link-block block">
-      {% if entry['nextPageLinkIntro'] is defined and entry['nextPageLinkIntro'] is not empty %}
-        <p>{{ entry.nextPageLinkIntro }}</p>
-      {% endif %}
-      <p class="next-page-link"><a href="{{ entry.nextPageLink.one().url }}">{{ entry.nextPageLink.one().title }} ></a></p>
-    </div>
-  {% endif %}
 
 {% endblock %}

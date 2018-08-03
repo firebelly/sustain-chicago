@@ -11,10 +11,10 @@
         {% set mappedEntryChildren = mappedEntry.children().level(2) %}
         <li>
           {% if mappedEntryChildren|length %}
-          <div class="nav-parent-label{{ entry is defined and entry.slug == mappedEntry.slug ? ' -current' : '' }}" data-active-toggle="">{{ mappedEntry.title }}<span class="expand-contract" aria-hidden="true"></span></div>
+          <div class="nav-parent-label{{ entry is defined and craft.app.request.getSegment(1) == mappedEntry.slug ? ' -current' : '' }}" data-active-toggle>{{ mappedEntry.title }}<span class="expand-contract" aria-hidden="true"></span></div>
           <ul class="nav-sub-level">
             {% for child in mappedEntryChildren.all() %}
-              <li><a href="{{ child.url }}">{{ child.title }}</a></li>
+              <li><a href="{{ child.url }}"{{ entry is defined and entry.slug == child.slug or craft.app.request.getSegment(2) == child.slug ? ' class="-current"' : '' }}>{{ child.title }}</a></li>
             {% endfor %}
           </ul>
           {% else %}
@@ -33,7 +33,7 @@
           <li><a href="{{ mappedEntry.url }}"{{ entry is defined and entry.slug == mappedEntry.slug ? ' class="-current"' : '' }}>{{ mappedEntry.title }}</a></li>
         {% endnav %}
         <li id="site-language-select" class="site-language-select">
-          <div class="nav-parent-label" data-active-toggle="">Language: <span class="current-language">English</span><span class="expand-contract" aria-hidden="true"><svg class="icon icon-arrow"><use xlink:href="#icon-arrow"/></svg></span></div>
+          <div class="nav-parent-label" data-active-toggle>Language: <span class="current-language">English</span><span class="expand-contract" aria-hidden="true"><svg class="icon icon-arrow"><use xlink:href="#icon-arrow"/></svg></span></div>
           <ul class="nav-sub-level">
             <li><a href="{{ craft.app.request.absoluteUrl }}">English</a></li>
             <li><a href="http://translate.google.com/translate?hl=en&sl=en&tl=es&u={{ craft.app.request.absoluteUrl }}">Español</a></li>

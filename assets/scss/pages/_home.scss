@@ -3,6 +3,7 @@
 body.page-home {
 
   .page-banner {  
+
     .banner-image {
       &::after {
         left: 0;
@@ -19,9 +20,19 @@ body.page-home {
       }
     }
 
+    .banner-text-container {
+
+      @include media-md {      
+        &.with-nav {
+          margin-top: 0;
+        }
+      }
+    }
+
     .page-banner-nav {
 
       @include media-md {
+        display: block;
         margin-top: -#{$spacing * 20};
         background-color: color(green-light);
       }
@@ -30,8 +41,22 @@ body.page-home {
 
   .page-header {
     @include media-md {
+      width: 100%;
+      float: none;
       min-height: #{$spacing * 20};
       margin-top: -#{$spacing * 20};
+      padding: #{$spacing * 2} calc(25% + #{$spacing * 12.5}) #{$spacing * 2} #{$spacing * 2};
+
+      .-inner {
+        width: 100%;
+      }
+    }
+  }
+
+  .action-dropdown {
+
+    @include max-screen($breakpoint-md) {
+      margin-bottom: #{$spacing * 8};
     }
   }
 }

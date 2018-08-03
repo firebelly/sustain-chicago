@@ -7,6 +7,16 @@
     margin-top: #{$spacing * 4};
   }
 
+  @include media-md {
+    margin-top: #{$spacing * 6};
+    padding-top: #{$spacing * 10};
+
+    + .block {
+      margin-top: -#{$spacing * 16};
+    }
+
+  }
+
   .stat {
     margin: 0;
     padding: #{$spacing * 2} 0;
@@ -14,7 +24,9 @@
     
     h5 {
       @include type-stat;
+      margin-bottom: #{$spacing * 2};
     }
+
     figcaption {
       @include p2;
       p {
@@ -26,26 +38,17 @@
     }
 
     @include media-md {
-      padding: #{$spacing * 2};
-    }
-  }
-
-  @include media-md {
-    margin-top: #{$spacing * 6};
-    padding-top: #{$spacing * 10};
-
-    + .block {
-      margin-top: -#{$spacing * 16};
-    }
-
-    .stat {
       top: 0;
       right: 0;
       z-index: 1;
       width: 50%;
       position: absolute;
-    }
+      padding: #{$spacing * 2};
 
+      h5 {
+        margin-bottom: 0;
+      }
+    }
   }
 }
 

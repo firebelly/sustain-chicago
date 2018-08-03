@@ -1,0 +1,33 @@
+{% extends (craft.app.request.isAjax and not craft.app.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
+
+{% set colors = ['dark', 'light', 'white'] %}
+
+{% block content %}
+
+  {% if entry.children.all()|length %}
+    <div class="wrap -extended">
+
+      <div class="grid">
+      {% for person in entry.children.all() %}
+        {% set colorIndex = loop.index - 1 %}
+        {% if colorIndex > colors|length - 1 %} 
+          {% set colorIndex = colorIndex % colors|length %}
+        {% endif %}
+
+        {% set personImage = craft.imager.transformImage(person.portrait.one(), { width: 600,  position: person.portrait.one().getFocalPoint(), effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
+
+        <div class="card profile with-hover -small {{ colors[colorIndex] }} one-half med-one-fourth">
+          <header class="card-header">
+            <h3 class="card-title"><a href="{{ person.url }}">{{ person.title }}</a></h3>
+            <h4 class="card-tag">{{ person.personTitle }}</h4>
+          </header>
+          <p class="card-action"><a href="{{ person.url }}">Meet {{ person.firstName }} ></a></p>
+          <div class="card-image" style="background-image:url('{{ personImage.getUrl() }}');"></div>
+        </div>
+      {% endfor %}
+      </div>
+
+    </div>
+  {% endif %}
+
+{% endblock %}

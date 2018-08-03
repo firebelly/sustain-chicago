@@ -1,0 +1,11 @@
+{% if entry.level > 1 %}
+  <ul class="breadcrumbs">
+    {% for crumb in entry.getAncestors().all() %}
+      {% if crumb.level > 1 %}
+        <li><a href="{{ crumb.url }}">{{ crumb.title }}</a></li>
+      {% else %}
+        <li>{{ crumb.title }}</li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endif %}
