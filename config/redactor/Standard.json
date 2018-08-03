@@ -1,6 +1,7 @@
 {
   "buttons": ["formatting", "bold", "italic", "underline", "unorderedlist", "orderedlist", "link", "image", "html"],
   "plugins": ["fullscreen"],
+  "linkNewTab": true,
   "formatting": ["p"],
   "formattingAdd": {
     "headline": {
