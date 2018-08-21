@@ -19,12 +19,14 @@ var SC = (function($) {
       slideEasing = [0.65, 0, 0.35, 1],
       page_at,
       $siteNav,
+      $siteHeader,
       $headerSearchForm,
       transitionElements,
       userScrolled,
       lastScrollTop = 0,
       downwardScrollDelta = 6,
       upwardScrollDelta = 120,
+      isAnimating = false,
       utils = window.fizzyUIUtils;
 
   /**
@@ -33,6 +35,7 @@ var SC = (function($) {
   function _init() {
     page_at = window.location.pathname;
     $siteNav = $('.site-nav-main');
+    $siteHeader = $('.site-header');
     $headerSearchForm = $('#header-search-form');
 
     // Transition elements to enable/disable on resize
@@ -50,7 +53,7 @@ var SC = (function($) {
     });
 
     // Update userScrolled var
-    $(window).scroll(function(event){
+    $(window).scroll(function(e){
       userScrolled = true;
     });
 
@@ -62,21 +65,46 @@ var SC = (function($) {
       }
     }, 250);
 
+    _initSmoothScroll();
     _initActiveToggle();
     _initClickToDeactivate();
     _initMobileNav(); 
+    _initSectionNav();
     _initSearchForm();
     _initFormFunctions();
     _initPageBanner();
     _initPrioritiesShowcase();
     _initAccordions();
+    _initStickyElements();
   }
 
-  function _scrollBody(el, duration) {
-    var headerOffset = 0;
-    if ($(el).length) {
-      $('html, body').animate({scrollTop: $(el).offset().top + headerOffset}, duration, 'easeInOutSine');
+  function _scrollBody(element, offset, duration, delay) {
+    var headerOffset = $siteHeader.outerHeight();
+    if (typeof offset === "undefined" || offset === null) {
+      offset = headerOffset;
     }
+    if (typeof duration === "undefined" || duration === null) {
+      duration = 300;
+    }
+
+    if ($(element).length) {
+      isAnimating = true;
+      element.velocity("scroll", {
+        duration: duration,
+        delay: delay,
+        offset: -offset,
+        complete: function(elements) {
+          isAnimating = false;
+        }
+      }, "easeOutSine");
+    }
+  }
+
+  function _initSmoothScroll() {
+    $(document).on('click', '.smooth-scroll', function(e) {
+      e.preventDefault();
+      _scrollBody($($(this).attr('href')));
+    });
   }
 
   function _initActiveToggle() {
@@ -107,11 +135,11 @@ var SC = (function($) {
       var st = $window.scrollTop();
 
       // Check to see if the nav is open
-      if ($siteNav.is('.-active')) {
-          return;
+      if ($siteNav.is('.-active') || isAnimating) {
+        return;
       }
 
-      if (st < $('.site-header').outerHeight()) {
+      if (st < $siteHeader.outerHeight()) {
         $body.removeClass('nav-up');
         return;
       }
@@ -123,7 +151,7 @@ var SC = (function($) {
               return;
           }
           $body.removeClass('nav-down').addClass('nav-up');
-      } else if (st + $window.height() < $(document).height() - 40 && !$('.velocity-animating').length) {
+      } else if (st + $window.height() < $(document).height() - 40 && !isAnimating) {
           // Scrolled up
           // Make sure they scroll up more than upwardScrollDelta
           if (Math.abs(lastScrollTop - st) <= upwardScrollDelta) {
@@ -149,6 +177,37 @@ var SC = (function($) {
         $childNav.velocity('slideDown', { duration: 250, easing: 'easeOutSine' });
       }
     });
+  }
+
+  function _initSectionNav() {
+    if ($('.section-navigation').length) {
+      var $sectionNav = $('.section-navigation'),
+          sections = $('.section');
+
+      // Build Nav
+      $sectionNav.append('<h4 class="accordion-toggle">Jump to <span class="expand-contract"></span></h4><ol class="accordion-content"></ol>');
+
+      sections.each(function(i) {
+        var sectionId = $(this).attr('id'),
+            sectionTitle = $(this).attr('data-section-title');
+        $sectionNav.find('ol').append('<li><a href="#'+ sectionId +'">'+ sectionTitle +'</a></li>');
+      });
+
+      $(document).on('click', '.section-navigation a', function(e) {
+        e.preventDefault();
+
+        var $section = $($(this).attr('href'));
+        var headerOffset;
+
+        if ($section.offset().top < $window.scrollTop() + $siteHeader.outerHeight()) {
+          headerOffset = $('.site-nav-main').outerHeight() + $siteHeader.find('.nav-utility').outerHeight();
+          _scrollBody($section, offset);
+        } else {
+          headerOffset = $('.site-nav-main').outerHeight();
+          _scrollBody($section, offset);
+        }
+      });
+    }
   }
 
   function _closeMobileNav() {
@@ -238,11 +297,11 @@ var SC = (function($) {
     });
 
     // Scroll to the nav item when clicked
-    $prioritiesNavCarousel.on( 'staticClick.flickity', function( event, pointer, cellElement, cellIndex ) {
+    $prioritiesNavCarousel.on( 'staticClick.flickity', function(event, pointer, cellElement, cellIndex) {
       if ( typeof cellIndex == 'number' ) {
         $prioritiesNavCarousel.flickity( 'select', cellIndex );
       }
-    }).on( 'change.flickity', function( event, index ) {
+    }).on( 'change.flickity', function(event, index) {
       var $priority = $($('.priorities-nav li').eq(index).attr('data-priority'));
       setActivePriority($priority);
       $('.priorities-nav li').eq(index).toggleClass('-active');
@@ -276,7 +335,39 @@ var SC = (function($) {
 
       $toggle.on('click', function(e) {
         $accordion.toggleClass('-active');
-        $content.slideToggle();
+        $content.slideToggle(250);
+      });
+    });
+  }
+
+  function _initStickyElements() {
+    if (!$('.sticky').length) {
+      return;
+    }
+
+    var $stickyElements = $('.sticky');
+
+    $(window).scroll(function(e){
+      var st = $window.scrollTop();
+
+      $stickyElements.each(function(i) {
+
+        if (!$(this).is('.stuck') && st + $siteHeader.outerHeight() >= $('.sticky-wrap').offset().top && st + $siteHeader.outerHeight() + $(this).outerHeight() < $('.sticky-wrap').offset().top + $('.sticky-wrap').outerHeight()) {
+          $(this).addClass('stuck').css('top', $siteHeader.outerHeight());
+        } else if ($(this).is('.stuck') && st + $siteHeader.outerHeight() < $('.sticky-wrap').offset().top) {
+          $(this).removeClass('stuck').css('top', 'auto');
+        } else if ($(this).is('.stuck') && st + $siteHeader.outerHeight() + $(this).outerHeight() >= $('.sticky-wrap').offset().top + $('.sticky-wrap').outerHeight()) {
+          $(this).addClass('bottom-stuck').css({
+            'top': 'auto',
+            'bottom': 0
+          });
+        } else if ($(this).is('.stuck') && st + $siteHeader.outerHeight() + $(this).outerHeight() < $('.sticky-wrap').offset().top + $('.sticky-wrap').outerHeight()) {
+          $(this).removeClass('bottom-stuck').css({
+            'top': $siteHeader.outerHeight(),
+            'bottom': 'auto'
+          });
+        }
+
       });
     });
   }

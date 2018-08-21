@@ -4,7 +4,7 @@
 
   {% include '/partials/_head' %}
 
-  <body class="{% if currentUser %}logged-in {% endif %}{% if bodyClass is defined %}{{ bodyClass }} {% endif %}{{ craft.app.request.getSegment(1) ? craft.app.request.getSegment(1) : 'page-home' }}{% block pageClass %}{% endblock %}"{% if bodyId is defined %} id="{{ bodyId }}"{% endif %}>
+  <body class="{% if currentUser %}logged-in {% endif %}{% if bodyClass is defined %}{{ bodyClass }} {% endif %}{{ craft.app.request.getSegment(1) ? craft.app.request.getSegment(1) : 'page-home' }} {{ craft.app.request.getSegment(2) ? craft.app.request.getSegment(2) : '' }} {% block pageClass %}{% endblock %}"{% if bodyId is defined %} id="{{ bodyId }}"{% endif %}>
     <div id="breakpoint-indicator"></div>
     {{ adminbar({ sticky: false }) }}
 
@@ -23,6 +23,18 @@
       <main class="site-main" role="main">
 
           {% block content %}{% endblock %}
+
+          {% if entry['pageBottomImage'] is defined and entry['pageBottomImage'] is not empty %}     
+            <div class="wrap">            
+              <div class="page-bottom-image background-image block">
+                {% set image = entry.pageBottomImage.one() %}
+                {% set transformedImage = craft.imager.transformImage(image, {
+                  effects: { modulate: [100, 0, 100], clut: 'gradient:#163B37-#E2E8EA' } 
+                }) %}
+                <img src="{{ transformedImage.getUrl() }}" alt="">
+              </div>
+            </div>         
+          {% endif %}
         
           {% if entry['nextPageLink'] is defined and entry['nextPageLink'] is not empty %}
             <div class="wrap">    

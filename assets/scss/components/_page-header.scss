@@ -36,11 +36,11 @@
 
     @include media-md {
       z-index: 2;
-      width: 25%;
       float: right;
       padding-left: 0;
       margin-top: -60px;
       position: relative;
+      width: calc(#{columns(3)} - 25px);
       margin-bottom: #{$spacing * 8};
     }
   }
@@ -148,7 +148,7 @@
 
   @include media-md {
     float: left;
-    width: calc(75% - 25px);
+    width: columns(9);
     min-height: #{$spacing * 6};
     margin-top: -#{$spacing * 6};
     padding: #{$spacing * 2} #{$spacing * 2} 0;

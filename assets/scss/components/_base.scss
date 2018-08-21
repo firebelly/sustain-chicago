@@ -17,25 +17,27 @@ body {
 
 .wrap {
   margin: 0 auto;
-  max-width: 1400px;
-  padding: 0 #{$spacing * 2};
+  max-width: $global-wrap;
+  padding-left: #{$spacing * 2};
+  padding-right: #{$spacing * 2};
 
   &.-extended {
-    padding: 0;
-    max-width: 1400px;
+    padding-left: 0;
+    padding-right: 0;
+    max-width: $global-wrap;
   }
 
   @include media-md {
     &, &.-extended {
-      padding: 0 #{$spacing * 10};
+      padding-left: #{$spacing * 10};
+      padding-right: #{$spacing * 10};
     }
   }
 }
 
-.page-content {
-  @include media-md {
-    padding: 0 #{$spacing * 2};
-  }
+.page-main-content {
+  z-index: 1;
+  position: relative;
 }
 
 .site-main {

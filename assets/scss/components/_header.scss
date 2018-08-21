@@ -33,7 +33,7 @@ html.adminbar-on {
     }
   }
 
-  @include min-screen($breakpoint-nav) {
+  @include media-nav {
     body {
       padding-top: $mainNavHeightMd + $adminbarHeightMd;
     }
@@ -48,7 +48,7 @@ body {
     padding-top: $mainNavHeightMd;
   }
 
-  @include min-screen($breakpoint-nav) {
+  @include media-nav {
     padding-top: $mainNavHeightMd + $utilityNavHeight;  
 
     &.nav-up {
@@ -76,7 +76,7 @@ body {
     padding: 0;
   }
 
-  @include min-screen($breakpoint-nav) {
+  @include media-nav {
     box-shadow: $box-shadow;
 
     > .wrap {
@@ -107,7 +107,7 @@ body {
       padding: 0 #{$spacing * 10} 0 #{$spacing * 12};
     }
 
-    @include min-screen($breakpoint-nav) {
+    @include media-nav {
       padding: 0;
       float: left;
       box-shadow: none;
@@ -160,7 +160,7 @@ body {
       height: $mainNavHeightMd;
     }
 
-    @include min-screen($breakpoint-nav) {
+    @include media-nav {
       display: none;
     }
   }
@@ -201,7 +201,7 @@ body {
       height: calc(100% - #{$mainNavHeightMd});
     }
 
-    @include min-screen($breakpoint-nav) {
+    @include media-nav {
       width: auto;
       float: right;
       height: auto;
@@ -257,7 +257,7 @@ body {
         }
       }
 
-      @include min-screen($breakpoint-nav) {
+      @include media-nav {
         top: 0;
         left: 0;
         right: 0;
@@ -362,7 +362,7 @@ body {
       background: color(green-light);
     }
 
-    @include min-screen($breakpoint-nav) {
+    @include media-nav {
       background-color: transparent;
       padding-right: #{$spacing * 4 - ($spacing * 1.5)};
 
@@ -376,7 +376,7 @@ body {
 
   }
 
-  @include min-screen($breakpoint-nav) {
+  @include media-nav {
     padding-top: $utilityNavHeight;
   }
 }
@@ -417,7 +417,7 @@ body {
     padding: 0 #{$spacing * 2} 0 #{$spacing * 6};
   }
 
-  @include min-screen($breakpoint-nav) {
+  @include media-nav {
     .nav-top-level {
       @include clearfix;
 
@@ -533,7 +533,7 @@ body {
     }
   }
 
-  @include min-screen($breakpoint-nav) {
+  @include media-nav {
     display: block;
 
     &:hover {
@@ -547,7 +547,7 @@ body {
 }
 
 .header-search-wrap {
-  @include min-screen($breakpoint-nav) {
+  @include media-nav {
     left: 50%;
     width: 100%;
     max-width: 1440px;
@@ -575,7 +575,7 @@ body {
     padding: #{$spacing * 2};
   }
 
-  @include min-screen($breakpoint-nav) {
+  @include media-nav {
     bottom: 0;
     width: 60%;
     display: flex;

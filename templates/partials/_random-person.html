@@ -1,5 +1,5 @@
-{% set peopleEntry = craft.entries.section('aroundChicago').slug('people') %}
-{% set peopleEntries = craft.entries.section('aroundChicago').level(3).descendantOf(peopleEntry.id) %}
+{% set peopleEntry = craft.entries.section('aroundChicago').slug('people').one() %}
+{% set peopleEntries = craft.entries.descendantOf(peopleEntry).all() %}
 
 {% if peopleEntries|length %}
   {% set person = random(peopleEntries) %}

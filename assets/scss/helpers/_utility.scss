@@ -30,11 +30,13 @@
     }
   }
 }
+
 .hide-for-medium-up {
   @include media-md {
     display: none !important;
   }
 }
+
 .show-for-large-up {
   display: none;
   @include media-lg {
@@ -44,6 +46,7 @@
     }
   }
 }
+
 .hide-for-large-up {
   @include media-lg {
     display: none !important;

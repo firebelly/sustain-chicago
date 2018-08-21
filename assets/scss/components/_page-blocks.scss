@@ -52,6 +52,13 @@
   }
 }
 
+.page-bottom-image {
+  @include media-md {
+    margin-top: -#{$spacing * 13};
+    margin-bottom: -#{$spacing * 8};
+  }
+}
+
 .next-page-link-block {
   margin-top: #{$spacing * 8};
 

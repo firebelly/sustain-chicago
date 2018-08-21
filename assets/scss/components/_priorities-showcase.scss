@@ -124,7 +124,35 @@
       display: flex;
     }
 
-    .priority-featured-project {
+    .featured-projects {
+      position: relative;
+
+      &::before {
+        left: 50%;
+        bottom: 0;
+        z-index: 1;
+        width: 1px;
+        content: '';
+        position: absolute;
+        top: #{$spacing * 2};
+        @include media-md {
+          display: none;
+        }
+      }
+
+      &.dark {
+        &::before {
+          background-color: color(green-light);
+        }
+      }
+      &.light {
+        &::before {
+          background-color: color(green-dark);
+        }
+      }
+    }
+
+    .featured-project {
       position: relative;
 
       &:hover {
@@ -146,15 +174,22 @@
 
       &::before {
         top: 0;
+        left: 0;
         z-index: 1;
         opacity: 1;
         height: 1px;
         content: '';
         position: absolute;
-        left: #{$spacing * 2};
         right: #{$spacing * 2};
         transform: translateY(-50%);
         @include transition(opacity);
+      }
+
+      &:first-of-type {
+        &::before {
+          right: 0;
+          left: #{$spacing * 2};
+        }
       }
 
       @include media-md {
@@ -163,9 +198,17 @@
           width: 1px;
           right: auto;
           height: auto;
+          bottom: 200px;
           top: #{$spacing * 2};
-          bottom: #{$spacing * 2};
           transform: translateX(-50%);
+        }
+
+        &:first-of-type {
+          &::before {
+            left: 0;
+            right: auto;
+            bottom: #{$spacing * 2};
+          }
         }
       }
     }

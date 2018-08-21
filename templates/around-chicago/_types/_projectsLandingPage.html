@@ -1,0 +1,80 @@
+{% extends (craft.app.request.isAjax and not craft.app.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
+
+{% set colors = ['dark', 'light', 'white'] %}
+
+{% set priorities = craft.entries.section('priorities').level(2).all() %}
+{% set projects = entry.children().all() %}
+
+{% block content %}
+
+  <div class="page-main-content wrap -extended clearfix sticky-wrap">
+
+    <div class="section-navigation-wrap column-secondary -right sticky">
+      <div class="-inner">
+        <nav class="section-navigation accordion"></nav>
+      </div>
+    </div>
+
+    <div class="project-categories column-primary -left">
+
+      {% for priority in priorities %}
+        {% set relatedProjects =  entry.children().relatedTo(priority).all() %}
+
+        {% if relatedProjects|length %}
+
+          {% set colorIndex = loop.index - 1 %}
+          {% if colorIndex > colors|length - 1 %} 
+            {% set colorIndex = colorIndex % colors|length %}
+          {% endif %}
+
+          <div id="{{ priority.slug }}" class="project-category section card -full {{ colors[colorIndex] }}" data-section-title="{{ priority.title }}">
+            <header class="card-header">
+              <h3 class="card-title">{{ priority.title }}</h3>
+            </header>
+            <div class="card-links">
+              <ul class="semantic-list">
+                {% for project in relatedProjects %}
+                  <li><a href="{{ project.projectUrl }}" target="_blank">{{ project.title }}{{ project.communityProject == 1 ? '<svg class="icon icon-star"><use xlink:href="#icon-star"/></svg>' : '' }}<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg></a></li>
+                {% endfor %}
+              </ul>
+            </div>
+
+            {% if entry.children().relatedTo(priority).search('featured:1').all()|length %}
+              <div class="featured-projects{{ entry.children().relatedTo(priority).search('featured:1').all()|length == 1 ? ' -single' : '' }}">
+                {% for featuredProject in entry.children().relatedTo(priority).search('featured:1').limit(2).all() %}
+                  {% set projectImage = craft.imager.transformImage(featuredProject.postImage.one(), { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
+                  {% if entry.children().relatedTo(priority).search('featured:1').all()|length == 1 %}
+                    <div class="featured-project card with-hover -full -small -split {{ colors[colorIndex] }}">
+                      <div class="split-container">
+                        <header class="card-header">
+                          <h4 class="card-tag">Featured Project</h4>
+                          <h3 class="card-title"><a href="{{ featuredProject.url }}" class="featured-project-toggle">{{ featuredProject.title }}</a></h3>
+                        </header>
+                        <p class="card-action"><a href="{{ featuredProject.url }}">Learn more ></a></p>
+                      </div>
+                      <div class="split-container -image" style="background-image:url('{{ projectImage.getUrl() }}');"></div>
+                    </div>
+                  {% else %}
+                    <div class="featured-project card with-hover -small {{ colors[colorIndex] }}">
+                      <header class="card-header">
+                        <h4 class="card-tag">Featured Project</h4>
+                        <h3 class="card-title"><a href="{{ featuredProject.url }}" class="featured-project-toggle">{{ featuredProject.title }}</a></h3>
+                      </header>
+                      <p class="card-action"><a href="{{ featuredProject.url }}">Learn more ></a></p>
+                      <div class="card-image" style="background-image:url('{{ projectImage.getUrl() }}');"></div>
+                    </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+
+        {% endif %}
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+{% endblock %}
