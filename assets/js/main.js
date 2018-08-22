@@ -79,7 +79,8 @@ var SC = (function($) {
   }
 
   function _scrollBody(element, offset, duration, delay) {
-    var headerOffset = $siteHeader.outerHeight();
+    var offset,
+        headerOffset = $siteHeader.outerHeight();
     if (typeof offset === "undefined" || offset === null) {
       offset = headerOffset;
     }
@@ -201,10 +202,10 @@ var SC = (function($) {
 
         if ($section.offset().top < $window.scrollTop() + $siteHeader.outerHeight()) {
           headerOffset = $('.site-nav-main').outerHeight() + $siteHeader.find('.nav-utility').outerHeight();
-          _scrollBody($section, offset);
+          _scrollBody($section, headerOffset);
         } else {
           headerOffset = $('.site-nav-main').outerHeight();
-          _scrollBody($section, offset);
+          _scrollBody($section, headerOffset);
         }
       });
     }
