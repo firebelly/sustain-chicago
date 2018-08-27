@@ -1,0 +1,9 @@
+{% set image = craft.imager.transformImage(block.image.one(), { width: 1000, position: block.image.one().getFocalPoint(), effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
+
+<figure class="image-with-stat image-block block">
+  <div class="image-container"><img src="{{ image.getUrl() }}" alt="{{ block.image.one().title }}"></div>
+  <figcaption class="stat">
+    <h5>{{ block.statFigure }}</h5>
+    <div class="stat-description">{{ block.statDescription }}</div>
+  </figcaption>
+</figure>

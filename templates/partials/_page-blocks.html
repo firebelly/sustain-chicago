@@ -1,7 +1,27 @@
 {% for block in entry.pageBlocks.all() %}
 
+  {% if block.type == "pageSection" %}
+    {% include "blocks/_page-section" %}
+  {% endif %}
+
+  {% if block.type == "textBlock" %}
+    {% include "blocks/_text-block" %}
+  {% endif %}
+
+  {% if block.type == "link" %}
+    {% include "blocks/_link" %}
+  {% endif %}
+
+  {% if block.type == "image" %}
+    {% include "blocks/_image" %}
+  {% endif %}
+
+  {% if block.type == "imageWithQuote" %}
+    {% include "blocks/_image-with-quote" %}
+  {% endif %}
+
   {% if block.type == "imageWithStat" %}
-    {% include "_image-with-stat" %}
+    {% include "blocks/_image-with-stat" %}
   {% endif %}
 
 {% endfor %}

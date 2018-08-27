@@ -5,6 +5,7 @@
   .accordion-toggle {
     position: relative;
     padding-right: 40px;
+    @include hover-style;
 
     .expand-contract {
       top: 50%;

@@ -8,7 +8,6 @@
   width: calc(100% + #{$spacing * 4});
 
   @include media-md {
-    height: 600px;
     margin-left: -#{$spacing * 10};
     width: calc(100% + #{$spacing * 20});
   }
@@ -17,14 +16,6 @@
     width: 100%;
     max-width: 100%;
     vertical-align: top;
-
-    @include media-md {
-      left: 0;
-      top: 50%;
-      z-index: 1;
-      position: absolute;
-      transform: translateY(-50%);
-    }
   }
 
   &::before,

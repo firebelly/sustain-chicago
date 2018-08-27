@@ -3,7 +3,10 @@
 .section-navigation-wrap {
   top: 0;
   left: 0;
+  right: 0;
+  z-index: 2;
   position: absolute;
+  // padding: 0 #{$spacing * 2};
 
   &.stuck {
     z-index: 5;
@@ -17,26 +20,52 @@
   }
 
   @include media-md {
-    top: auto;
-    left: auto;
-    float: right;
-    position: relative;
+
+    .section-navigation {
+      width: columns(7);
+    }
+
+    .-inner {
+      margin: 0 auto;
+      max-width: 1400px;
+      padding: 0 #{$spacing * 10};
+    }
 
     &.stuck {
       top: 0;
       left: 0;
-      z-index: 0;
+    }
+  }
 
-      .-inner {
-        margin: 0 auto;
-        max-width: 1400px;
-        padding: 0 #{$spacing * 10};
-      }
+  @include media-lg {
+    top: auto;
+    left: auto;
+    padding: 0;
+    right: auto;
+    float: right;
+    width: columns(3);
+    position: relative;
+    @include transition(top);
+
+    .section-navigation {
+      width: 100%;
+    }
+
+    .-inner {
+      padding: 0;
+    }
+
+    &.stuck {
+      top: auto;
 
       .section-navigation {      
         float: right;
         width: columns(3);
       } 
+
+      .-inner {
+        padding: 0 #{$spacing * 10};
+      }
     }
   } 
 }
@@ -54,18 +83,6 @@
     padding: 15px #{$spacing * 2};
   }
 
-  .accordion-toggle {
-
-    @include media-md {
-      pointer-events: none;
-      padding-right: #{$spacing * 2};
-
-      .expand-contract {
-        display: none;
-      }
-    }
-  }
-
   ol {
     margin: 0;
     padding: 0;
@@ -75,11 +92,10 @@
       border-top: 1px solid color(green-dark);
 
       a {
-        @include h4;
+        @include h5;
         display: block;
-        min-height: 60px;
         line-height: 30px;
-        padding: 15px 20px;
+        padding: 10px 20px;
         text-decoration: none;
         
         @include hover-style;
@@ -87,28 +103,15 @@
     }
   }
 
-  @include media-md {
+  @include media-lg {
     position: relative;
-  }
-
-  @media screen and (min-width: $breakpoint-md) and (max-height: 760px) {
-    ol {
-      li {
-        a {
-          @include h5;
-          min-height: 0;
-          padding: 10px 20px;
-        }
-      }
-    }
   }
 }
 
 // Sticky behavior
 .sticky-wrap {
-  z-index: 2;
-  padding-top: 60px;
   position: relative;
+  padding-top: #{$spacing * 12};
 
   @include media-md {
     padding-top: 0;

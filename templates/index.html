@@ -98,7 +98,7 @@
 
   {% if entry.homepageStats|length %}
     <div class="wrap">
-      {% include "partials/_image-with-stat" with { 'block' : entry.homepageStats.one() } %}
+      {% include "blocks/_background-image-with-stat" with { 'block' : entry.homepageStats.one() } %}
     </div>
   {% endif %}
 
@@ -126,7 +126,7 @@
 
   {% if entry.homepageStats|length == 2 %}
     <div class="wrap">
-      {% include "partials/_image-with-stat" with { 'block' : entry.homepageStats.nth(1) } %}
+      {% include "blocks/_background-image-with-stat" with { 'block' : entry.homepageStats.nth(1) } %}
     </div>
   {% endif %}
 

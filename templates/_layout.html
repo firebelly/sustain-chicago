@@ -28,7 +28,10 @@
             <div class="wrap">            
               <div class="page-bottom-image background-image block">
                 {% set image = entry.pageBottomImage.one() %}
-                {% set transformedImage = craft.imager.transformImage(image, {
+                {% set transformedImage = craft.imager.transformImage(image, { 
+                  width: 1400,
+                  ratio: 7/3,
+                  position: image.getFocalPoint(),
                   effects: { modulate: [100, 0, 100], clut: 'gradient:#163B37-#E2E8EA' } 
                 }) %}
                 <img src="{{ transformedImage.getUrl() }}" alt="">

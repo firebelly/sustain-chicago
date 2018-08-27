@@ -187,6 +187,11 @@ $capline: (
   @include paragraph-style(16, 20, .0312em);
 }
 
+@mixin type-link {
+  @include h4;
+  font-weight: 700;
+}
+
 /// Type based classes using type mixins
 .h1 {
   @include h1;
@@ -209,8 +214,7 @@ $capline: (
 }
 // Links with the h4 style are bold
 a.h4 {
-  @include h4;
-  font-weight: 700;
+  @include type-link;
 }
 
 .h5 {

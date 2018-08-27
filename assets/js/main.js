@@ -11,6 +11,8 @@ var SC = (function($) {
   var $window = $(window),
       $body = $('body'),
       breakpointIndicatorString,
+      breakpoint_xl,
+      breakpoint_nav,
       breakpoint_lg,
       breakpoint_md,
       breakpoint_sm,
@@ -20,12 +22,17 @@ var SC = (function($) {
       page_at,
       $siteNav,
       $siteHeader,
+      headerSmHeight = '60px',
+      headerMdHeight = '100px',
+      headerLgHeight = '160px',
       $headerSearchForm,
       transitionElements,
       userScrolled,
-      lastScrollTop = 0,
+      navLastScrollTop = 0,
+      sectionNavLastScrollTop = 0,
       downwardScrollDelta = 6,
       upwardScrollDelta = 120,
+      paddingBuffer = 40,
       isAnimating = false,
       utils = window.fizzyUIUtils;
 
@@ -37,6 +44,9 @@ var SC = (function($) {
     $siteNav = $('.site-nav-main');
     $siteHeader = $('.site-header');
     $headerSearchForm = $('#header-search-form');
+
+    // Set screen size vars
+    _resize();
 
     // Transition elements to enable/disable on resize
     transitionElements = [$siteNav, $headerSearchForm];
@@ -61,6 +71,7 @@ var SC = (function($) {
     setInterval(function() {
       if (userScrolled) {
         _showHideNavigation();
+        _collapseSectionNav();
         userScrolled = false;
       }
     }, 250);
@@ -75,12 +86,11 @@ var SC = (function($) {
     _initPageBanner();
     _initPrioritiesShowcase();
     _initAccordions();
-    _initStickyElements();
+    // _initStickyElements();
   }
 
   function _scrollBody(element, offset, duration, delay) {
-    var offset,
-        headerOffset = $siteHeader.outerHeight();
+    var headerOffset = $siteHeader.outerHeight();
     if (typeof offset === "undefined" || offset === null) {
       offset = headerOffset;
     }
@@ -133,7 +143,8 @@ var SC = (function($) {
   }
 
   function _showHideNavigation() {
-      var st = $window.scrollTop();
+      var st = $window.scrollTop(),
+          header = $('.nav-utility').outerHeight();
 
       // Check to see if the nav is open
       if ($siteNav.is('.-active') || isAnimating) {
@@ -145,23 +156,27 @@ var SC = (function($) {
         return;
       }
 
-      if (st > lastScrollTop && st > 40) {
+      if (st > navLastScrollTop && st > 40) {
           // Scrolled down
-          // Make sure they scroll down more than downwardScrollDelta
-          if (Math.abs(lastScrollTop - st) <= downwardScrollDelta) {
+          if (Math.abs(navLastScrollTop - st) <= downwardScrollDelta) {
               return;
           }
           $body.removeClass('nav-down').addClass('nav-up');
+          if (breakpoint_nav && $('.section-navigation-wrap').length && !$('.section-navigation-wrap').is('.bottom-stuck')) {
+            _updateSectionNavPos(headerMdHeight);
+          }
       } else if (st + $window.height() < $(document).height() - 40 && !isAnimating) {
           // Scrolled up
-          // Make sure they scroll up more than upwardScrollDelta
-          if (Math.abs(lastScrollTop - st) <= upwardScrollDelta) {
+          if (Math.abs(navLastScrollTop - st) <= upwardScrollDelta) {
               return;
           }
           $body.removeClass('nav-up').addClass('nav-down');
+          if (breakpoint_nav && $('.section-navigation-wrap').length && !$('.section-navigation-wrap').is('.bottom-stuck')) {
+            _updateSectionNavPos(headerLgHeight);
+          }
       }
 
-      lastScrollTop = st;
+      navLastScrollTop = st;
   }
 
   function _initMobileNav() {
@@ -183,10 +198,18 @@ var SC = (function($) {
   function _initSectionNav() {
     if ($('.section-navigation').length) {
       var $sectionNav = $('.section-navigation'),
+          $wrap = $('.section-navigation-wrap'),
+          $stickyWrap = $('.sticky-wrap'),
           sections = $('.section');
 
       // Build Nav
       $sectionNav.append('<h4 class="accordion-toggle">Jump to <span class="expand-contract"></span></h4><ol class="accordion-content"></ol>');
+
+      // If not small-screen, start with it open
+      if (breakpoint_lg) {
+        $sectionNav.addClass('-active');
+        $sectionNav.find('.expand-contract').addClass('-active');
+      }
 
       sections.each(function(i) {
         var sectionId = $(this).attr('id'),
@@ -194,21 +217,83 @@ var SC = (function($) {
         $sectionNav.find('ol').append('<li><a href="#'+ sectionId +'">'+ sectionTitle +'</a></li>');
       });
 
+      // Click to scroll to section
       $(document).on('click', '.section-navigation a', function(e) {
         e.preventDefault();
 
         var $section = $($(this).attr('href'));
         var headerOffset;
 
-        if ($section.offset().top < $window.scrollTop() + $siteHeader.outerHeight()) {
-          headerOffset = $('.site-nav-main').outerHeight() + $siteHeader.find('.nav-utility').outerHeight();
+        if ($section.offset().top < $window.scrollTop() + $siteHeader.outerHeight() && breakpoint_lg) {
+          headerOffset = $siteHeader.outerHeight() + $siteHeader.find('.nav-utility').outerHeight() + paddingBuffer;
           _scrollBody($section, headerOffset);
         } else {
-          headerOffset = $('.site-nav-main').outerHeight();
+          if (breakpoint_lg) {
+            headerOffset = $siteHeader.outerHeight();
+          } else {
+            headerOffset = $siteHeader.outerHeight() + $sectionNav.find('.accordion-toggle').outerHeight() + paddingBuffer;
+          }
           _scrollBody($section, headerOffset);
         }
       });
+
+      // Sticky Behavior
+      $(window).scroll(function(e){
+        var st = $window.scrollTop(),
+            $element = $wrap,
+            wrapIsStuck = $wrap.is('.stuck'),
+            stickyWrapTop = $stickyWrap.offset().top,
+            stickyWrapBottom = $stickyWrap.offset().top + $stickyWrap.outerHeight(),
+            scrollPos = st + $siteHeader.outerHeight();
+
+        // If elmeent isn't stuck and scroll is withiin the sticky wrap bounds, make it sticky
+        if (!wrapIsStuck && scrollPos >= stickyWrapTop && scrollPos + $element.outerHeight() < stickyWrapBottom) {
+
+          $element.addClass('stuck').css('top', $siteHeader.outerHeight());
+
+        // If it's already stuck and scroll is above the element, un-stick it
+        } else if (wrapIsStuck && scrollPos < stickyWrapTop) {
+          if (breakpoint_lg) {
+            $element.removeClass('stuck').css('top', 'auto');
+          } else {
+            $element.removeClass('stuck').css('top', '0');
+          }
+
+        // If it's stuck and scroll is past the bottom of the sticky wrap, stick it to the bottom of the wrap
+        } else if (wrapIsStuck && scrollPos + $element.outerHeight() >= stickyWrapBottom) {
+
+          $element.addClass('bottom-stuck').css({
+            'top': 'auto',
+            'bottom': 0
+          });
+
+        // If it's bottom-stuck and scroll is less than the bottom of the sticky wrap, un-bottom-stuck it
+        } else if ($element.is('.bottom-stuck') && scrollPos + $element.outerHeight() < stickyWrapBottom) {
+
+          $element.removeClass('bottom-stuck').css({
+            'top': $siteHeader.outerHeight(),
+            'bottom': 'auto'
+          });
+        }
+
+      });
     }
+  }
+
+  function _updateSectionNavPos(navOffset) {
+    $('.section-navigation-wrap.stuck').css('top', navOffset);
+  }
+
+  function _collapseSectionNav() {
+    var st = $(window).scrollTop();
+    // If on large-screen, and the nav is stuck, and the user scrolls a bit, contract it
+    if ($('.section-navigation-wrap').length && $('.section-navigation-wrap').is('.stuck') && $('.section-navigation').is('.-active')) {
+      if (Math.abs(sectionNavLastScrollTop - st) <= 150) {
+          return;
+      }
+      _collapseAccordion($('.section-navigation'));
+    }
+    sectionNavLastScrollTop = st;
   }
 
   function _closeMobileNav() {
@@ -329,48 +414,49 @@ var SC = (function($) {
   }
 
   function _initAccordions() {
+    // Activate/deactive functions
+
     $('.accordion').each(function() {
       var $accordion = $(this),
           $toggle = $accordion.find('.accordion-toggle'),
           $content = $accordion.find('.accordion-content');
 
+      // Start contracted/expanded depending on screen size
+      if (breakpoint_lg) {
+        _activateAccordion($accordion);
+      } else {
+        $content.hide();
+      }
+
       $toggle.on('click', function(e) {
-        $accordion.toggleClass('-active');
-        $content.slideToggle(250);
+        if ($accordion.is('.-active')) {
+          _collapseAccordion($accordion);
+        } else {
+          _expandAccordion($accordion);
+        }
       });
+
     });
   }
 
-  function _initStickyElements() {
-    if (!$('.sticky').length) {
-      return;
-    }
+  function _deactivateAccordion($accordion) {
+    $accordion.removeClass('-active');
+    $accordion.find('.expand-contract').removeClass('-active');        
+  }
 
-    var $stickyElements = $('.sticky');
+  function _activateAccordion($accordion) {
+    $accordion.addClass('-active');
+    $accordion.find('.expand-contract').addClass('-active');
+  }
 
-    $(window).scroll(function(e){
-      var st = $window.scrollTop();
+  function _collapseAccordion($accordion) {
+    _deactivateAccordion($accordion);
+    $accordion.find('.accordion-content').slideUp(250);
+  }
 
-      $stickyElements.each(function(i) {
-
-        if (!$(this).is('.stuck') && st + $siteHeader.outerHeight() >= $('.sticky-wrap').offset().top && st + $siteHeader.outerHeight() + $(this).outerHeight() < $('.sticky-wrap').offset().top + $('.sticky-wrap').outerHeight()) {
-          $(this).addClass('stuck').css('top', $siteHeader.outerHeight());
-        } else if ($(this).is('.stuck') && st + $siteHeader.outerHeight() < $('.sticky-wrap').offset().top) {
-          $(this).removeClass('stuck').css('top', 'auto');
-        } else if ($(this).is('.stuck') && st + $siteHeader.outerHeight() + $(this).outerHeight() >= $('.sticky-wrap').offset().top + $('.sticky-wrap').outerHeight()) {
-          $(this).addClass('bottom-stuck').css({
-            'top': 'auto',
-            'bottom': 0
-          });
-        } else if ($(this).is('.stuck') && st + $siteHeader.outerHeight() + $(this).outerHeight() < $('.sticky-wrap').offset().top + $('.sticky-wrap').outerHeight()) {
-          $(this).removeClass('bottom-stuck').css({
-            'top': $siteHeader.outerHeight(),
-            'bottom': 'auto'
-          });
-        }
-
-      });
-    });
+  function _expandAccordion($accordion) {
+    _activateAccordion($accordion);
+    $accordion.find('.accordion-content').slideDown(250);
   }
 
   // Disabling transitions on certain elements on resize
@@ -397,10 +483,21 @@ var SC = (function($) {
     .replace(/['"]+/g, '');
 
     // Determine current breakpoint
-    breakpoint_lg = breakpointIndicatorString === 'lg';
+    breakpoint_xl = breakpointIndicatorString === 'xl';
+    breakpoint_nav = breakpointIndicatorString === 'nav' || breakpoint_xl;
+    breakpoint_lg = breakpointIndicatorString === 'lg' || breakpoint_nav;
     breakpoint_md = breakpointIndicatorString === 'md' || breakpoint_lg;
     breakpoint_sm = breakpointIndicatorString === 'sm' || breakpoint_md;
     breakpoint_xs = breakpointIndicatorString === 'xs' || breakpoint_sm;
+
+    // Reposition section nav
+    if ($('.section-navigation').length) {
+      if (breakpoint_md) {
+        _updateSectionNavPos(headerMdHeight);
+      } else {
+        _updateSectionNavPos(headerSmHeight);
+      }
+    }
 
     // Reset inline styles for navigation for medium breakpoint
     if (breakpoint_md && $('.site-nav .nav-sub-level')[0].hasAttribute('style')) {

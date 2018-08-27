@@ -1,0 +1,17 @@
+<figure class="background-image-with-stat block">
+  <figcaption class="stat">
+    <h5>{{ block.statFigure }}</h5>
+    <div class="stat-description">{{ block.statDescription }}</div>
+  </figcaption>
+
+  <div class="background-image">
+    {% set image = block.image.one() %}
+    {% set transformedImage = craft.imager.transformImage(image, {
+      width: 1400,
+      ratio: 7/3,
+      position: image.getFocalPoint(),
+      effects: { modulate: [100, 0, 100], clut: 'gradient:#163B37-#E2E8EA' }
+    }) %}
+    <img src="{{ transformedImage.getUrl() }}" alt="">
+  </div>
+</figure>

@@ -1,0 +1,7 @@
+{
+  "buttons": ["bold", "italic", "underline", "link"],
+  "toolbarFixed": true,
+  "linkNewTab": true,
+  "markup": "cite",
+  "enterKey": false
+}

@@ -1,0 +1,8 @@
+<div class="link-block block">
+  {% if block.externalLink is not empty %}
+    {% set linkUrl = block.externalLink %}
+  {% else %}
+    {% set linkUrl = block.internalLink.one().url %}
+  {% endif %}
+  <a href="{{ linkUrl }}"{{ block.externalLink is not empty ? ' target="_blank"' : '' }}>{{ block.linkText }}</a>
+</div>

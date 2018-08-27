@@ -35,7 +35,8 @@
   z-index: 1;
   position: relative;
   display: inline-block;
-  &::after {
+  @include transition(color);
+  &::before {
     top: 50%;
     z-index: -1;
     content: '';
@@ -54,7 +55,7 @@
     fill: color(white)!important;
     color: color(white)!important;
 
-    &::after {
+    &::before {
       transform: scaleX(1) translateY(-50%);
     }
   }

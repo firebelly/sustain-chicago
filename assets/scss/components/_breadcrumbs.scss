@@ -3,6 +3,7 @@
 .breadcrumbs {
   @include clearfix;
   @extend .semantic-list;
+  margin-bottom: $spacing;
 
   li {
     @include h5;

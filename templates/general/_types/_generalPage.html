@@ -1,0 +1,17 @@
+{% extends (craft.app.request.isAjax and not craft.app.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
+
+{% block content %}
+    
+  <div class="page-main-content sticky-wrap wrap">
+    <div class="section-navigation-wrap">
+      <div class="-inner">
+        <nav class="section-navigation accordion"></nav>
+      </div>
+    </div>
+
+    <div class="content-padding">
+      {% include 'partials/_page-blocks.html' %}
+    </div>
+  </div>
+
+{% endblock %}

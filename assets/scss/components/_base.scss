@@ -40,6 +40,12 @@ body {
   position: relative;
 }
 
+.content-padding {
+  @include media-md {
+    padding: 0 #{$spacing * 2};
+  }
+}
+
 .site-main {
   padding-bottom: #{$spacing * 8};
   background-color: color(blue-light);
