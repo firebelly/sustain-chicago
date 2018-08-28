@@ -4,7 +4,7 @@ import os
 env.hosts = ['chicagocity.webfactional.com']
 env.user = 'chicagocity'
 env.path = '~/Sites/sustain-chicago'
-env.remotepath = '/home/firebelly/webapps/sustainchicago'
+env.remotepath = '/home/chicagocity/webapps/sustainchicago'
 env.git_branch = 'master'
 env.warn_only = True
 env.remote_protocol = 'http'
