@@ -117,7 +117,7 @@
           <div class="card-description">
             <p>{{ page.description }}</p>
           </div>
-          <p class="card-action"><a href="{{ page.entry.one().url }}">{{ page.entry.one().title }} ></a></p>
+          <p class="card-action"><a href="{{ page.entry.one().url }}">{{ page.linkText is not empty ? page.linkText : page.entry.one().title }} ></a></p>
         </div>
       {% endfor %}
       </div>

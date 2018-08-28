@@ -11,7 +11,7 @@
 
     <ul class="dropdown-actions">
       {% for block in entry.actionDropdown.type('dropdownActions').limit(null).all() %}
-      <li><a href="{{ block.internalLink is not empty ? block.internalLink.one().url : block.externalLink }}">{{ block.actionLabel }}</a></li>
+      <li><a href="{{ block.internalLink is not empty ? block.internalLink.one().url : block.externalLink }}"{{ block.internalLink is empty ? ' target="_blank"' : '' }}>{{ block.actionLabel }}{{ block.internalLink is empty ? ' <svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg>' : '' }}</a></li>
       {% endfor %}
     </ul>
   </div>

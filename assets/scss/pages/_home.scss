@@ -40,6 +40,11 @@ body.page-home {
   }
 
   .page-header {
+    
+    .page-title {
+      @include h2;
+    }
+
     @include media-md {
       width: 100%;
       float: none;

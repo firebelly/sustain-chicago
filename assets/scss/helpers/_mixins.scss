@@ -124,14 +124,20 @@
   outline: 0 solid transparent;
   box-shadow: 0 0 0 0 transparent;
   @include transition(background, outline-width, color, box-shadow);
+
+  svg {
+    @include transition(fill);
+  }
   
   &:hover {  
     z-index: 2;
     outline-offset: 0;
-    fill: color(white);
     color: color(white);
     box-shadow: $box-shadow-hover;
     background-color: color(blue);
     outline: 10px solid color(blue);
+    svg {
+      fill: color(white);
+    }
   }
 }

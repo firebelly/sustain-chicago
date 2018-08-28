@@ -163,8 +163,19 @@
       a {
         display: block;
         text-decoration: none;
+        color: color(green-dark);
         padding: $spacing #{$spacing * 2};
         @include hover-style;
+
+        .icon {
+          top: 1px;
+          width: 20px;
+          height: 20px;
+          position: relative;
+          display: inline-block;
+          fill: color(green-dark);
+          margin-left: #{$spacing * 2};
+        }
       }
     }
 
