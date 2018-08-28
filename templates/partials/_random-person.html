@@ -1,4 +1,4 @@
-{% set peopleEntry = craft.entries.section('aroundChicago').slug('people').one() %}
+{% set peopleEntry = craft.entries.section('aroundChicago').slug('local-leaders').one() %}
 {% set peopleEntries = craft.entries.descendantOf(peopleEntry).all() %}
 
 {% if peopleEntries|length %}
