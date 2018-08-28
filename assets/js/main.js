@@ -235,6 +235,8 @@ var SC = (function($) {
           }
           _scrollBody($section, headerOffset);
         }
+
+        parent.location.hash = $(this).attr('href').replace('#','');
       });
 
       // Sticky Behavior
