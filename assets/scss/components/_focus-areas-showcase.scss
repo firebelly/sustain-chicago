@@ -1,6 +1,6 @@
-// Priorities Showcase
+// Focus Areas Showcase
 
-.priorities-showcase {
+.focus-areas-showcase {
   background-color: color(white);
 
   > h4 {
@@ -9,7 +9,7 @@
     padding: #{$spacing * 2} #{$spacing * 2} 0;
   }
 
-  .priorities-nav {
+  .focus-areas-nav {
     position: relative;
     @extend .semantic-list;
 
@@ -117,7 +117,7 @@
     }
   }
 
-  .priority {
+  .focus-area {
     display: none;
 
     &.-active {

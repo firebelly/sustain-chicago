@@ -1,6 +1,6 @@
 {% extends (craft.app.request.isAjax and not craft.app.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
 
-{% set prioritiesColors = ['dark', 'light'] %}
+{% set focusAreasColors = ['dark', 'light'] %}
 {% set featuredPageColors = ['dark', 'light', 'white'] %}
 {% set projectsEntry = craft.entries.section('aroundChicago').slug('projects').one() %}
 
@@ -18,50 +18,50 @@
 
   <div class="wrap -extended">
 
-    <div class="priorities-showcase block">
-      <h4>Our priorities</h4>
-      <ul class="priorities-nav">
-        {% for priority in craft.entries.section('priorities').level(2).all() %}
+    <div class="focus-areas-showcase block">
+      <h4>Our Focus Areas</h4>
+      <ul class="focus-areas-nav">
+        {% for focusArea in craft.entries.section('focusAreas').level(2).all() %}
           {% set colorIndex = loop.index - 1 %}
-          {% if colorIndex > prioritiesColors|length - 1 %} 
-            {% set colorIndex = colorIndex % prioritiesColors|length %}
+          {% if colorIndex > focusAreasColors|length - 1 %} 
+            {% set colorIndex = colorIndex % focusAreasColors|length %}
           {% endif %}
-          <li data-priority="#{{ priority.slug }}" class="{{ prioritiesColors[colorIndex] }} {{ loop.index == 1 ? ' -active' : '' }}">{{ priority.title }}</li>
+          <li data-focus-area="#{{ focusArea.slug }}" class="{{ focusAreasColors[colorIndex] }} {{ loop.index == 1 ? ' -active' : '' }}">{{ focusArea.title }}</li>
         {% endfor %}
       </ul>
 
-      <div class="priorities-content">
-        {% for priority in craft.entries.section('priorities').level(2).all() %}
+      <div class="focus-areas-content">
+        {% for focusArea in craft.entries.section('focusAreas').level(2).all() %}
           {% set colorIndex = loop.index - 1 %}
-          {% if colorIndex > prioritiesColors|length - 1 %} 
-            {% set colorIndex = colorIndex % prioritiesColors|length %}
+          {% if colorIndex > focusAreasColors|length - 1 %} 
+            {% set colorIndex = colorIndex % focusAreasColors|length %}
           {% endif %}
-          <div class="priority grid{{ loop.index == 1 ? ' -active' : '' }}" id="{{ priority.slug }}">
-            <div class="priority-overfiew card with-hover {{ prioritiesColors[colorIndex] }}">
+          <div class="focus-area grid{{ loop.index == 1 ? ' -active' : '' }}" id="{{ focusArea.slug }}">
+            <div class="focus-area-overfiew card with-hover {{ focusAreasColors[colorIndex] }}">
               <header class="card-header">
-                <h3 class="card-title"><a href="{{ priority.url }}" >{{ priority.title }}</a></h3>
+                <h3 class="card-title"><a href="{{ focusArea.url }}" >{{ focusArea.title }}</a></h3>
               </header>
               <div class="card-description">
-                <p>{{ priority.pageDescription }}</p>
+                <p>{{ focusArea.pageDescription }}</p>
               </div>
-              <p class="card-action"><a href="{{ priority.url }}" >Learn More ></a></p>
+              <p class="card-action"><a href="{{ focusArea.url }}" >Learn More ></a></p>
             </div>
 
-            {% set relatedProjects = craft.entries.descendantOf(projectsEntry).relatedTo(priority).all() %}
+            {% set relatedProjects = craft.entries.descendantOf(projectsEntry).relatedTo(focusArea).all() %}
             {% if relatedProjects|length %}
-              {% if craft.entries.descendantOf(projectsEntry).relatedTo(priority).search('featured:1').all()|length %}
-                {% set featuredProjects = craft.entries.section('aroundChicago').descendantOf(projectsEntry.id).relatedTo(priority).search('featured:1') %}
+              {% if craft.entries.descendantOf(projectsEntry).relatedTo(focusArea).search('featured:1').all()|length %}
+                {% set featuredProjects = craft.entries.section('aroundChicago').descendantOf(projectsEntry.id).relatedTo(focusArea).search('featured:1') %}
               {% else %}
                 {% set featuredProjects = relatedProjects.one() %}
               {% endif %}
 
-              <div class="featured-projects med-one-half grid {{ prioritiesColors[colorIndex] }}{{ featuredProjects.all()|length == 1 ? ' -single' : '' }}">
+              <div class="featured-projects med-one-half grid {{ focusAreasColors[colorIndex] }}{{ featuredProjects.all()|length == 1 ? ' -single' : '' }}">
 
                 {% for featuredProject in featuredProjects.all() %}
                     
                   {% set projectImage = craft.imager.transformImage(featuredProject.postImage.one(), { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
                   {% if featuredProjects|length == 1 %}
-                    <div class="featured-project card with-hover -full -small -split {{ prioritiesColors[colorIndex] }}">
+                    <div class="featured-project card with-hover -full -small -split {{ focusAreasColors[colorIndex] }}">
                       <div class="split-container">
                         <header class="card-header">
                           <h4 class="card-tag">Featured Project</h4>
@@ -72,7 +72,7 @@
                       <div class="split-container -image" style="background-image:url('{{ projectImage.getUrl() }}');"></div>
                     </div>
                   {% else %}
-                    <div class="featured-project card with-hover one-half -small {{ prioritiesColors[colorIndex] }}">
+                    <div class="featured-project card with-hover one-half -small {{ focusAreasColors[colorIndex] }}">
                       <header class="card-header">
                         <h4 class="card-tag">Featured Project</h4>
                         <h3 class="card-title"><a href="{{ featuredProject.url }}" class="featured-project-toggle">{{ featuredProject.title }}</a></h3>

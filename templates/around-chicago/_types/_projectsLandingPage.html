@@ -2,7 +2,7 @@
 
 {% set colors = ['dark', 'light', 'white'] %}
 
-{% set priorities = craft.entries.section('priorities').level(2).all() %}
+{% set focusAreas = craft.entries.section('focusAreas').level(2).all() %}
 {% set projects = entry.children().all() %}
 
 {% block content %}
@@ -17,7 +17,7 @@
 
     <div class="project-categories column-primary -left">
 
-      {% for priority in priorities %}
+      {% for priority in focusAreas %}
         {% set relatedProjects =  entry.children().relatedTo(priority).all() %}
 
         {% if relatedProjects|length %}

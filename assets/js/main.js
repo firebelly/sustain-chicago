@@ -84,7 +84,7 @@ var SC = (function($) {
     _initSearchForm();
     _initFormFunctions();
     _initPageBanner();
-    _initPrioritiesShowcase();
+    _initFocusAreasShowcase();
     _initAccordions();
     // _initStickyElements();
   }
@@ -365,16 +365,16 @@ var SC = (function($) {
     });
   }
 
-  function _initPrioritiesShowcase() {
-    if (!$('.priorities-showcase').length) {
+  function _initFocusAreasShowcase() {
+    if (!$('.focus-areas-showcase').length) {
       return;
     }
 
-    // Priority Showcase Carousels
-    var $prioritiesNav = $('.priorities-nav'),
-        $prioritiesContent = $('.priorities-content');
+    // Focuse Areas Showcase Carousels
+    var $focusAreasNav = $('.focus-areas-nav'),
+        $focusAreasContent = $('.focus-areas-content');
 
-    var $prioritiesNavCarousel = $prioritiesNav.flickity({
+    var $focusAreasNavCarousel = $focusAreasNav.flickity({
       pageDots: false,
       wrapAround: true,
       cellAlign: 'left',
@@ -383,33 +383,33 @@ var SC = (function($) {
     });
 
     // Scroll to the nav item when clicked
-    $prioritiesNavCarousel.on( 'staticClick.flickity', function(event, pointer, cellElement, cellIndex) {
+    $focusAreasNavCarousel.on( 'staticClick.flickity', function(event, pointer, cellElement, cellIndex) {
       if ( typeof cellIndex == 'number' ) {
-        $prioritiesNavCarousel.flickity( 'select', cellIndex );
+        $focusAreasNavCarousel.flickity( 'select', cellIndex );
       }
     }).on( 'change.flickity', function(event, index) {
-      var $priority = $($('.priorities-nav li').eq(index).attr('data-priority'));
-      setActivePriority($priority);
-      $('.priorities-nav li').eq(index).toggleClass('-active');
+      var $focusArea = $($('.focus-areas-nav li').eq(index).attr('data-focus-area'));
+      setActiveFocusArea($focusArea);
+      $('.focus-areas-nav li').eq(index).toggleClass('-active');
     });
 
     // Activate showcase when clicked relative nav item
-    $(document).on('click', '.priorities-nav li', function(e) {
-      var $priority = $($(this).attr('data-priority'));
+    $(document).on('click', '.focus-areas-nav li', function(e) {
+      var $focusArea = $($(this).attr('data-focus-area'));
 
       if ($(this).is('.-active')) {
         return;
       }
 
-      setActivePriority($priority);
+      setActiveFocusArea($focusArea);
 
       $(this).toggleClass('-active');
     });
 
-    function setActivePriority($priority) {
-      $prioritiesNav.find('li.-active').removeClass('-active');
-      $prioritiesContent.find('.priority.-active').not($priority).removeClass('-active');
-      $priority.toggleClass('-active');
+    function setActiveFocusArea($focusArea) {
+      $focusAreasNav.find('li.-active').removeClass('-active');
+      $focusAreasContent.find('.focus-area.-active').not($focusArea).removeClass('-active');
+      $focusArea.toggleClass('-active');
     }
   }
 
