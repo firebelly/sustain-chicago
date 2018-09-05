@@ -55,10 +55,24 @@ var SC = (function($) {
     $(document).keyup(function(e) {
       // Escape key
       if (e.keyCode === 27) {
-        // Close Form
         _closeMobileNav();
         _closeSearchForm();
         _closeActionDropdown();
+        _closeProjectModal();
+      }
+
+      // Left Arrow
+      if (e.keyCode === 37) {
+        if ($body.is('.modal-open')) {
+          _changeProjectModal('previous');
+        }
+      }
+
+      // Right Arrow
+      if (e.keyCode === 39) {
+        if ($body.is('.modal-open')) {
+          _changeProjectModal('next');
+        }
       }
     });
 
@@ -501,24 +515,14 @@ var SC = (function($) {
 
     // Project modal close and navigation
     $(document).on('click', '#project-modal button', function(e) {
-      var $button = $(this),
-          featuredProjects = $('.featured-project'),
-          currentProjectId = $modal.attr('data-projectId'),
-          $currentProject = $('#'+$modal.attr('data-projectId')),
-          currentProjectIndex = $.map(featuredProjects, function(obj, index) {
-            if(obj.id == currentProjectId) {
-              return index;
-            }
-          })[0],
-          prevProjectIndex = currentProjectIndex === 0 ? featuredProjects.length - 1 : currentProjectIndex - 1,
-          nextProjectIndex = currentProjectIndex === featuredProjects.length - 1 ? 0 : currentProjectIndex + 1;
+      var $button = $(this);
 
       if ($button.is('.project-modal-close')) {
         _closeProjectModal();
       } else if ($button.is('.prev-project-button')) {
-        _populateProjectModal($(featuredProjects[prevProjectIndex]));
+        _changeProjectModal('previous');
       } else if ($button.is('.next-project-button')) {
-        _populateProjectModal($(featuredProjects[nextProjectIndex]));
+        _changeProjectModal('next');
       }
     });
   }
@@ -553,6 +557,25 @@ var SC = (function($) {
   function _closeProjectModal() {
     $body.removeClass('modal-open no-scroll');
     $('#project-modal').removeClass('-active');
+  }
+
+  function _changeProjectModal(direction) {
+    var featuredProjects = $('.featured-project'),
+        currentProjectId = $('#project-modal').attr('data-projectId'),
+        $currentProject = $('#'+$('#project-modal').attr('data-projectId')),
+        currentProjectIndex = $.map(featuredProjects, function(obj, index) {
+          if(obj.id == currentProjectId) {
+            return index;
+          }
+        })[0],
+        prevProjectIndex = currentProjectIndex === 0 ? featuredProjects.length - 1 : currentProjectIndex - 1,
+        nextProjectIndex = currentProjectIndex === featuredProjects.length - 1 ? 0 : currentProjectIndex + 1;
+
+    if (direction === 'previous') {
+      _populateProjectModal($(featuredProjects[prevProjectIndex]));
+    } else if (direction === 'next') {
+      _populateProjectModal($(featuredProjects[nextProjectIndex]));
+    }
   }
 
   // Disabling transitions on certain elements on resize
