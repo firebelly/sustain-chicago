@@ -1,4 +1,4 @@
-{% if entry.level > 1 %}
+{% if entry is defined and entry.level > 1 %}
   <ul class="breadcrumbs">
     {% for crumb in entry.getAncestors().all() %}
       {% if crumb.level > 1 %}

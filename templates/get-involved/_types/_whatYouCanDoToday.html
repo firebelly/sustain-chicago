@@ -1,0 +1,43 @@
+{% extends (craft.app.request.isAjax and not craft.app.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
+
+{% set colors = ['theme-dark', 'theme-light', 'theme-white'] %}
+
+{% set focusAreas = craft.entries.section('focusAreas').level(2).mainContent(':notempty:').all() %}
+
+{% block content %}
+
+  <div class="page-main-content wrap -extended clearfix sticky-wrap">
+
+    <div class="section-navigation-wrap column-secondary -right sticky">
+      <div class="-inner">
+        <nav class="section-navigation accordion"></nav>
+      </div>
+    </div>
+
+    <div class="focus-areas cards-stacked column-primary -left">
+
+      {% for focusArea in focusAreas %}
+        {% set focusAreaContent =  focusArea.mainContent %}
+
+        {% set colorIndex = loop.index - 1 %}
+        {% if colorIndex > colors|length - 1 %} 
+          {% set colorIndex = colorIndex % colors|length %}
+        {% endif %}
+
+        <div id="{{ focusArea.slug }}" class="section card -full {{ colors[colorIndex] }}" data-section-title="{{ focusArea.title }}">
+          <div class="card-header">
+            <h3 class="card-title">{{ focusArea.title }}</h3>
+          </div>
+          <div class="card-content user-content">
+            {{ focusAreaContent }}
+          </div>
+          <p class="card-action"><a href="{{ focusArea.url }}">Learn more about {{ focusArea.title }} ></a></p>
+        </div>
+
+      {% endfor %}
+
+    </div>
+
+  </div>
+
+{% endblock %}

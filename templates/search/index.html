@@ -1,26 +1,90 @@
 {% extends (craft.app.request.isAjax and not craft.app.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
 {% set query = craft.app.request.getParam('q') %}
-{% set title = 'Search: ' ~ query %}
 {% set results = craft.entries().search(query).orderBy('score') %}
+{% set title = 'Search: ' ~ query %}
+{% if craft.app.request.getParam('n') != '' %}
+  {% set resultsPerPage = craft.app.request.getParam('n') %}
+{% else %}
+  {% set resultsPerPage = 10 %}
+{% endif %}
+{% set paramString = '?q='~query~'&n='~resultsPerPage %}
 
 {% block content %}
 
-  <h2 class="page-title">
-    {{ results|length }} result{{ results|length > 1 ? "s" : "" }} found for “{{ query }}”
-  </h2>  
+<div class="wrap">
 
-  {% include "partials/_search-form" with { 'query': query } %}
-  <div class="center-content">
-    <div class="news-posts article-grid">
-    {% if query %}
-      {% set entries = craft.entries.search(query).orderBy('score') %}
-        {% for entry in entries.all() %}
-          {% include 'search/_article' %}
-        {% else %}
-          <p class="no-results">No results found.</p>
-        {% endfor %}
+  <div class="page-main-content content-padding">
+
+    <h5 class="inline-search-headline">Search again</h5>
+    {% include "partials/_search-form" with { 'query': query } %}
+
+    {% paginate results.limit(resultsPerPage) as resultsInfo, resultsEntries %}
+
+    <form action="/search" id="items-per-page">
+      <input id="newQuery" type="hidden" name="q" value="{{ query }}">
+      <label for="itemsPerPage">Items per page</label>
+      <div class="custom-select">      
+        <select name="n" id="itemsPerPage">
+          <option value="10"{{ resultsPerPage == 10 ? ' selected' : '' }}>10</option>
+          <option value="25"{{ resultsPerPage == 25 ? ' selected' : '' }}>25</option>
+          <option value="50"{{ resultsPerPage == 50 ? ' selected' : '' }}>50</option>
+          <option value="100"{{ resultsPerPage == 100 ? ' selected' : '' }}>100</option>
+        </select>
       </div>
+    </form>
+
+    {% if resultsInfo.totalPages > 1 %}
+      <nav class="search-pagination -top">
+        {% if resultsInfo.prevUrl %}<a href="{{ resultsInfo.prevUrl }}{{ paramString }}">< Previous</a> |{% endif %}
+
+        {% for page, url in resultsInfo.getPrevUrls(5) %}
+            <a href="{{ url }}{{ paramString }}">{{ page }}</a>
+        {% endfor %}
+
+        <span class="current">{{ resultsInfo.currentPage }}</span>
+
+        {% for page, url in resultsInfo.getNextUrls(5) %}
+            <a href="{{ url }}{{ paramString }}">{{ page }}</a>
+        {% endfor %}
+
+        {% if resultsInfo.nextUrl %}| <a href="{{ resultsInfo.nextUrl }}{{ paramString }}">Next ></a>{% endif %}
+      </nav>
     {% endif %}
+
+    {% if resultsInfo.total > 0  %}
+      {% set startingNumber = (resultsInfo.currentPage * resultsPerPage) - resultsPerPage + 1 %}
+      {% set endingNumber = ((resultsInfo.currentPage - 1) * resultsPerPage) + resultsEntries|length %}
+      <p class="results-info">Showing {{ startingNumber }}{{ startingNumber != endingNumber ? ' - '~endingNumber : '' }} of {{ resultsInfo.total }} results</p>
+    {% endif %}
+
+    <div id="results">
+      {% if results.all()|length %}      
+        {% for result in resultsEntries %}
+          {% include 'search/_article' %}
+        {% endfor %}
+      {% endif %}
     </div>
+
+    {% if resultsInfo.totalPages > 1 %}
+      <nav class="search-pagination -bottom">
+        {% if resultsInfo.prevUrl %}<a href="{{ resultsInfo.prevUrl }}{{ paramString }}">< Previous</a> |{% endif %}
+
+        {% for page, url in resultsInfo.getPrevUrls(5) %}
+            <a href="{{ url }}{{ paramString }}">{{ page }}</a>
+        {% endfor %}
+
+        <span class="current">{{ resultsInfo.currentPage }}</span>
+
+        {% for page, url in resultsInfo.getNextUrls(5) %}
+            <a href="{{ url }}{{ paramString }}">{{ page }}</a>
+        {% endfor %}
+
+        {% if resultsInfo.nextUrl %}| <a href="{{ resultsInfo.nextUrl }}{{ paramString }}">Next ></a>{% endif %}
+      </nav>
+    {% endif %}
+
   </div>
+    
+</div>
+
 {% endblock %}

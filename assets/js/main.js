@@ -86,7 +86,7 @@ var SC = (function($) {
     _initPageBanner();
     _initFocusAreasShowcase();
     _initAccordions();
-    // _initStickyElements();
+    _initProjectModal();
   }
 
   function _scrollBody(element, offset, duration, delay) {
@@ -315,6 +315,19 @@ var SC = (function($) {
         }, false);
       }
     });
+
+    // Posts-per-page select on search results page
+    $('#itemsPerPage').on('change', function(e) {
+      var $thisForm = $(this).closest('form'),
+          pageQuery = $thisForm.find('#newQuery').val(),
+          searchFormQuery = $('.page-main-content .search-form input').val();
+
+      if (pageQuery !== searchFormQuery) {
+        $thisForm.find('#newQuery').val(searchFormQuery);
+      }
+
+      $(this).closest('form').trigger('submit');
+    });
   }
 
   function _closeSearchForm() {
@@ -459,6 +472,87 @@ var SC = (function($) {
   function _expandAccordion($accordion) {
     _activateAccordion($accordion);
     $accordion.find('.accordion-content').slideDown(250);
+  }
+
+  function _initProjectModal() {
+    // Only set up on the projects page
+    if (!$('body.project-modal').length) {
+      return;
+    }
+
+    $body.append('<div id="project-modal"></div>');
+    var $modal = $('#project-modal');
+
+    // Activate when clicking on a featured project link
+    $('.featured-project a').on('click', function(e) {
+      e.preventDefault();
+      var $project = $(this).closest('.featured-project');
+      _openProjectModal($project);
+    });
+
+    // Close when clicking on background overlay
+    $(document).on('click', 'body.modal-open', function(e) {
+      var $target = $(e.target);
+
+      if (!$target.parents('.featured-project').length && !$target.is('#project-modal .project-image') && !$target.is('#project-modal .project-content') && !$target.parents('.project-content').length && !$target.is('.project-modal-close') && !$target.parents('.project-modal-close').length && !$target.parents('.project-modal-nav').length) {
+        _closeProjectModal();
+      }
+    });
+
+    // Project modal close and navigation
+    $(document).on('click', '#project-modal button', function(e) {
+      var $button = $(this),
+          featuredProjects = $('.featured-project'),
+          currentProjectId = $modal.attr('data-projectId'),
+          $currentProject = $('#'+$modal.attr('data-projectId')),
+          currentProjectIndex = $.map(featuredProjects, function(obj, index) {
+            if(obj.id == currentProjectId) {
+              return index;
+            }
+          })[0],
+          prevProjectIndex = currentProjectIndex === 0 ? featuredProjects.length - 1 : currentProjectIndex - 1,
+          nextProjectIndex = currentProjectIndex === featuredProjects.length - 1 ? 0 : currentProjectIndex + 1;
+
+      if ($button.is('.project-modal-close')) {
+        _closeProjectModal();
+      } else if ($button.is('.prev-project-button')) {
+        _populateProjectModal($(featuredProjects[prevProjectIndex]));
+      } else if ($button.is('.next-project-button')) {
+        _populateProjectModal($(featuredProjects[nextProjectIndex]));
+      }
+    });
+  }
+
+  function _populateProjectModal($project) {
+    var $modal = $('#project-modal'),
+        modalMarkup = '<div class="wrap -extended"><div class="modal-container float-grid"><div class="project-image med-one-half"></div><div class="project-content card med-one-half"><div class="content-overflow"><header class="card-header"><h4 class="card-tag">Featured <span class="project-focus-area"></span> Project</h4><h3 class="card-title"></h3></header><div class="card-text"></div><p class="card-action"><a href="" target="_blank">Project website<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg></a></p></div></div><button class="project-modal-close"><span class="sr-only">Close Project Details</span><svg class="icon icon-close"><use xlink:href="#icon-close"/></svg></button><nav class="project-modal-nav"><ul><li class="prev-project"><button class="prev-project-button"><span class="sr-only">Next Featured Project</span><svg class="icon icon-arrow"><use xlink:href="#icon-arrow"/></svg></button></li><li class="next-project"><button class="next-project-button"><span class="sr-only">Previous Featured Project</span><svg class="icon icon-arrow"><use xlink:href="#icon-arrow"/></svg></button></li></ul></nav></div></div>';
+
+    $modal.html(modalMarkup);
+
+    var projectId = $project.attr('id'),
+        projectImage = $project.attr('data-image'),
+        projectTitle = $project.find('.card-title a').text(),
+        projectFocusArea = $project.attr('data-focus-area'),
+        projectUrl = $project.attr('data-project-url'),
+        projectContent = $project.find('.project-content').html();
+
+    $modal.attr('data-projectId', projectId);
+    $modal.find('.project-image').css('background-image', 'url('+projectImage+')');
+    $modal.find('.project-focus-area').html(projectFocusArea);
+    $modal.find('.card-title').html(projectTitle);
+    $modal.find('.card-text').html(projectContent);
+    $modal.find('.card-action a').attr('href', projectUrl);
+  }
+
+  function _openProjectModal($project) {
+    _populateProjectModal($project);
+    $body.addClass('modal-open no-scroll');
+    $('#project-modal').addClass('-active');
+  }
+
+  function _closeProjectModal() {
+    $body.removeClass('modal-open no-scroll');
+    $('#project-modal').removeClass('-active');
   }
 
   // Disabling transitions on certain elements on resize

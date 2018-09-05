@@ -1,0 +1,69 @@
+{% extends (craft.app.request.isAjax and not craft.app.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
+
+{% block pageClass %}project-modal{% endblock %}
+
+{% set projectsEntry = craft.entries.section('aroundChicago').slug('projects').one() %}
+
+{% block content %}
+
+  <div class="page-main-content">
+
+    <div class="block wrap -extended card-grid-container">
+      <div class="featured-projects-wrap -full theme-dark">
+        {% if craft.entries.descendantOf(projectsEntry).relatedTo(entry).search('featured:1').all()|length %}
+          {% include "partials/_featured-projects" with { 'featuredProjects' : craft.entries.descendantOf(projectsEntry).relatedTo(entry).search('featured:1') } %}
+        {% endif %}
+      </div>
+    </div>
+
+    {% if entry.backgroundImage is not empty %}
+
+      <div class="background-image-block block top-overlap bottom-overlap">
+        {% set image = entry.backgroundImage.one() %}
+        {% set transformedImage = craft.imager.transformImage(image, { 
+          width: 1400,
+          ratio: 7/3,
+          position: image.getFocalPoint(),
+          effects: { modulate: [100, 0, 100], clut: 'gradient:#163B37-#E2E8EA' } 
+        }) %}
+        <div class="background-image">
+          <img src="{{ transformedImage.getUrl() }}" alt="{{ image.title }}">
+        </div>
+      </div>
+
+    {% endif %}
+
+    <div class="block wrap -extended float-grid">
+      
+      {% if craft.entries.descendantOf(projectsEntry).relatedTo(entry).all()|length %}
+      <div class="card theme-light">
+        <div class="card-header">
+          <h3 class="card-title">{{ entry.title }} Projects</h3>
+        </div>
+        <div class="card-links">
+          <ul>
+            {% for project in craft.entries.descendantOf(projectsEntry).relatedTo(entry).all() %}
+              <li><a href="{{ project.projectUrl }}" target="_blank">{{ project.title }}{{ project.communityProject == 1 ? '<svg class="icon icon-star"><use xlink:href="#icon-star"/></svg>' : '' }}<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg></a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+
+      {% if entry.mainContent is not empty %}
+      <div class="card theme-white">
+        <div class="card-header">
+          <h3 class="card-title">Ways to live green</h3>
+        </div>
+        <div class="card-content user-content">
+          {{ entry.mainContent }}
+        </div>
+        <p class="card-action"><a href="/get-involved/what-you-can-do-today">More ways to live green ></a></p>
+      </div>
+      {% endif %}      
+
+    </div>
+
+  </div>
+
+{% endblock %}

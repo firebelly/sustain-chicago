@@ -1,0 +1,5 @@
+{% if entry.type == 'generalPage' %}
+  {% include ["general/index.html"] %}
+{% else %}
+  {% include ["why-sustainibility/_types/_" ~ entry.type, "why-sustainibility/_types/_general"] %}
+{% endif %}

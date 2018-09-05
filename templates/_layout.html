@@ -5,8 +5,8 @@
   {% include '/partials/_head' %}
 
   <body class="{% if currentUser %}logged-in {% endif %}{% if bodyClass is defined %}{{ bodyClass }} {% endif %}{{ craft.app.request.getSegment(1) ? craft.app.request.getSegment(1) : 'page-home' }} {{ craft.app.request.getSegment(2) ? craft.app.request.getSegment(2) : '' }} {% block pageClass %}{% endblock %}"{% if bodyId is defined %} id="{{ bodyId }}"{% endif %}>
+    <a id="skip-to-content" href="#site-main">skip to main content</a>
     <div id="breakpoint-indicator"></div>
-    {{ adminbar({ sticky: false }) }}
 
       <header class="site-header" role="banner">
 
@@ -18,15 +18,16 @@
 
       </header>
 
-      {% include '/partials/_page-header' %}
+      <main id="site-main" class="site-main" role="main">
 
-      <main class="site-main" role="main">
+        {% include '/partials/_page-header' %}
 
-          {% block content %}{% endblock %}
+        {% block content %}{% endblock %}
 
-          {% if entry['pageBottomImage'] is defined and entry['pageBottomImage'] is not empty %}     
-            <div class="wrap">            
-              <div class="page-bottom-image background-image block">
+        {% if entry['pageBottomImage'] is defined and entry['pageBottomImage'] is not empty %}     
+          <div class="page-bottom-image block">
+            <div class="wrap">
+              <div class="background-image">
                 {% set image = entry.pageBottomImage.one() %}
                 {% set transformedImage = craft.imager.transformImage(image, { 
                   width: 1400,
@@ -36,19 +37,17 @@
                 }) %}
                 <img src="{{ transformedImage.getUrl() }}" alt="">
               </div>
-            </div>         
-          {% endif %}
-        
-          {% if entry['nextPageLink'] is defined and entry['nextPageLink'] is not empty %}
-            <div class="wrap">    
-              <div class="next-page-link-block block">
-                {% if entry['nextPageLinkIntro'] is defined and entry['nextPageLinkIntro'] is not empty %}
-                  <p>{{ entry.nextPageLinkIntro }}</p>
-                {% endif %}
-                <p class="next-page-link"><a href="{{ entry.nextPageLink.one().url }}">{{ entry.nextPageLink.one().title }} ></a></p>
-              </div>
             </div>
-          {% endif %}
+          </div>
+        {% endif %}
+
+        {% set whatYouCanDoToday = craft.entries.section('getInvolved').slug('what-you-can-do-today').one()%}
+        {% if entry is defined and entry.slug != whatYouCanDoToday.slug %}
+          <div class="next-page-link-block block wrap">
+            <p>Change starts at home.</p>
+            <p class="next-page-link"><a href="{{ whatYouCanDoToday.url }}">{{ whatYouCanDoToday.title }} ></a></p>
+          </div>
+        {% endif %}
 
       </main>
 

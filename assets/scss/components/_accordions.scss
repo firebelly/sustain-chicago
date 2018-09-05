@@ -3,6 +3,7 @@
 .accordion {
 
   .accordion-toggle {
+    cursor: pointer;
     position: relative;
     padding-right: 40px;
     @include hover-style;

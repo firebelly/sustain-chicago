@@ -37,8 +37,8 @@ form {
     height: 55px;
     appearance: none;
     border-radius: 5px;
-    background-color: color(white);
     padding: 12px #{$spacing * 2};
+    background-color: color(white);
 
     &:hover,
     &:focus,
@@ -53,6 +53,61 @@ form {
     border: none;
     outline: none;
     appearance: none;
+  }
+
+  .custom-select {
+    @include p1;
+    overflow: hidden;
+    border-radius: 5px;
+    position: relative;
+    display: inline-block;
+    @include transition(box-shadow);
+    
+    &:hover,
+    &:focus,
+    &:active {
+      outline: none;
+      box-shadow: 0 0 0 5px color(blue);
+    }
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+    }
+    &::before {
+      top: 0;
+      right: 0;
+      width: 55px;
+      height: 100%;
+      background: color(green-light);
+    }
+    &::after {
+      top: 50%;
+      right: 17px;
+      width: 20px;
+      height: 20px;
+      transform: rotate(90deg) translateX(-50%);
+      background-image: url('../svgs/icon-arrow-select.svg');
+      background-size: 20px 20px;
+    }
+
+    select {
+      width: 100%;
+      border: none;
+      height: 55px;
+      display: block;
+      cursor: pointer;
+      appearance: none;
+      background-color: color(white);
+      padding: 12px 100px 12px #{$spacing * 2};
+      &:hover,
+      &:focus,
+      &:active {
+        outline: none;
+      }
+    }
   }
 
   .form-cta {

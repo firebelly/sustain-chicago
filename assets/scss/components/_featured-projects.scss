@@ -1,0 +1,81 @@
+// Featured Projects
+
+.featured-projects {
+  margin: 0;
+  position: relative;
+
+  &:not(.-single) {
+    @include media-md {
+      display: flex;
+    }
+
+    .featured-project {
+
+      @include media-md {
+        max-width: 50%;
+        flex-basis: 50%;
+
+        &:first-of-type {
+          &::after {          
+            right: 0;
+            bottom: 0;
+            width: 1px;
+            content: '';
+            position: absolute;
+            top: #{$spacing * 2};
+            border-right: 1px solid;
+          }
+          &:hover {
+            &::after {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Cards with only 1 featured project
+  &.-single {
+    .split-container {
+      &:first-of-type {
+        padding-bottom: 20px;
+      }
+      &.-image {
+        margin-bottom: 0;
+        min-height: 320px;
+      }
+    }
+  }
+
+  .featured-project {
+    display: flex;
+    position: relative;
+    background-color: transparent;
+    padding: #{$spacing * 2} #{$spacing * 2} 0;
+
+    &:not(.-split) {
+      flex-direction: column;
+    }
+
+    .card-image {
+      margin-bottom: 0;
+    }
+  }
+}
+
+// Variations based on classes set on the parent wrapper
+.featured-projects-wrap {
+
+  // Full-width variation
+  // As seen on focus areas entires
+  &.-full {
+    .featured-project {
+      @include media-md {
+        .card-action {
+          margin-top: #{$spacing * 13};
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,27 @@
 // Common UI Components
 
+// Skip to content button
+#skip-to-content {
+  @include h4;
+  @extend .theme-light;
+  
+  top: 0;
+  left: 0;
+  height: 60px;
+  z-index: 1000;
+  position: fixed;
+  line-height: 60px;
+  display: inline-block;
+  padding: 0 #{$spacing * 2};
+  transform: translateX(-100%);
+
+  &:focus {
+    transform: none;
+  }
+}
+
+// Expand/contract plus/minus
+// Used for accordions
 .expand-contract {
   width: 20px;
   height: 20px;

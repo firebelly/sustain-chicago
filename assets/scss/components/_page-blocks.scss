@@ -1,5 +1,12 @@
 // Page Blocks
 
+.block {
+  &:not(.background-image-block, .page-bottom-image) {
+    z-index: 1;
+    position: relative;
+  }
+}
+
 // Page Section Titles
 .page-section {
   @include h2;
@@ -10,6 +17,16 @@
 .text-block {
   a {
     @extend .inline-link;
+  }
+
+  &.one-column {
+    @extend .column-primary;
+  }
+
+  &.two-column {
+    @include media-md {
+      columns: 2;
+    }
   }
 }
 
@@ -54,6 +71,10 @@
       padding-top: 0;
       padding-left: #{$spacing * 2};
       width: calc(#{columns(3)} - #{$spacing});
+    }
+
+    &.-last {
+      margin-bottom: -#{$spacing * 12};
     }
   }
 }
@@ -118,13 +139,14 @@
     .stat {
       right: 0;
       top: -1px;
+      width: 100%;
       position: absolute;
 
       > * {
         float: right;
       }
 
-      h5 {
+      .stat-figure {
         margin: 0;
         float: right;
         transform: none;
@@ -143,31 +165,30 @@
   }
 }
 
-// Background Image with Stat (As seen on the homepage)
-.background-image-with-stat  {
-  margin: 0;
+// Background Image Blocks, with and without stat
+.background-image-block  {
+  z-index: 0;
   position: relative;
-
-  + .block {
-    margin-top: #{$spacing * 4};
+  
+  @include max-screen($breakpoint-md) {
+    margin: #{$spacing * 4} 0;
   }
 
-  @include media-md {
-    margin-top: #{$spacing * 6};
-    padding-top: #{$spacing * 10};
-
-    + .block {
-      margin-top: -#{$spacing * 16};
+  // Variation with stat
+  &.with-stat {
+    @include media-md {
+      margin-top: #{$spacing * 6};
+      padding-top: #{$spacing * 10};
     }
-
   }
 
+  // Stat Styles
   .stat {
     margin: 0;
     padding: #{$spacing * 2} 0;
     background-color: color(blue-light);
     
-    h5 {
+    .stat-figure {
       @include type-stat;
       margin-bottom: #{$spacing * 2};
     }
@@ -190,18 +211,60 @@
       position: absolute;
       padding: #{$spacing * 2};
 
-      h5 {
+      .stat-figure {
         margin-bottom: 0;
       }
     }
   }
 }
 
-// The Background Image at the bottom of a page
+// Page-bottom image
 .page-bottom-image {
+  margin-top: #{$spacing * 4};
+
+  + .next-page-link-block {
+    margin-top: 0;
+  }
+
   @include media-md {
-    margin-top: -#{$spacing * 13};
-    margin-bottom: -#{$spacing * 8};
+    margin-bottom: -#{$spacing * 4};
+  }
+}
+
+// Stats block
+.stats {
+  margin-top: -#{$spacing * 2};
+
+  .stat {
+    margin: 0;
+    padding: 0;
+    margin-top: #{$spacing * 2};
+  }
+
+  .stat-figure {
+    @include h1;
+    margin-top: 0;
+    margin-bottom: #{($spacing * 2) - baseline('h1') - capline('p1')};
+  }
+
+  .stat-description {
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  @include media-md {
+    flex-wrap: wrap;
+    margin-top: -#{$spacing * 4};
+
+    .stat {
+      margin-top: #{$spacing * 4};
+      padding-right: #{$spacing * 4};
+    }
+
+    .stat-figure {
+      margin-bottom: #{($spacing * 2) - baseline('h1-medium') - capline('p1')};
+    }
   }
 }
 

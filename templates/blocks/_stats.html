@@ -1,0 +1,8 @@
+<div class="stats block grid{{ blockClass is defined ? ' ' ~ blockClass : '' }}">
+  {% for stat in block.stats.all() %}
+  <figure class="stat med-one-half">
+    <h5 class="stat-figure">{{ stat.statFigure }}</h5>
+    <figcaption class="stat-description">{{ stat.statDescription }}</figcaption>
+  </figure>
+  {% endfor %}
+</div>

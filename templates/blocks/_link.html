@@ -1,4 +1,4 @@
-<div class="link-block block">
+<div class="link-block block column-primary{{ blockClass is defined ? ' ' ~ blockClass : '' }}">
   {% if block.externalLink is not empty %}
     {% set linkUrl = block.externalLink %}
   {% else %}

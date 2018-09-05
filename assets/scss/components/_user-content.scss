@@ -10,4 +10,27 @@
   p {
     margin-bottom: 1em;
   }
+
+  // Custom UL styles
+  ul {
+    padding-left: 0;
+    list-style: none;
+
+    li {
+      &::before {
+        content: '';
+        width: 10px;
+        height: 10px;
+        border: 5px solid;
+        position: relative;
+        border-radius: 50%;
+        margin-right: .5em;
+        display: inline-block;
+      }
+    }
+
+    ul {
+      padding-left: #{$spacing * 4};
+    }
+  }
 }

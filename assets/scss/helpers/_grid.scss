@@ -42,6 +42,23 @@ $column-width: 100% / $columns;
   }
 }
 
+// Float Grid Alternative
+.float-grid {
+  width: 100%;
+  @include clearfix;
+
+  > * {
+    width: 100%;
+    float: none;
+  }
+
+  @include media-md {
+    > * {
+      float: left;
+    }
+  }
+}
+
 .grid-item {
   flex-basis: auto;
 }
@@ -98,6 +115,17 @@ $column-width: 100% / $columns;
   }
 }
 
+// Overlaps
+.top-overlap {
+  @include media-md {
+    margin-top: -#{$spacing * 12};
+  }
+}
+.bottom-overlap {
+  @include media-md {
+    margin-bottom: -#{$spacing * 12};
+  }
+}
 
 // This allows js to determine breakpoint
 #breakpoint-indicator {

@@ -1,0 +1,81 @@
+// Search Page Styles
+
+body.search {
+  
+  .page-main-content {
+    margin-top: #{$spacing * 4};
+
+    @include media-md {
+      width: columns(7);
+    }
+  }
+
+  .inline-search-headline {
+    @include h5;
+    margin-bottom: $spacing;
+  }
+
+}
+
+// Posts-per-page form
+#items-per-page {
+  margin-top: #{$spacing * 4};
+
+  label {
+    @include h5;
+    display: block;
+    margin-bottom: $spacing;
+  }
+}
+
+// Search Navigation
+.search-pagination {
+  @include h4;
+  padding: $spacing 0;
+  margin: #{$spacing * 4} 0 0;
+  border-top: 1px solid color(green-dark);
+  &.-top {
+    border-bottom: 1px solid color(green-dark);
+  }
+
+  a {
+    @include type-link;
+  }
+}
+
+.results-info {
+  @include h5;
+  margin: #{$spacing * 4} 0 #{$spacing * 3};
+}
+
+// Search Results
+.search-article {
+  margin-top: #{$spacing * 3};
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  .result-title {
+    margin: 0;
+    @include h3;
+  }
+
+  .result-excerpt {
+    margin: $spacing 0 0;
+  }
+
+  .result-url {
+    margin: $spacing 0 0;
+
+    a {
+      @extend .h4;
+      @extend .inline-link;
+    }
+  }
+}
+
+.no-results {
+  @include h4;
+  margin-top: #{$spacing * 4};
+}

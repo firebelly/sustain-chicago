@@ -32,16 +32,43 @@
 <div class="wrap clearfix">  
   <div class="page-header{{ entry['pageBanner'] is not defined or entry['pageBanner'] is empty ? ' no-pagebanner' : '' }}">
     <div class="-inner">
-      {% include 'partials/_breadcrumbs' %}
+      {% if entry is defined %}
+        {% include 'partials/_breadcrumbs' %}
+      {% elseif craft.app.request.getSegment(1) == 'search' %}
+        <h5 class="page-subheader">Search Results</h4>
+      {% endif %}
       <h1 class="page-title">
         {% if entry['alternateHeadline'] is defined and entry['alternateHeadline'] is not empty %}
          {{ entry.alternateHeadline|nl2br }}
-        {% else %}
+        {% elseif entry is defined %}
          {% block pageTitlePrefix %}{% endblock %}{{ entry.title }}
+        {% elseif craft.app.request.getSegment(1) == 'search' %}
+          {% set query = craft.app.request.getParam('q') %}
+          {% set results = craft.entries().search(query).orderBy('score') %}
+          {{ results|length }} result{{ results|length > 1 ? "s" : "" }} found for “{{ query }}”
         {% endif %}
       </h1>
       {% if entry['pageIntro'] is defined and entry['pageIntro'] is not empty %}
-        <div class="page-intro user-content">{{ entry.pageIntro }}</div>
+        <div class="page-intro user-content">
+          {{ entry.pageIntro.pageIntroText }}
+
+            {% for link in entry.pageIntro.pageIntroLink.all() %}
+              {% if link.type == 'internalLink' %}
+                {% set linkUrl = link.internalLink.url %}
+              {% elseif link.type == 'externalLink' %}
+                {% set linkUrl = link.externalLink %}
+              {% endif %}
+              <div class="link-block">
+                <p><a href="{{ linkUrl }}">{{ link.linkText }}</a></p>
+              </div>
+            {% endfor %}
+
+          {% if entry.type == 'focusArea' %}
+            <div class="link-block">
+              <p><a href="/around-chicago/our-goals/#{{ entry.slug }}">Our goals: {{ entry.title }}</a></p>
+            </div>
+          {% endif %}
+        </div>
       {% endif %}
     </div>
   </div>

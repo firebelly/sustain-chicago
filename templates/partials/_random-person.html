@@ -4,7 +4,7 @@
 {% if peopleEntries|length %}
   {% set person = random(peopleEntries) %}
   {% set personImage = craft.imager.transformImage(person.portrait.one(), { width: 600, position: person.portrait.one().getFocalPoint(), effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
-  <div class="card profile with-hover white -small one-half">
+  <div class="card profile with-hover theme-white -small one-half">
     <header class="card-header">
       <h4 class="card-tag">People</h4>
       <h3 class="card-title"><a href="{{ person.url }}">{{ person.title }}</a></h3>

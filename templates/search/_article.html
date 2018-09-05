@@ -1,7 +1,19 @@
-{# Skip over some single pages that don't make sense in search #}
+{% set isExternalResult = result.getSection() == 'External Search Results' %}
 
-  <article class="search-article">
-    <h3><a href="{{ entry.url }}">{{ entry.title }}</a></h3>
-    <p>Entry excerpt...</p>
-  </article>
+{% if isExternalResult %}
+  {% set resultUrl = result.externalUrl %}
+{% else %}
+    {% set resultUrl = result.url %}
+{% endif %}
 
+<article class="search-article">
+  <h3 class="result-title"><a class="inline-link" href="{{ resultUrl }}"{{ isExternalResult ? ' target="_blank"' : '' }}>{{ result.title }}</a></h3>
+  {% if result['pageDescription'] is defined and result['pageDescription'] is not empty %}
+    {% set excerpt = result.pageDescription|striptags|raw|slice(0, 175) ~ '...' %}
+    <p class="result-excerpt">{{ excerpt }}</p>
+  {% elseif result['pageIntro'] is defined and result['pageIntro'] is not empty %}
+    {% set excerpt = result.pageIntro.pageIntroText|striptags|raw|slice(0, 175) ~ '...' %}
+    <p class="result-excerpt">{{ excerpt }}</p>
+  {% endif %}
+  <p class="result-url"><a href="{{ resultUrl }}">{{ resultUrl }}</a></p>
+</article>

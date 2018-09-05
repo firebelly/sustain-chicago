@@ -1,0 +1,5 @@
+{% if entry.type == 'generalPage' %}
+  {% include ["general/index.html"] %}
+{% else %}
+  {% include ["get-involved/_types/_" ~ entry.type, "get-involved/_types/_general"] %}
+{% endif %}

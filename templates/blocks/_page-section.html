@@ -1,1 +1,1 @@
-<h4 id="{{ block.sectionHeading|lower|replace({' + ':'-',' ':'-'}) }}" class="page-section section column-primary" data-section-title="{{ block.sectionHeading }}">{{ block.sectionHeading }}</h4>
+<h4 id="{{ block.sectionHeading|lower|replace({' + ':'-',' ':'-'}) }}" class="page-section section block column-primary{{ blockClass is defined ? ' ' ~ blockClass : '' }}" data-section-title="{{ block.sectionHeading }}">{{ block.sectionHeading }}</h4>

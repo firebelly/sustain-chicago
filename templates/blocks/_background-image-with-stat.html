@@ -1,6 +1,6 @@
-<figure class="background-image-with-stat block">
+<figure class="background-image-block with-stat block{{ blockClass is defined ? ' ' ~ blockClass : '' }}">
   <figcaption class="stat">
-    <h5>{{ block.statFigure }}</h5>
+    <h5 class="stat-figure">{{ block.statFigure }}</h5>
     <div class="stat-description">{{ block.statDescription }}</div>
   </figcaption>
 
@@ -12,6 +12,6 @@
       position: image.getFocalPoint(),
       effects: { modulate: [100, 0, 100], clut: 'gradient:#163B37-#E2E8EA' }
     }) %}
-    <img src="{{ transformedImage.getUrl() }}" alt="">
+    <img src="{{ transformedImage.getUrl() }}" alt="{{ image.title }}">
   </div>
 </figure>

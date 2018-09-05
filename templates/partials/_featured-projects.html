@@ -1,0 +1,28 @@
+<div class="featured-projects{{ featuredProjects.all()|length == 1 ? ' -single' : '' }}">
+  {% for featuredProject in featuredProjects.limit(2).all() %}
+    {% set projectImage = craft.imager.transformImage(featuredProject.postImage.one(), { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
+    {% if featuredProjects.all()|length == 1 %}
+      <div id="{{ featuredProject.slug }}" class="featured-project card with-hover -full -small -split" data-image="{{ projectImage.getUrl() }}" data-project-url="{{ featuredProject.projectUrl }}" data-focus-area="{{ featuredProject.focusArea.one().title }}">
+        <div class="split-container">
+          <header class="card-header">
+            <h4 class="card-tag">Featured Project</h4>
+            <h3 class="card-title"><a href="{{ featuredProject.url }}" class="featured-project-toggle">{{ featuredProject.title }}</a></h3>
+          </header>
+          <p class="card-action"><a href="{{ featuredProject.url }}">Learn more ></a></p>
+          <div class="project-content sr-only">{{ featuredProject.mainContent }}</div>
+        </div>
+        <div class="split-container -image" style="background-image:url('{{ projectImage.getUrl() }}');"></div>
+      </div>
+    {% else %}
+      <div id="{{ featuredProject.slug }}" class="featured-project card with-hover -small" data-image="{{ projectImage.getUrl() }}" data-project-url="{{ featuredProject.projectUrl }}" data-focus-area="{{ featuredProject.focusArea.one().title }}">
+        <header class="card-header">
+          <h4 class="card-tag">Featured Project</h4>
+          <h3 class="card-title"><a href="{{ featuredProject.url }}" class="featured-project-toggle">{{ featuredProject.title }}</a></h3>
+        </header>
+        <p class="card-action"><a href="{{ featuredProject.url }}">Learn more ></a></p>
+        <div class="project-content sr-only">{{ featuredProject.mainContent }}</div>
+        <div class="card-image" style="background-image:url('{{ projectImage.getUrl() }}');"></div>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>

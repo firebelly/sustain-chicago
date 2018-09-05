@@ -2,15 +2,17 @@
 
 {% block content %}
     
-  <div class="page-main-content sticky-wrap wrap">
+  <div class="page-main-content wrap{{ entry['pageSectionNav'] is defined and entry['pageSectionNav'] == '1' ? ' sticky-wrap' : '' }}">
+    {% if entry['pageSectionNav'] is defined and entry['pageSectionNav'] == '1' %}    
     <div class="section-navigation-wrap">
       <div class="-inner">
         <nav class="section-navigation accordion"></nav>
       </div>
     </div>
+    {% endif %}
 
     <div class="content-padding">
-      {% include 'partials/_page-blocks.html' %}
+      {% include 'partials/_page-blocks.html' with { 'pageBlocks' : entry.pageBlocks } %}
     </div>
   </div>
 

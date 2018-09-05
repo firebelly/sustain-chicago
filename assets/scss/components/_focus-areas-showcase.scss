@@ -45,12 +45,12 @@
 
       &.-active {
 
-        &.dark {        
+        &[data-color="theme-dark"] {        
           color: color(green-light);
           background-color: color(green-dark);
         }
 
-        &.light {
+        &[data-color="theme-light"] {
           color: color(green-dark);
           background-color: color(green-light);
         }
@@ -124,49 +124,17 @@
       display: flex;
     }
 
-    .featured-projects {
+    .featured-projects-wrap {
+      padding-top: 0;
+      padding-bottom: 0;
       position: relative;
 
-      &::before {
-        left: 50%;
-        bottom: 0;
-        z-index: 1;
-        width: 1px;
-        content: '';
-        position: absolute;
-        top: #{$spacing * 2};
-        @include media-md {
-          display: none;
-        }
-      }
-
-      &.dark {
+      &.theme-dark {
         &::before {
           background-color: color(green-light);
         }
       }
-      &.light {
-        &::before {
-          background-color: color(green-dark);
-        }
-      }
-    }
-
-    .featured-project {
-      position: relative;
-
-      &:hover {
-        &::before {
-          opacity: 0;
-        }
-      }
-
-      &.dark {
-        &::before {
-          background-color: color(green-light);
-        }
-      }
-      &.light {
+      &.theme-light {
         &::before {
           background-color: color(green-dark);
         }
@@ -174,41 +142,50 @@
 
       &::before {
         top: 0;
-        left: 0;
-        z-index: 1;
-        opacity: 1;
         height: 1px;
         content: '';
         position: absolute;
+        left: #{$spacing * 2};
         right: #{$spacing * 2};
-        transform: translateY(-50%);
-        @include transition(opacity);
-      }
-
-      &:first-of-type {
-        &::before {
-          right: 0;
-          left: #{$spacing * 2};
-        }
       }
 
       @include media-md {
         &::before {
           left: 0;
+          z-index: 1;
           width: 1px;
           right: auto;
           height: auto;
-          bottom: 200px;
           top: #{$spacing * 2};
-          transform: translateX(-50%);
+          bottom: #{$spacing * 2};
         }
+      }
+    }
 
-        &:first-of-type {
+    .featured-projects {
+      margin: 0;
+      height: 100%;
+
+      @include media-md {      
+        &.-single {
           &::before {
-            left: 0;
-            right: auto;
-            bottom: #{$spacing * 2};
+            display: none;
           }
+        }
+      }
+    }
+
+    .featured-project {
+      position: relative;
+
+      &.dark {
+        &::before {
+          background-color: color(green-light);
+        }
+      }
+      &.light {
+        &::before {
+          background-color: color(green-dark);
         }
       }
     }

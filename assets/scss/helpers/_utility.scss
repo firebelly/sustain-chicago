@@ -15,6 +15,12 @@
   border: 0;
 }
 
+// Disable-scrolling
+.no-scroll {
+  overflow: hidden;
+}
+
+// Clearfix
 .clearfix,
 .cf {
   @include clearfix;

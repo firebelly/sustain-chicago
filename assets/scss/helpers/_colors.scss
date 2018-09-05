@@ -9,3 +9,21 @@
     background-color: $value;
   }
 }
+
+// Color Schemes
+.theme-dark {
+  fill: color(green-light);
+  color: color(green-light);
+  background-color: color(green-dark);
+  -webkit-font-smoothing: antialiased;
+}
+.theme-light {
+  fill: color(green-dark);
+  color: color(green-dark);
+  background-color: color(green-light);
+}
+.theme-white {
+  fill: color(green-dark);
+  color: color(green-dark);
+  background-color: color(white);
+}

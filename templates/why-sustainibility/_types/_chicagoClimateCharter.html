@@ -1,0 +1,135 @@
+{% extends (craft.app.request.isAjax and not craft.app.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
+
+{% set colors = ['theme-dark', 'theme-light', 'theme-white'] %}
+
+{% block content %}
+
+  <div class="page-main-content">
+
+    {% if entry.pageBlocks is not empty %}
+      <div class="wrap">
+        <div class="content-padding">
+          {% include 'partials/_page-blocks.html' with { 'pageBlocks' : entry.pageBlocks } %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if entry.people is not empty %}
+    <div class="block">
+      
+      <div class="wrap">
+        <h4 id="featured-guests" class="content-padding page-section column-primary">Featured Guests</h4>
+      </div>
+
+      <div class="wrap -extended grid">
+        
+        <div class="grid">
+        {% for person in entry.people.all() %}
+          {% set colorIndex = loop.index - 1 %}
+          {% if colorIndex > colors|length - 1 %} 
+            {% set colorIndex = colorIndex % colors|length %}
+          {% endif %}
+
+          {% set personImage = craft.imager.transformImage(person.portrait.one(), { width: 600,  position: person.portrait.one().getFocalPoint(), effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
+
+          <div class="card profile with-hover -small {{ colors[colorIndex] }} one-half med-one-fourth">
+            <header class="card-header">
+              <h3 class="card-title">{{ person.personName }}</h3>
+              <h4 class="card-tag">{{ person.personTitle }}</h4>
+            </header>
+            {% if person.socialMediaLinks is not empty %}
+            <p class="card-action social-links">
+              {% for socialMediaLinks in person.socialMediaLinks %}
+                <a href="{{ socialMediaLinks.facebookUrl }}"><svg class="icon icon-facebook"><use xlink:href="#icon-facebook" /></svg><span class="sr-only">Facebook</span></a> 
+                <a href="{{ socialMediaLinks.twitterUrl }}"><svg class="icon icon-twitter"><use xlink:href="#icon-twitter" /></svg><span class="sr-only">Twitter</span></a> 
+                <a href="{{ socialMediaLinks.instagramUrl }}"><svg class="icon icon-instagram"><use xlink:href="#icon-instagram" /></svg><span class="sr-only">Instagram</span></a>
+              {% endfor %}
+            </p>
+            {% endif %}
+            <div class="card-image" style="background-image:url('{{ personImage.getUrl() }}');"></div>
+          </div>
+        {% endfor %}
+        </div>
+
+      </div>
+
+    </div>
+    {% endif %}
+
+    {% if entry.globalCovenantOfMayors is not empty or entry.northAmericanClimateSummit is not empty %}
+    <div class="block">
+
+      <div class="wrap">
+        <h4 id="press-materials" class="content-padding page-section column-primary">Press Materials</h4>
+      </div>
+
+      <div class="wrap -extended">
+        
+        <div class="grid">
+
+          {% if entry.northAmericanClimateSummit is not empty %}
+          <div class="card theme-dark">
+            <div class="card-header">
+              <h3 class="card-title">North American Climate Summit</h3>
+            </div>
+            <div class="card-links">
+              <ul>              
+                {% for resource in entry.northAmericanClimateSummit.all() %}
+                  {% if resource.externalLink is not empty %}
+                    {% set resourceUrl = resource.externalLink %}
+                    {% set resourceType = 'link-out' %}
+                  {% elseif resource.externalResource is not empty %}
+                    {% set resourceUrl = resource.externalResource %}
+                    {% set resourceType = 'downloadable' %}
+                  {% elseif resource.internalResource is not empty %}
+                    {% set resourceUrl = resource.internalResource.one().url %}
+                    {% set resourceType = 'downloadable' %}
+                  {% endif %}
+                  <li><a href="{{ resourceUrl }}">{{ resource.linkText }}<svg class="icon icon-{{ resourceType }}"><use xlink:href="#icon-{{ resourceType }}"/></svg></a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          {% endif %}
+
+          {% if entry.globalCovenantOfMayors is not empty %}
+          <div class="card theme-light">
+            <div class="card-header">
+              <h3 class="card-title">Global Covenant of Mayors</h3>
+            </div>
+            <div class="card-links">
+              <ul>              
+                {% for resource in entry.globalCovenantOfMayors.all() %}
+                  {% if resource.externalLink is not empty %}
+                    {% set resourceUrl = resource.externalLink %}
+                    {% set resourceType = 'link-out' %}
+                  {% elseif resource.externalResource is not empty %}
+                    {% set resourceUrl = resource.externalResource %}
+                    {% set resourceType = 'downloadable' %}
+                  {% elseif resource.internalResource is not empty %}
+                    {% set resourceUrl = resource.internalResource.one().url %}
+                    {% set resourceType = 'downloadable' %}
+                  {% endif %}
+                  <li><a href="{{ resourceUrl }}">{{ resource.linkText }}<svg class="icon icon-{{ resourceType }}"><use xlink:href="#icon-{{ resourceType }}"/></svg></a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+          {% endif %}
+          
+        </div>
+
+      </div>
+
+    </div>
+    {% endif %}
+
+    {% if entry.imageWithQuote is not empty %}
+      <div class="wrap">
+        {% include 'blocks/_image-with-quote' with { 'block': entry.imageWithQuote.one(), 'blockClass': '-last' } %}
+      </div>
+    {% endif %}
+
+  </div>
+
+{% endblock %}

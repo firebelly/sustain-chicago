@@ -1,0 +1,146 @@
+// Project Modal
+
+$buttonHeightSm: 60px;
+$buttonHeightMd: 100px;
+$imageHeightSm: 200px;
+
+#project-modal {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: none;
+  position: fixed;
+
+  &::before {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    content: '';
+    position: absolute;
+    background-color: rgba(color(white), .7);
+  }
+
+  &.-active {
+    display: block;
+  }
+
+  .wrap {
+    height: 100%;
+  }
+
+  .modal-container {
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding-top: $buttonHeightSm;
+
+    @include media-md {
+      padding-top: 0;
+    }
+  }
+
+  // Modal content
+  .project-image {
+    height: $imageHeightSm;
+    background-size: cover;
+
+    @include media-md {
+      height: 0;
+      padding-bottom: 38.3333%;
+    }
+  }
+
+  .project-content {
+    height: calc(100% - #{$imageHeightSm + $buttonHeightSm});
+
+    .content-overflow {
+      overflow: auto;
+    }
+
+    .card-text {
+      margin-top: #{($spacing * 5) - capline('p1') - baseline('h3')};
+    }
+
+    @include media-md {
+      height: auto;
+      max-height: 100%;
+    }
+  }
+
+  // Button Styles
+  button {
+    @include hover-style;
+    border: none;
+    display: flex;
+    appearance: none;
+    width: $buttonHeightSm;
+    height: $buttonHeightSm;
+    background-color: color(green-light);
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      margin: auto;
+      fill: color(green-dark);
+    }
+
+    @include media-md {
+      width: $buttonHeightMd;
+      height: $buttonHeightMd;
+    }
+  }
+
+  // Close Button
+  .project-modal-close {
+    top: 0;
+    right: 0;
+    position: absolute;
+
+    @include media-md {
+      left: 100%;
+      right: auto;
+    }
+  }
+
+  // Nav
+  .project-modal-nav {
+    ul {
+      @extend .semantic-list;
+      display: flex;
+    }
+
+    // Prev/next buttons
+    .prev-project {
+      border-right: 1px solid color(white);
+
+      .icon {
+        transform: rotate(180deg);
+      }
+    }
+
+    @include media-md {
+      left: 100%;
+      position: absolute;
+      top: $buttonHeightMd;
+      border-top: 1px solid color(white);
+
+      ul {
+        flex-direction: column;
+      }
+
+      .prev-project {
+        order: 1;
+        border-right: none;
+        border-top: 1px solid color(white);
+      }
+      .next-project {
+        order: 0;
+      }
+    }
+  }
+}

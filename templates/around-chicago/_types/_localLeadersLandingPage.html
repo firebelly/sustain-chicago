@@ -1,11 +1,11 @@
 {% extends (craft.app.request.isAjax and not craft.app.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
 
-{% set colors = ['dark', 'light', 'white'] %}
+{% set colors = ['theme-dark', 'theme-light', 'theme-white'] %}
 
 {% block content %}
 
   {% if entry.children.all()|length %}
-    <div class="wrap -extended">
+    <div class="wrap -extended card-grid-container">
 
       <div class="grid">
       {% for person in entry.children.all() %}

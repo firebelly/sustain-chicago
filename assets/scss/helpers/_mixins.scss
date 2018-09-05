@@ -119,7 +119,6 @@
 
 // Hover State Mixin
 @mixin hover-style() {
-  cursor: pointer;
   position: relative;
   outline: 0 solid transparent;
   box-shadow: 0 0 0 0 transparent;

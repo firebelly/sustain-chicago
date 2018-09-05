@@ -104,6 +104,10 @@
     a {
       @extend .inline-link;
     }
+
+    + .card-action {
+      margin-top: $spacing;
+    }
   }
 
   &-description {
@@ -116,9 +120,7 @@
 
   &-links {
     ul, ol {
-      margin: 0;
-      padding: 0;
-      list-style: none;
+      @extend .semantic-list;
     }
 
     li {
@@ -193,11 +195,9 @@
   // Card Variations
   &.-small,
   .-small {
-
     .card-title {
       @include h3;
     }
-
   }
 
   &.stat {
@@ -207,11 +207,9 @@
     }
 
     &.-small {
-      
       .stat-figure {
         @include h2;
       }
-
     }
   }
 
@@ -265,87 +263,46 @@
     margin: #{$spacing * 2} 0 -#{$spacing * 2} -#{$spacing * 2};
   }
 
+  // Content placed at the bottom of a card
+  .card-bottom {
+
+    // Featured Projects
+    .featured-projects {
+      margin-top: #{$spacing * 2};
+
+      &::before {
+        top: 0;
+        z-index: 1;
+        height: 1px;
+        content: '';
+        position: absolute;
+        border-top: 1px solid;
+        left: #{$spacing * 2};
+        right: #{$spacing * 2};
+      }
+    }
+  }
+
   // Featured Projects
   .featured-projects {
-    display: flex;
-    position: relative;
     left: -#{$spacing * 2};
-    margin: #{$spacing * 2} 0 -#{$spacing * 2};
-    width: calc(100% + #{$spacing * 4});
-
-    &::before {
-      top: 0;
-      z-index: 1;
-      height: 1px;
-      content: '';
-      position: absolute;
-      border-top: 1px solid;
-      left: #{$spacing * 2};
-      right: #{$spacing * 2};
-    }
-
-    &:not(.-single) {    
-      .featured-project {
-        max-width: 50%;
-        flex-basis: 50%;
-
-        &:first-of-type {
-          &::after {          
-            right: 0;
-            bottom: 0;
-            width: 1px;
-            content: '';
-            position: absolute;
-            top: #{$spacing * 2};
-            border-right: 1px solid;
-          }
-          &:hover {
-            &::after {
-              display: none;
-            }
-          }
-        }
-      }
-    }
-
-    &.-single {
-      .split-container {
-        &:first-of-type {
-          padding-bottom: 20px;
-        }
-        &.-image {
-          margin-bottom: 0;
-        }
-      }
-    }
-
-    .featured-project {
-      display: flex;
-      position: relative;
-      padding: #{$spacing * 2} #{$spacing * 2} 0;
-
-      &:not(.-split) {
-        flex-direction: column;
-      }
-
-      .card-image {
-        margin-bottom: 0;
-      }
-    }
+    margin: 0 0 -#{$spacing * 2};
+    width: calc(100% + #{$spacing * 4});    
   }
 
   // Color Variations
-  &.dark {
-    @extend .color-green-light;
+  &.theme-dark {
+    @extend .theme-dark;
     outline: 0 solid transparent;
-    @extend .background-green-dark;
-    -webkit-font-smoothing: antialiased;
   }
 
-  &.light {
-    @extend .color-green-dark;
+  &.theme-light {
+    @extend .theme-light;
     outline: 0 solid transparent;
-    @extend .background-green-light;
+  }
+
+  &.theme-white {
+    @extend .theme-white;
   }
 
   // Hover State
@@ -359,4 +316,25 @@
     }
   }
 
+}
+
+// Stacked Cards
+.cards-stacked {
+  > .card {
+    margin-top: #{$spacing * 4};
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+
+  @include media-md {
+    margin-bottom: -#{$spacing * 12};
+  }
+}
+
+// Card grid container
+// used to add top-margin to grid container
+.card-grid-container {
+  // margin-top: #{$spacing * 8};
 }

@@ -1,6 +1,8 @@
 {% extends (craft.app.request.isAjax and not craft.app.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
 
-{% set colors = ['dark', 'light', 'white'] %}
+{% block pageClass %}project-modal{% endblock %}
+
+{% set colors = ['theme-dark', 'theme-light', 'theme-white'] %}
 
 {% set focusAreas = craft.entries.section('focusAreas').level(2).all() %}
 {% set projects = entry.children().all() %}
@@ -15,10 +17,10 @@
       </div>
     </div>
 
-    <div class="project-categories column-primary -left">
+    <div class="focus-areas cards-stacked card-grid-container column-primary -left">
 
-      {% for priority in focusAreas %}
-        {% set relatedProjects =  entry.children().relatedTo(priority).all() %}
+      {% for focusArea in focusAreas %}
+        {% set relatedProjects =  entry.children().relatedTo(focusArea).all() %}
 
         {% if relatedProjects|length %}
 
@@ -27,44 +29,21 @@
             {% set colorIndex = colorIndex % colors|length %}
           {% endif %}
 
-          <div id="{{ priority.slug }}" class="project-category section card -full {{ colors[colorIndex] }}" data-section-title="{{ priority.title }}">
-            <header class="card-header">
-              <h3 class="card-title">{{ priority.title }}</h3>
-            </header>
+          <div id="{{ focusArea.slug }}" class="project-category section card -full {{ colors[colorIndex] }}" data-section-title="{{ focusArea.title }}">
+            <div class="card-header">
+              <h3 class="card-title">{{ focusArea.title }}</h3>
+            </div>
             <div class="card-links">
-              <ul class="semantic-list">
+              <ul>
                 {% for project in relatedProjects %}
-                  <li><a href="{{ project.projectUrl }}" target="_blank">{{ project.title }}{{ project.communityProject == 1 ? '<svg class="icon icon-star"><use xlink:href="#icon-star"/></svg>' : '' }}<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg></a></li>
+                  <li id="{{ project.slug }}"><a href="{{ project.projectUrl }}" target="_blank">{{ project.title }}{{ project.communityProject == 1 ? '<svg class="icon icon-star"><use xlink:href="#icon-star"/></svg>' : '' }}<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg></a></li>
                 {% endfor %}
               </ul>
             </div>
-
-            {% if entry.children().relatedTo(priority).search('featured:1').all()|length %}
-              <div class="featured-projects{{ entry.children().relatedTo(priority).search('featured:1').all()|length == 1 ? ' -single' : '' }}">
-                {% for featuredProject in entry.children().relatedTo(priority).search('featured:1').limit(2).all() %}
-                  {% set projectImage = craft.imager.transformImage(featuredProject.postImage.one(), { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
-                  {% if entry.children().relatedTo(priority).search('featured:1').all()|length == 1 %}
-                    <div class="featured-project card with-hover -full -small -split {{ colors[colorIndex] }}">
-                      <div class="split-container">
-                        <header class="card-header">
-                          <h4 class="card-tag">Featured Project</h4>
-                          <h3 class="card-title"><a href="{{ featuredProject.url }}" class="featured-project-toggle">{{ featuredProject.title }}</a></h3>
-                        </header>
-                        <p class="card-action"><a href="{{ featuredProject.url }}">Learn more ></a></p>
-                      </div>
-                      <div class="split-container -image" style="background-image:url('{{ projectImage.getUrl() }}');"></div>
-                    </div>
-                  {% else %}
-                    <div class="featured-project card with-hover -small {{ colors[colorIndex] }}">
-                      <header class="card-header">
-                        <h4 class="card-tag">Featured Project</h4>
-                        <h3 class="card-title"><a href="{{ featuredProject.url }}" class="featured-project-toggle">{{ featuredProject.title }}</a></h3>
-                      </header>
-                      <p class="card-action"><a href="{{ featuredProject.url }}">Learn more ></a></p>
-                      <div class="card-image" style="background-image:url('{{ projectImage.getUrl() }}');"></div>
-                    </div>
-                  {% endif %}
-                {% endfor %}
+              
+            {% if entry.children().relatedTo(focusArea).search('featured:1').all()|length %}
+              <div class="card-bottom">
+              {% include "partials/_featured-projects" with { 'featuredProjects' : entry.children().relatedTo(focusArea).search('featured:1') } %}
               </div>
             {% endif %}
           </div>

@@ -19,14 +19,15 @@
     "rss": "https://craftcms.com/changelog.rss"
   },
   "require": {
-    "craftcms/cms": "3.0.22",
+    "craftcms/cms": "3.0.23",
     "vlucas/phpdotenv": "^2.4.0",
     "verbb/expanded-singles": "1.0.4",
     "wbrowar/adminbar": "3.1.6",
     "clubstudioltd/craft-asset-rev": "6.0.1",
     "craftcms/redactor": "2.1.6",
     "aelvan/imager": "v2.1.0",
-    "doublesecretagency/craft-cpcss": "2.1.0"
+    "doublesecretagency/craft-cpcss": "2.1.0",
+    "verbb/super-table": "dev-craft-3 as 2.0.8"
   },
   "autoload": {
     "psr-4": {

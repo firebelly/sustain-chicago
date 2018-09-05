@@ -142,8 +142,19 @@
     margin-bottom: #{$spacing * 3 - baseline('h1')};
   }
 
+  .page-subheader {
+    margin: 0;
+    @include h5;
+  }
+
   .page-intro {
     @extend .top-margin-paras;
+
+    .link-block {
+      p {
+        margin-top: 1em;
+      }
+    }
   }
 
   @include media-md {

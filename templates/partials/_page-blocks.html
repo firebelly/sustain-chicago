@@ -1,27 +1,36 @@
-{% for block in entry.pageBlocks.all() %}
+{% for block in pageBlocks.all() %}
+  {% if loop.index == pageBlocks.all()|length %}
+    {% set blockClass = '-last' %}
+  {% else %}
+    {% set blockClass = '' %}
+  {% endif %}
 
   {% if block.type == "pageSection" %}
-    {% include "blocks/_page-section" %}
+    {% include "blocks/_page-section" with { 'blockClass' : blockClass } %}
   {% endif %}
 
   {% if block.type == "textBlock" %}
-    {% include "blocks/_text-block" %}
+    {% include "blocks/_text-block" with { 'blockClass' : blockClass } %}
+  {% endif %}
+
+  {% if block.type == "stats" %}
+    {% include "blocks/_stats" with { 'blockClass' : blockClass } %}
   {% endif %}
 
   {% if block.type == "link" %}
-    {% include "blocks/_link" %}
+    {% include "blocks/_link" with { 'blockClass' : blockClass } %}
   {% endif %}
 
   {% if block.type == "image" %}
-    {% include "blocks/_image" %}
+    {% include "blocks/_image" with { 'blockClass' : blockClass } %}
   {% endif %}
 
   {% if block.type == "imageWithQuote" %}
-    {% include "blocks/_image-with-quote" %}
+    {% include "blocks/_image-with-quote" with { 'blockClass' : blockClass } %}
   {% endif %}
 
   {% if block.type == "imageWithStat" %}
-    {% include "blocks/_image-with-stat" %}
+    {% include "blocks/_image-with-stat" with { 'blockClass' : blockClass } %}
   {% endif %}
 
 {% endfor %}

@@ -1,7 +1,9 @@
 {% extends (craft.app.request.isAjax and not craft.app.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
 
-{% set focusAreasColors = ['dark', 'light'] %}
-{% set featuredPageColors = ['dark', 'light', 'white'] %}
+{% block pageClass %}project-modal{% endblock %}
+
+{% set focusAreasColors = ['theme-dark', 'theme-light'] %}
+{% set featuredPageColors = ['theme-dark', 'theme-light', 'theme-white'] %}
 {% set projectsEntry = craft.entries.section('aroundChicago').slug('projects').one() %}
 
 {% block content %}
@@ -26,7 +28,7 @@
           {% if colorIndex > focusAreasColors|length - 1 %} 
             {% set colorIndex = colorIndex % focusAreasColors|length %}
           {% endif %}
-          <li data-focus-area="#{{ focusArea.slug }}" class="{{ focusAreasColors[colorIndex] }} {{ loop.index == 1 ? ' -active' : '' }}">{{ focusArea.title }}</li>
+          <li data-focus-area="#{{ focusArea.slug }}" data-color="{{ focusAreasColors[colorIndex] }}" class="{{ loop.index == 1 ? ' -active' : '' }}">{{ focusArea.title }}</li>
         {% endfor %}
       </ul>
 
@@ -36,7 +38,7 @@
           {% if colorIndex > focusAreasColors|length - 1 %} 
             {% set colorIndex = colorIndex % focusAreasColors|length %}
           {% endif %}
-          <div class="focus-area grid{{ loop.index == 1 ? ' -active' : '' }}" id="{{ focusArea.slug }}">
+          <div class="focus-area grid {{ focusAreasColors[colorIndex] }}{{ loop.index == 1 ? ' -active' : '' }}" id="{{ focusArea.slug }}">
             <div class="focus-area-overfiew card with-hover {{ focusAreasColors[colorIndex] }}">
               <header class="card-header">
                 <h3 class="card-title"><a href="{{ focusArea.url }}" >{{ focusArea.title }}</a></h3>
@@ -55,34 +57,11 @@
                 {% set featuredProjects = relatedProjects.one() %}
               {% endif %}
 
-              <div class="featured-projects med-one-half grid {{ focusAreasColors[colorIndex] }}{{ featuredProjects.all()|length == 1 ? ' -single' : '' }}">
+              <div class="featured-projects-wrap card med-one-half {{ focusAreasColors[colorIndex] }}">
 
-                {% for featuredProject in featuredProjects.all() %}
-                    
-                  {% set projectImage = craft.imager.transformImage(featuredProject.postImage.one(), { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
-                  {% if featuredProjects|length == 1 %}
-                    <div class="featured-project card with-hover -full -small -split {{ focusAreasColors[colorIndex] }}">
-                      <div class="split-container">
-                        <header class="card-header">
-                          <h4 class="card-tag">Featured Project</h4>
-                          <h3 class="card-title"><a href="{{ featuredProject.url }}" class="featured-project-toggle">{{ featuredProject.title }}</a></h3>
-                        </header>
-                        <p class="card-action"><a href="{{ featuredProject.url }}">Learn more ></a></p>
-                      </div>
-                      <div class="split-container -image" style="background-image:url('{{ projectImage.getUrl() }}');"></div>
-                    </div>
-                  {% else %}
-                    <div class="featured-project card with-hover one-half -small {{ focusAreasColors[colorIndex] }}">
-                      <header class="card-header">
-                        <h4 class="card-tag">Featured Project</h4>
-                        <h3 class="card-title"><a href="{{ featuredProject.url }}" class="featured-project-toggle">{{ featuredProject.title }}</a></h3>
-                      </header>
-                      <p class="card-action"><a href="{{ featuredProject.url }}">Learn more ></a></p>
-                      <div class="card-image" style="background-image:url('{{ projectImage.getUrl() }}');"></div>
-                    </div>
-                  {% endif %}
-
-                {% endfor %}
+                {% if featuredProjects.all()|length %}
+                  {% include "partials/_featured-projects" with { 'featuredProjects' : featuredProjects } %}
+                {% endif %}
 
               </div>
 
@@ -97,7 +76,7 @@
   </div>
 
   {% if entry.homepageStats|length %}
-    <div class="wrap">
+    <div class="wrap bottom-overlap">
       {% include "blocks/_background-image-with-stat" with { 'block' : entry.homepageStats.one() } %}
     </div>
   {% endif %}
@@ -125,7 +104,7 @@
   {% endif %}
 
   {% if entry.homepageStats|length == 2 %}
-    <div class="wrap">
+    <div class="wrap bottom-overlap">
       {% include "blocks/_background-image-with-stat" with { 'block' : entry.homepageStats.nth(1) } %}
     </div>
   {% endif %}
@@ -139,7 +118,7 @@
         {% if craft.entries.descendantOf(projectsEntry).search('featured:1').all()|length %}
           {% set featuredProject = random(craft.entries.descendantOf(projectsEntry).search('featured:1').all()) %}
           {% set projectImage = craft.imager.transformImage(featuredProject.postImage.one(), { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
-          <div class="card profile with-hover light -small one-half">
+          <div class="card profile with-hover theme-light -small one-half">
             <header class="card-header">
               <h4 class="card-tag">Featured Project</h4>
               <h3 class="card-title"><a href="{{ featuredProject.url }}">{{ featuredProject.title }}</a></h3>
@@ -153,7 +132,7 @@
 
       </div>
       
-      <div class="card dark med-order-0">
+      <div class="card theme-dark med-order-0">
         <header class="card-header with-action">
           <h3 class="card-title -small">Latest</h3>
           <p class="header-action"><a href="https://twitter.com/{{ footerContent.twitterHandle }}">See all<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg></a></p>
