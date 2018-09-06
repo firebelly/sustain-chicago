@@ -150,7 +150,7 @@
         margin: 0;
         float: right;
         transform: none;
-        padding: 0 0 #{$spacing * 2} .01em;
+        padding: 0 0 #{$spacing * 2} #{$spacing * 2};
       }
 
       .stat-description {
