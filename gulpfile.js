@@ -40,7 +40,7 @@ var enabled = {
 // Smash CSS!
 gulp.task('styles', function() {
   return gulp.src([
-      'assets/scss/main.scss'
+      'web/assets/scss/main.scss'
     ])
     .pipe(gulpif(enabled.maps, sourcemaps.init()))
     .pipe(sass())
@@ -67,7 +67,7 @@ gulp.task('styles', function() {
 // Smash javascript!
 gulp.task('scripts', ['jshint'], function() {
   return gulp.src([
-      'assets/js/main.js'
+      'web/assets/js/main.js'
     ])
     .pipe(include())
     .pipe(concat('main.js'))
@@ -89,21 +89,11 @@ gulp.task('scripts', ['jshint'], function() {
 
 // Revision files for production assets
 gulp.task('rev', function() {
-  if (!enabled.rev) return;
-  return gulp.src(['web/assets/dist/**/*.{css,js,jpg,png,gif}'])
-    .pipe(revAll.revision())
-    .pipe(revdel())
+  return gulp.src(['web/assets/dist/**/*.css', 'web/assets/dist/**/*.js'])
+    .pipe(rev())
     .pipe(gulp.dest('web/assets/dist'))
-    .pipe(revAll.manifestFile())
+    .pipe(rev.manifest())
     .pipe(gulp.dest('web/assets/dist'));
-});
-
-// Copy various files/dirs to dist
-gulp.task('copy', function() {
-  gulp.src(['assets/js/modernizr.custom.js'])
-    .pipe(gulp.dest('web/assets/dist/js/'));
-  return gulp.src(['assets/images/*'])
-    .pipe(gulp.dest('web/assets/dist/images/'));
 });
 
 // Folders to watch for changes
@@ -114,9 +104,9 @@ gulp.task('watch', ['build'], function() {
     notify: true,
     open: false
   });
-  gulp.watch('assets/scss/**/*.scss', ['styles']);
-  gulp.watch('assets/js/**/*.js', ['scripts']);
-  gulp.watch('assets/svgs/**/*.svg', ['svgs']);
+  gulp.watch('web/assets/scss/**/*.scss', ['styles']);
+  gulp.watch('web/assets/js/**/*.js', ['scripts']);
+  gulp.watch('web/assets/svgs/**/*.svg', ['svgs']);
 });
 
 // `gulp jshint` - Lints configuration JSON and project JS.
@@ -134,17 +124,27 @@ gulp.task('clean', require('del').bind(null, ['web/assets/dist']));
 
 // `gulp build` - Run all the build tasks but don't clean up beforehand.
 gulp.task('build', function(callback) {
-  runSequence(
-    'clean',
-    ['copy', 'styles', 'scripts', 'svgs'],
-    'rev',
-    callback
-  );
+  if (argv.production) {
+    // production gulpin' (with file revisioning)
+    runSequence(
+      'clean',
+      ['styles','scripts','svgs'],
+      'rev',
+      callback
+    );
+  } else {
+    // dev gulpin'
+    runSequence(
+      'clean',
+      ['styles','scripts','svgs'],
+      callback
+    );
+  }
 });
 
 // SVGs to defs
 gulp.task('svgs', function() {
-  return gulp.src('assets/svgs/*.svg')
+  return gulp.src('web/assets/svgs/*.svg')
     .pipe(svgmin({
         plugins: [{
             removeViewBox: false
