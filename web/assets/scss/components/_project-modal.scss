@@ -21,7 +21,7 @@ $imageHeightSm: 200px;
     z-index: 0;
     content: '';
     position: absolute;
-    background-color: rgba(color(white), .9);
+    background-color: rgba(color(black), .85);
   }
 
   &.-active {
@@ -40,7 +40,8 @@ $imageHeightSm: 200px;
     padding-top: $buttonHeightSm;
 
     @include media-md {
-      padding-top: 0;
+      padding-top: $buttonHeightMd;
+      padding-bottom: #{$spacing * 4};
     }
   }
 
@@ -60,6 +61,21 @@ $imageHeightSm: 200px;
 
     .content-overflow {
       overflow: auto;
+      &::after {
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        content: '';
+        position: absolute;
+        pointer-events: none;
+        height: #{$spacing * 8};
+        background-image: linear-gradient(to top, rgba(color(white), 1), rgba(color(white), 1) 33%, rgba(color(white), 0));
+      }
+
+      > .-inner {      
+        position: relative;
+        padding-bottom: #{$spacing * 6};
+      }
     }
 
     .card-text {
@@ -104,6 +120,7 @@ $imageHeightSm: 200px;
     @include media-md {
       left: 100%;
       right: auto;
+      top: $buttonHeightMd;
     }
   }
 
@@ -112,6 +129,7 @@ $imageHeightSm: 200px;
     ul {
       @extend .semantic-list;
       display: flex;
+      justify-content: flex-end;
     }
 
     // Prev/next buttons
@@ -126,7 +144,8 @@ $imageHeightSm: 200px;
     @include media-md {
       left: 100%;
       position: absolute;
-      top: $buttonHeightMd;
+      width: $buttonHeightMd;
+      top: #{$buttonHeightMd * 2};
       border-top: 1px solid color(white);
 
       ul {
