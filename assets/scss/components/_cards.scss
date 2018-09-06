@@ -146,7 +146,6 @@
     a {
       width: 100%;
       @include h4;
-      @extend .inline-link;
       @include fontweight-bold;
     }
 
@@ -290,12 +289,18 @@
   // Color Variations
   &.theme-dark {
     @extend .theme-dark;
-    outline: 0 solid transparent;
+
+    &, .card {
+      outline: 0 solid transparent;
+    }
   }
 
   &.theme-light {
     @extend .theme-light;
-    outline: 0 solid transparent;
+
+    &, .card {
+      outline: 0 solid transparent;
+    }
   }
 
   &.theme-white {
@@ -303,14 +308,8 @@
   }
 
   // Hover State
-  &.with-hover {
+  &.-hover {
     @include hover-style;
-
-    a {
-      &::after {
-        display: none;
-      }
-    }
   }
 
 }
@@ -328,10 +327,4 @@
   @include media-md {
     margin-bottom: -#{$spacing * 12};
   }
-}
-
-// Card grid container
-// used to add top-margin to grid container
-.card-grid-container {
-  // margin-top: #{$spacing * 8};
 }
