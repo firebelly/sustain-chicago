@@ -308,10 +308,26 @@
   }
 
   // Hover State
+  &.with-hover {
+    @include transition(background, outline-width, color, box-shadow);
+
+    svg {
+      @include transition(fill);
+    }
+  }
   &.-hover {
     @include hover-style;
   }
 
+}
+
+// Setting the context for all -themed containers
+// that have cards to remove the card outline
+.theme-dark,
+.theme-light {
+  .card {
+    outline: 0 solid transparent;
+  }
 }
 
 // Stacked Cards
