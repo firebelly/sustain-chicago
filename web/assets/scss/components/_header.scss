@@ -112,6 +112,8 @@ body {
     @include h3;
     margin-bottom: 0;
     display: inline-block;
+    // Manual letter-spacing to align to subtitle
+    letter-spacing: .024em;
 
     a {
       color: color(white);
