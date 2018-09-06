@@ -85,35 +85,46 @@ body {
     }
   }
   
-  .site-title {
+  .site-headline {
     margin: 0;
     z-index: 11;
-    @include h3;
     @include smooth;
     position: relative;
     box-shadow: $box-shadow;
-    padding: 0 #{$spacing * 2};
-    line-height: $mainNavHeightSm;
+    height: $mainNavHeightSm;
     background-color: color(black);
+    padding: #{$spacing / 2} #{$spacing * 2};
+
+    @include media-md {
+      height: $mainNavHeightMd;
+      padding: #{$spacing * 2} #{$spacing * 10} #{$spacing * 2} #{$spacing * 12};
+    }
+    @include media-nav {
+      float: left;
+      box-shadow: none;
+      padding: #{$spacing * 2.5} 0;
+      background-color: transparent;
+      margin: 0 #{$spacing * 5} 0 #{$spacing * 2};
+    }
+  }
+
+  .site-title {
+    @include h3;
+    margin-bottom: 0;
+    display: inline-block;
 
     a {
       color: color(white);
       @extend .inline-link;
       text-decoration: none;
     }
+  }
 
-    @include media-md {
-      line-height: $mainNavHeightMd;
-      padding: 0 #{$spacing * 10} 0 #{$spacing * 12};
-    }
-
-    @include media-nav {
-      padding: 0;
-      float: left;
-      box-shadow: none;
-      background-color: transparent;
-      margin: 0 #{$spacing * 5} 0 #{$spacing * 2};
-    }
+  .site-subtitle {
+    margin: 0;
+    @include font-copy;
+    color: color(white);
+    @include paragraph-style(10, 10, .0694em, uppercase);
   }
 
   .nav-toggle {
