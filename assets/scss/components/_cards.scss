@@ -136,15 +136,6 @@
       vertical-align: top;
       @extend .inline-link;
       @include fontweight-bold;
-
-      .icon {
-        width: 20px;
-        height: 20px;
-        bottom: -2px;
-        fill: inherit;
-        position: relative;
-        margin-left: #{$spacing * 2};
-      }
     }
   }
 
@@ -157,12 +148,6 @@
       @include h4;
       @extend .inline-link;
       @include fontweight-bold;
-    }
-
-    .icon {
-      width: 20px;
-      height: 20px;
-      fill: inherit;
     }
 
     &.social-links {
@@ -189,6 +174,18 @@
           color: color(white);
         }
       }
+    }
+  }
+
+  &-links,
+  &-action {
+    .icon {
+      width: 20px;
+      height: 20px;
+      bottom: -2px;
+      fill: inherit;
+      position: relative;
+      margin-left: #{$spacing * 2};
     }
   }
 
