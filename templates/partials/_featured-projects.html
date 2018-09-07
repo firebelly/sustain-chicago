@@ -2,7 +2,7 @@
   {% for featuredProject in featuredProjects.limit(2).all() %}
     {% set projectImage = craft.imager.transformImage(featuredProject.postImage.one(), { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
     {% if featuredProjects.all()|length == 1 %}
-      <div id="{{ featuredProject.slug }}" class="featured-project card with-hover -full -small -split" data-image="{{ projectImage.getUrl() }}" data-project-url="{{ featuredProject.projectUrl }}" data-focus-area="{{ featuredProject.focusArea.one().title }}">
+      <div id="{{ featuredProject.slug }}" class="featured-project card with-hover alt-size -full -small -split" data-image="{{ projectImage.getUrl() }}" data-project-url="{{ featuredProject.projectUrl }}" data-focus-area="{{ featuredProject.focusArea.one().title }}">
         <div class="split-container">
           <header class="card-header">
             <h4 class="card-tag">Featured Project</h4>

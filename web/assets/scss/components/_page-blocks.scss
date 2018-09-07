@@ -36,8 +36,15 @@
     @include type-link;
     @extend .inline-link;
 
-    &::after {
+    &:not(.downloadable)::after {
       content: ' >';
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      fill: inherit;
+      margin-left: $spacing;
     }
   }
 }

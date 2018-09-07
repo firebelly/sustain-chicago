@@ -71,7 +71,11 @@
 
             {% for link in entry.pageIntro.pageIntroLink.all() %}
               {% if link.type == 'internalLink' %}
-                {% set linkUrl = link.internalLink.one().url %}
+                {% if link.anchorLink is not empty %}
+                  {% set linkUrl = link.internalLink.one().url ~ '/#' ~ link.anchorLink %}
+                {% else %}
+                  {% set linkUrl = link.internalLink.one().url %}
+                {% endif %}
               {% elseif link.type == 'externalLink' %}
                 {% set linkUrl = link.externalLink %}
               {% endif %}
@@ -80,11 +84,6 @@
               </div>
             {% endfor %}
 
-          {% if entry.type == 'focusArea' %}
-            <div class="link-block">
-              <p><a href="/around-chicago/our-goals/#{{ entry.slug }}">Our goals: {{ entry.title }}</a></p>
-            </div>
-          {% endif %}
         </div>
       {% endif %}
     </div>
