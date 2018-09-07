@@ -18,6 +18,34 @@
   </div>
   {% endif %}
 
+  {% if entry.featuredPages is not empty %}
+    <div class="wrap -extended">
+      <div class="block grid">
+      {% for page in entry.featuredPages.all() %}
+        {% set colorIndex = loop.index - 1 %}
+        {% if colorIndex > featuredPageColors|length - 1 %} 
+          {% set colorIndex = colorIndex % featuredPageColors|length %}
+        {% endif %}
+        <div class="card alt-size med-one-half lg-one-third with-hover {{ featuredPageColors[colorIndex] }}">
+          <header class="card-header">
+            <h3 class="card-title"><a href="{{ page.entry.one().url }}">{{ page.headline is not empty ? page.headline : page.entry.title }}</a></h3>
+          </header>
+          <div class="card-description">
+            <p>{{ page.description }}</p>
+          </div>
+          <p class="card-action"><a href="{{ page.entry.one().url }}">{{ page.linkText is not empty ? page.linkText : page.entry.one().title }} ></a></p>
+        </div>
+      {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  {% if entry.homepageStats|length %}
+    <div class="wrap bottom-overlap">
+      {% include "blocks/_background-image-with-stat" with { 'block' : entry.homepageStats.one() } %}
+    </div>
+  {% endif %}
+
   <div class="wrap -extended">
 
     <div class="focus-areas-showcase block">
@@ -57,7 +85,7 @@
                 {% set featuredProjects = relatedProjects.one() %}
               {% endif %}
 
-              <div class="featured-projects-wrap card med-one-half {{ focusAreasColors[colorIndex] }}">
+              <div class="featured-projects-wrap card alt-size med-one-half {{ focusAreasColors[colorIndex] }}">
 
                 {% if featuredProjects.all()|length %}
                   {% include "partials/_featured-projects" with { 'featuredProjects' : featuredProjects } %}
@@ -74,34 +102,6 @@
     </div>
 
   </div>
-
-  {% if entry.homepageStats|length %}
-    <div class="wrap bottom-overlap">
-      {% include "blocks/_background-image-with-stat" with { 'block' : entry.homepageStats.one() } %}
-    </div>
-  {% endif %}
-
-  {% if entry.featuredPages is not empty %}
-    <div class="wrap -extended">
-      <div class="block grid">
-      {% for page in entry.featuredPages.all() %}
-        {% set colorIndex = loop.index - 1 %}
-        {% if colorIndex > featuredPageColors|length - 1 %} 
-          {% set colorIndex = colorIndex % featuredPageColors|length %}
-        {% endif %}
-        <div class="card with-hover {{ featuredPageColors[colorIndex] }}">
-          <header class="card-header">
-            <h3 class="card-title"><a href="{{ page.entry.one().url }}">{{ page.headline is not empty ? page.headline : page.entry.title }}</a></h3>
-          </header>
-          <div class="card-description">
-            <p>{{ page.description }}</p>
-          </div>
-          <p class="card-action"><a href="{{ page.entry.one().url }}">{{ page.linkText is not empty ? page.linkText : page.entry.one().title }} ></a></p>
-        </div>
-      {% endfor %}
-      </div>
-    </div>
-  {% endif %}
 
   {% if entry.homepageStats|length == 2 %}
     <div class="wrap bottom-overlap">
