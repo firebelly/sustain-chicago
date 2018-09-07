@@ -67,6 +67,7 @@ body.page-home {
     }
 
     @include media-md {
+      margin-bottom: #{$spacing * 2};
       padding-bottom: #{$spacing * 7.5};
     }
   }

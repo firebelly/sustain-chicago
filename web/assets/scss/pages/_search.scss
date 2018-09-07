@@ -59,6 +59,13 @@ body.search {
   .result-title {
     margin: 0;
     @include h3;
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      fill: inherit;
+      margin-left: 10px;
+    }
   }
 
   .result-excerpt {

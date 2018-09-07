@@ -7,7 +7,7 @@
 {% endif %}
 
 <article class="search-article">
-  <h3 class="result-title"><a class="inline-link" href="{{ resultUrl }}"{{ isExternalResult ? ' target="_blank"' : '' }}>{{ result.title }}</a></h3>
+  <h3 class="result-title"><a class="inline-link" href="{{ resultUrl }}"{{ isExternalResult ? ' target="_blank"' : '' }}>{{ result.title }}{{ isExternalResult ? '<svg class="icon icon-link-out" aria-hidden="true" role="presentation"><use xlink:href="#icon-link-out"/></svg>' }}</a></h3>
   {% if result['pageDescription'] is defined and result['pageDescription'] is not empty %}
     {% set excerpt = result.pageDescription|striptags|raw|slice(0, 175) ~ '...' %}
     <p class="result-excerpt">{{ excerpt }}</p>

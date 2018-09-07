@@ -54,7 +54,7 @@
       <h1 class="page-title">
         {% if entry['alternateHeadline'] is defined and entry['alternateHeadline'] is not empty %}
          {{ entry.alternateHeadline|nl2br }}
-        {% elseif entry %}
+        {% elseif entry is defined %}
          {% block pageTitlePrefix %}{% endblock %}{{ entry.title }}
         {% elseif craft.app.request.getSegment(1) == 'search' %}
           {% set query = craft.app.request.getParam('q') %}

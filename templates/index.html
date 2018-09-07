@@ -26,7 +26,7 @@
         {% if colorIndex > featuredPageColors|length - 1 %} 
           {% set colorIndex = colorIndex % featuredPageColors|length %}
         {% endif %}
-        <div class="card alt-size med-one-half lg-one-third with-hover {{ featuredPageColors[colorIndex] }}">
+        <div class="card alt-size -small med-one-half lg-one-third with-hover {{ featuredPageColors[colorIndex] }}">
           <header class="card-header">
             <h3 class="card-title"><a href="{{ page.entry.one().url }}">{{ page.headline is not empty ? page.headline : page.entry.title }}</a></h3>
           </header>

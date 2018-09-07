@@ -145,11 +145,7 @@ $capline: (
 
 @mixin h2 {
   @include font-display;
-  @include paragraph-style(30, 30, .0133em, uppercase);
-
-  @include media-md {
-    @include paragraph-style(50, 40, .0104em, uppercase);
-  }
+  @include paragraph-style(50, 40, .0104em, uppercase);
 }
 
 @mixin h3 {
