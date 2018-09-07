@@ -6,7 +6,6 @@
   right: 0;
   z-index: 2;
   position: absolute;
-  // padding: 0 #{$spacing * 2};
 
   &.stuck {
     z-index: 5;
@@ -113,7 +112,7 @@
   position: relative;
   padding-top: #{$spacing * 12};
 
-  @include media-md {
+  @include media-nav {
     padding-top: 0;
   }
 }

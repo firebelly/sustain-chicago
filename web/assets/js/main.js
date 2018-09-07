@@ -279,10 +279,10 @@ var SC = (function($) {
 
         // If it's already stuck and scroll is above the element, un-stick it
         } else if (wrapIsStuck && scrollPos < stickyWrapTop) {
+          $element.removeClass('stuck').css('top', '0');
           if (breakpoint_lg) {
             $element.removeClass('stuck').css('top', 'auto');
           } else {
-            $element.removeClass('stuck').css('top', '0');
           }
 
         // If it's stuck and scroll is past the bottom of the sticky wrap, stick it to the bottom of the wrap
