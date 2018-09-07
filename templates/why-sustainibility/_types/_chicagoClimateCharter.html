@@ -32,7 +32,7 @@
 
           {% set personImage = craft.imager.transformImage(person.portrait.one(), { width: 600,  position: person.portrait.one().getFocalPoint(), effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
 
-          <div class="card profile with-hover -small {{ colors[colorIndex] }} alt-size med-one-fourth">
+          <div class="card profile -small {{ colors[colorIndex] }} alt-size med-one-fourth">
             <header class="card-header">
               <h3 class="card-title">{{ person.personName }}</h3>
               <h4 class="card-tag">{{ person.personTitle }}</h4>

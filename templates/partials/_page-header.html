@@ -71,12 +71,12 @@
 
             {% for link in entry.pageIntro.pageIntroLink.all() %}
               {% if link.type == 'internalLink' %}
-                {% set linkUrl = link.internalLink.url %}
+                {% set linkUrl = link.internalLink.one().url %}
               {% elseif link.type == 'externalLink' %}
                 {% set linkUrl = link.externalLink %}
               {% endif %}
               <div class="link-block">
-                <p><a href="{{ linkUrl }}">{{ link.linkText }}</a></p>
+                <p><a href="{{ linkUrl }}"{{ link.type == 'externalLink' ? ' target="_blank"' : '' }}>{{ link.linkText }}</a></p>
               </div>
             {% endfor %}
 

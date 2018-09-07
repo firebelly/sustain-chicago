@@ -150,27 +150,23 @@
     }
 
     &.social-links {
+
       a {
-        width: 20px;
-        height: 20px;
+        width: auto;
+        line-height: 20px;
         display: inline-block;
         margin-left: #{$spacing * 2};
-        outline: 5px solid transparent;
-        @include transition(background-color, outline);
+        background-color: transparent;
+        @include hover-style;
         &:first-of-type {
           margin-left: 0;
         }
 
         .icon {
+          margin: 0;
+          width: 20px;
+          height: 20px;
           vertical-align: top;
-          @include transition(fill);
-        }
-
-        &:hover,
-        &:focus,
-        &:active {
-          fill: color(white);
-          color: color(white);
         }
       }
     }
