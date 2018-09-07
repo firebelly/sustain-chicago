@@ -29,7 +29,7 @@
 
         {% if entry['pageBottomImage'] is defined and entry['pageBottomImage'] is not empty %}     
           <div class="page-bottom-image block">
-            <div class="wrap">
+            <div class="wrap -extended">
               <div class="background-image">
                 {% set image = entry.pageBottomImage.one() %}
                 {% set transformedImage = craft.imager.transformImage(image, { 

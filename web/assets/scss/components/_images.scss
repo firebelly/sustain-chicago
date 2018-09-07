@@ -4,8 +4,6 @@
   z-index: 0;
   overflow: hidden;
   position: relative;
-  margin-left: -#{$spacing * 2};
-  width: calc(100% + #{$spacing * 4});
 
   @include media-md {
     margin-left: -#{$spacing * 10};
