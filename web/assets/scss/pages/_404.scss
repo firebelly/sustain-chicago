@@ -1,0 +1,9 @@
+// 404 Page
+
+body#fourohfour-page {
+  .page-main-content {
+    .block {
+      margin-top: #{$spacing * 4};
+    }
+  } 
+}

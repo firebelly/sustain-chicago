@@ -47,17 +47,22 @@
       {% if entry is defined %}
         {% include 'partials/_breadcrumbs' %}
       {% elseif craft.app.request.getSegment(1) == 'search' %}
-        <h5 class="page-subheader">Search Results</h4>
+        <h4 class="page-subheader">Search Results</h4>
+      {% elseif not entry %}
+        <h4 class="page-subheader">Error 404</h4>
       {% endif %}
       <h1 class="page-title">
         {% if entry['alternateHeadline'] is defined and entry['alternateHeadline'] is not empty %}
          {{ entry.alternateHeadline|nl2br }}
-        {% elseif entry is defined %}
+        {% elseif entry %}
          {% block pageTitlePrefix %}{% endblock %}{{ entry.title }}
         {% elseif craft.app.request.getSegment(1) == 'search' %}
           {% set query = craft.app.request.getParam('q') %}
           {% set results = craft.entries().search(query).orderBy('score') %}
           {{ results|length }} result{{ results|length > 1 ? "s" : "" }} found for “{{ query }}”
+        {% elseif not entry %}
+          {# 404 page #}
+          We're Sorry!
         {% endif %}
       </h1>
       {% if entry['pageIntro'] is defined and entry['pageIntro'] is not empty %}

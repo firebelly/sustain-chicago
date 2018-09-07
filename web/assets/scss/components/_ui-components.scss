@@ -87,13 +87,10 @@
 .action-dropdown {
   z-index: 2;
   position: relative;
-  padding: #{$spacing * 2};
-  background-color: color(green-light);
 
   @include media-md {
     display: flex;
     align-items: flex-start;
-    padding-bottom: #{$spacing * 7.5};
   }
 
   .action-dropdown-label {

@@ -59,9 +59,15 @@ body.page-home {
   }
 
   .action-dropdown {
+    padding: #{$spacing * 2};
+    background-color: color(green-light);
 
     @include max-screen($breakpoint-md) {
       margin-bottom: #{$spacing * 8};
+    }
+
+    @include media-md {
+      padding-bottom: #{$spacing * 7.5};
     }
   }
 }

@@ -1,7 +1,7 @@
 <div class="action-dropdown">
-  {% for block in entry.actionDropdown.type('dropdownLabel').limit(1).all() %}
-    <h4 class="action-dropdown-label">{{ block.label }}</h4>
-  {% endfor %}
+  {% if entry and quickActions.actionDropdown.dropdownLabel is not empty %}
+    <h4 class="action-dropdown-label">{{ quickActions.actionDropdown.dropdownLabel }}</h4>
+  {% endif %}
 
   <div class="action-dropdown-container">
     <div class="action-dropdown-toggle" data-active-toggle=".action-dropdown-container">
@@ -10,8 +10,8 @@
     </div>
 
     <ul class="dropdown-actions">
-      {% for block in entry.actionDropdown.type('dropdownActions').limit(null).all() %}
-      <li><a href="{{ block.internalLink is not empty ? block.internalLink.one().url : block.externalLink }}"{{ block.internalLink is empty ? ' target="_blank"' : '' }}>{{ block.actionLabel }}{{ block.internalLink is empty ? ' <svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg>' : '' }}</a></li>
+      {% for action in quickActions.actionDropdown.dropdownActions.all() %}
+      <li><a href="{{ action.internalLink is not empty ? action.internalLink.one().url : action.externalLink }}"{{ action.internalLink is empty ? ' target="_blank"' : '' }}>{{ action.actionLabel }}{{ action.internalLink is empty ? ' <svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg>' : '' }}</a></li>
       {% endfor %}
     </ul>
   </div>
