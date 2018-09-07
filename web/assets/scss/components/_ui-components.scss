@@ -72,6 +72,11 @@
     transform: scaleX(0) translateY(-50%);
   }
 
+  .icon {
+    fill: inherit;
+    @include transition(fill);
+  }
+
   &:hover,
   &:focus {
     fill: color(white)!important;

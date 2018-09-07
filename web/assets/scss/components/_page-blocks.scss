@@ -35,6 +35,7 @@
   a {
     @include type-link;
     @extend .inline-link;
+    fill: color(green-dark);
 
     &:not(.downloadable)::after {
       content: ' >';
@@ -43,7 +44,6 @@
     .icon {
       width: 20px;
       height: 20px;
-      fill: inherit;
       margin-left: $spacing;
     }
   }
