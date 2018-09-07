@@ -1,6 +1,6 @@
 {% extends (craft.app.request.isAjax and not craft.app.request.isLivePreview) ? "_ajax-layout" : "_layout" %}
 
-{% set personImage = craft.imager.transformImage(entry.portrait.one(), { width: 1000, ratio: 11/5, position: entry.portrait.one().getFocalPoint(), effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
+{% set personImage = craft.imager.transformImage(entry.portrait.one(), { width: 1000, ratio: 3/2, position: entry.portrait.one().getFocalPoint(), effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
 
 {% block pageClass %} page-single-person{% endblock %}
 {% block pageTitlePrefix %}Meet {% endblock %}
