@@ -17,14 +17,17 @@
     list-style: none;
 
     li {
+      padding-left: 1em;
+      position: relative;
       &::before {
+        left: 0;
+        top: .55em;
         content: '';
         width: 10px;
         height: 10px;
         border: 5px solid;
-        position: relative;
+        position: absolute;
         border-radius: 50%;
-        margin-right: .5em;
         display: inline-block;
       }
     }
