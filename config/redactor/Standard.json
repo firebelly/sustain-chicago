@@ -3,6 +3,7 @@
   "plugins": ["fullscreen"],
   "linkNewTab": true,
   "formatting": ["p"],
+  "imagePosition": true,
   "formattingAdd": {
     "headline": {
       "title": "Headline",

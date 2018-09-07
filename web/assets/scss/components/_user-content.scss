@@ -36,4 +36,20 @@
       padding-left: #{$spacing * 4};
     }
   }
+
+  figure {
+    padding: 0;
+    margin-left: 0;
+  }
+
+  .icon-figure {
+    top: 3px;
+    float: left;
+    height: 20px;
+    position: relative;
+    margin: 1em 10px 0 0!important;
+    img {
+      height: 20px;
+    }
+  }
 }
