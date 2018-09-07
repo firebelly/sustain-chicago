@@ -41,7 +41,7 @@
   {% endif %}
 
   {% if entry.homepageStats|length %}
-    <div class="wrap bottom-overlap">
+    <div class="bottom-overlap">
       {% include "blocks/_background-image-with-stat" with { 'block' : entry.homepageStats.one() } %}
     </div>
   {% endif %}
@@ -104,7 +104,7 @@
   </div>
 
   {% if entry.homepageStats|length == 2 %}
-    <div class="wrap bottom-overlap">
+    <div class="bottom-overlap">
       {% include "blocks/_background-image-with-stat" with { 'block' : entry.homepageStats.nth(1) } %}
     </div>
   {% endif %}

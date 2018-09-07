@@ -18,7 +18,7 @@
 
     {% if entry.backgroundImage is not empty %}
 
-      <div class="background-image-block block top-overlap bottom-overlap">
+      <div class="background-image-block block wrap -extended top-overlap bottom-overlap">
         {% set image = entry.backgroundImage.one() %}
         {% set transformedImage = craft.imager.transformImage(image, { 
           width: 1400,

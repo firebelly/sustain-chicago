@@ -185,7 +185,7 @@
   // Stat Styles
   .stat {
     margin: 0;
-    padding: #{$spacing * 2} 0;
+    padding: #{$spacing * 2};
     background-color: color(blue-light);
     
     .stat-figure {
@@ -205,11 +205,11 @@
 
     @include media-md {
       top: 0;
-      right: 0;
       z-index: 1;
-      width: 50%;
       position: absolute;
+      right: #{$spacing * 10};
       padding: #{$spacing * 2};
+      width: calc(50% - #{$spacing * 10});
 
       .stat-figure {
         margin-bottom: 0;
