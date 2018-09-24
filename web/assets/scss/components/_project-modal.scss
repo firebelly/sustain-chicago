@@ -60,7 +60,8 @@ $imageHeightSm: 200px;
     height: calc(100% - #{$imageHeightSm + $buttonHeightSm});
 
     .content-overflow {
-      overflow: auto;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
       &::after {
         left: 0;
         bottom: 0;
