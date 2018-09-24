@@ -17,6 +17,7 @@
 
 // Disable-scrolling
 .no-scroll {
+  position: fixed;
   overflow: hidden;
 }
 

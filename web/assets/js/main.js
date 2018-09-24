@@ -126,6 +126,20 @@ var SC = (function($) {
     }
   }
 
+  function _disableScroll() {
+    var st = $(window).scrollTop();
+    $body.attr('data-st', st);
+    $body.addClass('no-scroll');
+    $body.css('top', -st);
+  }
+
+  function _enableScroll() {
+    $body.removeClass('no-scroll');
+    $body.css('top', '');
+    $(window).scrollTop($body.attr('data-st'));
+    $body.attr('data-st', '');
+  }
+
   function _initSmoothScroll() {
     $(document).on('click', '.smooth-scroll', function(e) {
       e.preventDefault();
@@ -560,12 +574,15 @@ var SC = (function($) {
 
   function _openProjectModal($project) {
     _populateProjectModal($project);
-    $body.addClass('modal-open no-scroll');
+    $body.addClass('modal-open');
+    _disableScroll();
     $('#project-modal').addClass('-active');
   }
 
   function _closeProjectModal() {
-    $body.removeClass('modal-open no-scroll');
+    var st = $(window).scrollTop();
+    $body.removeClass('modal-open');
+    _enableScroll();
     $('#project-modal').removeClass('-active');
   }
 
