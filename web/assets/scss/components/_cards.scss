@@ -47,7 +47,7 @@
       a {
         @include h4;
         color: inherit;
-        line-height: 1;
+        line-height: 1.2;
         @extend .inline-link;
         @include fontweight-bold;
       }
@@ -313,6 +313,11 @@
   }
   &.-hover {
     @include hover-style;
+  }
+  &:not(.with-hover) {
+    .card-action a {
+      @extend .inline-link;
+    }
   }
 
 }

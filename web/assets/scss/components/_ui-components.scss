@@ -55,36 +55,20 @@
 // Inline link styles
 .inline-link {
   z-index: 1;
+  display: inline;
   position: relative;
-  display: inline-block;
-  @include transition(color);
-  &::before {
-    top: 50%;
-    z-index: -1;
-    content: '';
-    left: -.25em;
-    right: -.2em;
-    height: 1.5em;
-    position: absolute;
-    transform-origin: left;
-    background-color: color(blue);
-    @include transition(transform);
-    transform: scaleX(0) translateY(-50%);
-  }
+  background-color: rgba(color(blue),0);
 
   .icon {
     fill: inherit;
-    @include transition(fill);
   }
 
   &:hover,
   &:focus {
     fill: color(white)!important;
     color: color(white)!important;
-
-    &::before {
-      transform: scaleX(1) translateY(-50%);
-    }
+    background-color: rgba(color(blue),1);
+    box-shadow: .2em .1em 0 rgba(color(blue),1), -.2em .1em 0 rgba(color(blue),1), -.2em 0 0 rgba(color(blue),1), .2em 0 0 rgba(color(blue),1);
   }
 }
 
