@@ -161,7 +161,7 @@ $capline: (
   @include paragraph-style(30, 30, .0133em, uppercase);
 
   @include media-md {
-    @include paragraph-style(18, 30, .0694em, uppercase);
+    @include paragraph-style(18, 18, .0694em, uppercase);
   }
 
   @include media-lg {
