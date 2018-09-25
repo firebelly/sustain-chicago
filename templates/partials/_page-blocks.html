@@ -25,6 +25,10 @@
     {% include "blocks/_image" with { 'blockClass' : blockClass } %}
   {% endif %}
 
+  {% if block.type == "backgroundImage" %}
+    {% include "blocks/_background-image" with { 'blockClass' : blockClass } %}
+  {% endif %}
+
   {% if block.type == "imageWithQuote" %}
     {% include "blocks/_image-with-quote" with { 'blockClass' : blockClass } %}
   {% endif %}

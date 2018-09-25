@@ -1,0 +1,11 @@
+// Page-specific styles
+
+body.chicago-climate-charter {
+  .page-bottom-image {
+    margin-top: -#{$spacing * 4};
+
+    @include media-md {
+      margin-top: -#{$spacing * 18};
+    }
+  }
+}

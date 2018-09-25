@@ -79,10 +79,6 @@
       padding-left: #{$spacing * 2};
       width: calc(#{columns(3)} - #{$spacing});
     }
-
-    &.-last {
-      margin-bottom: -#{$spacing * 12};
-    }
   }
 }
 
@@ -166,6 +162,7 @@
         padding-top: 0;
         text-align: left;
         padding-left: #{$spacing * 2};
+        background-color: color(blue-light);
         width: calc(#{columns(3)} - #{$spacing});
       }
     }
@@ -176,13 +173,23 @@
 .background-image-block  {
   z-index: 0;
   position: relative;
-  
-  @include max-screen($breakpoint-md) {
-    margin: #{$spacing * 4} 0;
+
+  &:not(.with-stat) {
+    width: calc(100% + #{$spacing * 4});
+    margin: -#{$spacing * 8} 0 -#{$spacing * 8} -#{$spacing * 2};
+
+    @include media-md {
+      margin-top: -#{$spacing * 12};
+      margin-bottom: -#{$spacing * 12};
+    }
   }
 
   // Variation with stat
   &.with-stat {
+    @include max-screen($breakpoint-md) {
+      margin: #{$spacing * 4} 0;
+    }
+
     @include media-md {
       margin-top: #{$spacing * 6};
       padding-top: #{$spacing * 10};
@@ -202,6 +209,7 @@
 
     .stat-description {
       @include p2;
+
       p {
         margin: 0;
       }
