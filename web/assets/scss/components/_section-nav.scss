@@ -11,6 +11,11 @@
     z-index: 5;
     width: 100%;
     position: fixed;
+    pointer-events: none;
+
+    .section-navigation {
+      pointer-events: auto;
+    }
   }
   &.bottom-stuck {
     top: auto;
