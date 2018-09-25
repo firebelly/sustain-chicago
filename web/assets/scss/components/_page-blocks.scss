@@ -179,8 +179,12 @@
     margin: -#{$spacing * 8} 0 -#{$spacing * 8} -#{$spacing * 2};
 
     @include media-md {
-      margin-top: -#{$spacing * 12};
-      margin-bottom: -#{$spacing * 12};
+      margin-top: -#{$spacing * 16};
+      margin-bottom: -#{$spacing * 16};
+
+      &.-last {
+        margin-bottom: -#{$spacing * 12};
+      }
     }
   }
 
