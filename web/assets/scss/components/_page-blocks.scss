@@ -66,6 +66,10 @@
     padding-top: $spacing;
   }
 
+  + .background-image-block:not(.with-stat) {
+    margin-top: -#{$spacing * 8};
+  }
+
   @include media-md {
     @include clearfix();
 
@@ -78,6 +82,10 @@
       padding-top: 0;
       padding-left: #{$spacing * 2};
       width: calc(#{columns(3)} - #{$spacing});
+    }
+
+    + .background-image-block:not(.with-stat) {
+      margin-top: -#{$spacing * 16};
     }
   }
 }
@@ -176,11 +184,15 @@
 
   &:not(.with-stat) {
     width: calc(100% + #{$spacing * 4});
-    margin: -#{$spacing * 8} 0 -#{$spacing * 8} -#{$spacing * 2};
+    margin: 0 0 0 -#{$spacing * 2};
+
+    &.-last {
+      margin-bottom: -#{$spacing * 12};
+    }
 
     @include media-md {
-      margin-top: -#{$spacing * 16};
-      margin-bottom: -#{$spacing * 16};
+      margin-top: -#{$spacing * 12};
+      margin-bottom: -#{$spacing * 12};
 
       &.-last {
         margin-bottom: -#{$spacing * 12};
@@ -203,8 +215,8 @@
   // Stat Styles
   .stat {
     margin: 0;
-    padding: #{$spacing * 2};
     background-color: color(blue-light);
+    padding: 0 #{$spacing * 2} #{$spacing * 2};
     
     .stat-figure {
       @include type-stat;
@@ -227,7 +239,6 @@
       z-index: 1;
       position: absolute;
       right: #{$spacing * 10};
-      padding: #{$spacing * 2};
       width: calc(50% - #{$spacing * 10});
 
       .stat-figure {
@@ -240,13 +251,15 @@
 // Page-bottom image
 .page-bottom-image {
   margin-top: #{$spacing * 4};
+  margin-bottom: -#{$spacing * 4};
+
 
   + .next-page-link-block {
     margin-top: 0;
   }
 
-  @include media-md {
-    margin-bottom: -#{$spacing * 4};
+  @include media-xl {
+    margin-bottom: -#{$spacing * 8};
   }
 }
 

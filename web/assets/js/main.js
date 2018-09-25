@@ -188,7 +188,7 @@ var SC = (function($) {
 
   function _initCardFunctions() {
     // Hover style triggered by links in cards
-    $('.card.with-hover a').on('mouseenter', function(e) {
+    $('.card.with-hover .card-title, .card.with-hover .card-action a').on('mouseenter', function(e) {
       $(this).closest('.card').addClass('-hover');
     }).on('mouseleave', function(e) {
       $(this).closest('.card').removeClass('-hover');
