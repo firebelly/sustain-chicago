@@ -76,6 +76,21 @@ var SC = (function($) {
       }
     });
 
+    // Offset for fixed header when loading
+    // page with hash
+    if(window.location.hash) {
+      var st = $(window).scrollTop();
+      var offset;
+
+      if (breakpoint_xs) {
+        offset = 140;
+      } else if (breakpoint_md) {
+        offset = $siteHeader.outerHeight();
+      }
+
+      $(window).scrollTop(st - offset);
+    }
+
     // Update userScrolled var
     $(window).scroll(function(e){
       userScrolled = true;
@@ -221,7 +236,7 @@ var SC = (function($) {
     $siteNav.on('click', '.nav-parent-label', function(e) {
       e.preventDefault();
 
-      if (!breakpoint_md) {      
+      if (!breakpoint_nav) {      
         var $childNav = $(this).next('.nav-sub-level');
 
         if ($(this).is('.-active')) {
