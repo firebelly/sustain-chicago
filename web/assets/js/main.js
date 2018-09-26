@@ -118,7 +118,6 @@ var SC = (function($) {
     _initAccordions();
     _initProjectModal();
     _initExternalLinkIcons();
-    _initTranslations();
   }
 
   function _scrollBody(element, offset, duration, delay) {
@@ -639,13 +638,6 @@ var SC = (function($) {
          $(this).addClass('external-link').append('<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg>');
        }
     });
-  }
-
-  function _initTranslations() {
-    if (_getUrlParameter('lang') !== '') {
-      $body.addClass('translated');
-      $body.attr('data-lang', _getUrlParameter('lang'));
-    }
   }
 
   // Disabling transitions on certain elements on resize

@@ -1,0 +1,64 @@
+// Translation Styles
+
+// Translate Bar Height
+$translateBarHeight: 40px;
+
+html.translated-ltr,
+html.translated-rtl {
+
+  .site-header {
+    padding-top: $translateBarHeight;
+
+    .nav-toggle {
+      top: $translateBarHeight;
+    }
+  }
+
+  @include media-nav {  
+    .site-header {
+      padding-top: 100px;
+      
+      .site-nav-main {
+        .nav-utility {
+          top: $translateBarHeight;
+        }
+      }
+    }
+
+    body.nav-up .site-header {
+      padding-top: $translateBarHeight;
+    }
+  }
+}
+
+// RTL
+.translated-rtl {
+  direction: rtl;
+
+  .icon-link-out {
+    transform: scaleX(-1);
+  }
+
+  // Page Blocks
+  .background-image {
+    @include media-md {
+      margin-left: 0;
+      margin-right: -#{$spacing * 10}; 
+    }
+  }
+
+  // Cards
+  .card {
+
+    .card-image {
+      margin: #{$spacing * 2} -#{$spacing * 2} -#{$spacing * 2} 0;
+    }
+  }
+
+  // Forms
+  form {
+    .input-wrap.single-line {
+      flex-direction: row-reverse;
+    }
+  }
+}
