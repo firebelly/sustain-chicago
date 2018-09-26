@@ -117,6 +117,7 @@ var SC = (function($) {
     _initFocusAreasShowcase();
     _initAccordions();
     _initProjectModal();
+    _initExternalLinkIcons();
   }
 
   function _scrollBody(element, offset, duration, delay) {
@@ -620,6 +621,16 @@ var SC = (function($) {
     } else if (direction === 'next') {
       _populateProjectModal($(featuredProjects[nextProjectIndex]));
     }
+  }
+
+  function _initExternalLinkIcons() {
+    var comp = new RegExp(location.host);
+
+    $('.user-content a').each(function() {
+       if(!comp.test($(this).attr('href'))){
+         $(this).addClass('external-link').append('<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg>');
+       }
+    });
   }
 
   // Disabling transitions on certain elements on resize

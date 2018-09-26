@@ -12,10 +12,6 @@
   outline-offset: -1px;
   padding: #{$spacing * 2};
 
-  .icon {
-    transition: fill .1s ease-out;
-  }
-
   @include media-md {
 
     &:not(.alt-size) {
@@ -316,7 +312,7 @@
     @include hover-style;
   }
   &:not(.with-hover) {
-    > .card-action a {
+    > .card-action:not(.social-links) a {
       @extend .inline-link;
     }
   }
