@@ -85,7 +85,7 @@
                     {% set resourceUrl = resource.internalResource.one().url %}
                     {% set resourceType = 'downloadable' %}
                   {% endif %}
-                  <li><a href="{{ resourceUrl }}">{{ resource.linkText }}<svg class="icon icon-{{ resourceType }}"><use xlink:href="#icon-{{ resourceType }}"/></svg></a></li>
+                  <li><a href="{{ resourceUrl }}"{{ resource.externalLink is not empty or resource.externalResource is not empty or resource.internalResource is not empty ? ' target="_blank" rel="noopener"' : '' }}>{{ resource.linkText }}<svg class="icon icon-{{ resourceType }}"><use xlink:href="#icon-{{ resourceType }}"/></svg></a></li>
                 {% endfor %}
               </ul>
             </div>
@@ -110,7 +110,7 @@
                     {% set resourceUrl = resource.internalResource.one().url %}
                     {% set resourceType = 'downloadable' %}
                   {% endif %}
-                  <li><a href="{{ resourceUrl }}">{{ resource.linkText }}<svg class="icon icon-{{ resourceType }}"><use xlink:href="#icon-{{ resourceType }}"/></svg></a></li>
+                  <li><a href="{{ resourceUrl }}"{{ resource.externalLink is not empty or resource.externalResource is not empty or resource.internalResource is not empty ? ' target="_blank" rel="noopener"' : '' }}>{{ resource.linkText }}<svg class="icon icon-{{ resourceType }}"><use xlink:href="#icon-{{ resourceType }}"/></svg></a></li>
                 {% endfor %}
               </ul>
             </div>
