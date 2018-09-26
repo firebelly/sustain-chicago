@@ -118,6 +118,7 @@ var SC = (function($) {
     _initAccordions();
     _initProjectModal();
     _initExternalLinkIcons();
+    _initTranslations();
   }
 
   function _scrollBody(element, offset, duration, delay) {
@@ -155,6 +156,13 @@ var SC = (function($) {
     $(window).scrollTop($body.attr('data-st'));
     $body.attr('data-st', '');
   }
+
+  function _getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+  };
 
   function _initSmoothScroll() {
     $(document).on('click', '.smooth-scroll', function(e) {
@@ -631,6 +639,13 @@ var SC = (function($) {
          $(this).addClass('external-link').append('<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg>');
        }
     });
+  }
+
+  function _initTranslations() {
+    if (_getUrlParameter('lang') !== '') {
+      $body.addClass('translated');
+      $body.attr('data-lang', _getUrlParameter('lang'));
+    }
   }
 
   // Disabling transitions on certain elements on resize

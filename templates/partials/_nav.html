@@ -1,5 +1,12 @@
 {% set mainEntries = craft.entries.section('navigation').slug('main').one().children().level(2) %}
 {% set utilityEntries = craft.entries.section('navigation').slug('utility').one().children().level(2) %}
+{% set languages = {eng: 'English', esp: 'Español', chinese: '简体中文', pol: 'Polski', arabic: 'عربي'} %}
+{% if craft.request.getParam('lang') is not empty %}
+  {% set currentLanguageCode = craft.request.getParam('lang') %}
+  {% set currentLanguageTitle = attribute(languages, currentLanguageCode) %}
+{% else %}
+  {% set currentLanguageTitle = 'English' %}
+{% endif %}
 
 <nav class="site-nav-main site-nav">
 
@@ -33,13 +40,13 @@
           <li><a href="{{ mappedEntry.url }}"{{ entry is defined and entry.slug == mappedEntry.slug ? ' class="-current"' : '' }}>{{ mappedEntry.title }}</a></li>
         {% endnav %}
         <li id="site-language-select" class="site-language-select">
-          <div class="nav-parent-label" data-active-toggle>Language: <span class="current-language">English</span><span class="expand-contract" aria-hidden="true"><svg class="icon icon-arrow"><use xlink:href="#icon-arrow"/></svg></span></div>
+          <div class="nav-parent-label" data-active-toggle>Language: <span class="current-language">{{ currentLanguageTitle }}</span><span class="expand-contract" aria-hidden="true"><svg class="icon icon-arrow"><use xlink:href="#icon-arrow"/></svg></span></div>
           <ul class="nav-sub-level">
             <li><a href="{{ craft.app.request.absoluteUrl }}">English</a></li>
-            <li><a href="http://translate.google.com/translate?hl=en&sl=en&tl=es&u={{ craft.app.request.absoluteUrl }}">Español</a></li>
-            <li><a href="http://translate.google.com/translate?hl=en&sl=en&tl=zh-CN&u={{ craft.app.request.absoluteUrl }}">简体中文</a></li>
-            <li><a href="http://translate.google.com/translate?hl=en&sl=en&tl=pl&u={{ craft.app.request.absoluteUrl }}">Polski</a></li>
-            <li><a href="http://translate.google.com/translate?hl=en&sl=en&tl=ar&u={{ craft.app.request.absoluteUrl }}">عربي</a></li>
+            <li><a href="http://translate.google.com/translate?hl=en&sl=en&tl=es&u={{ craft.app.request.absoluteUrl }}?lang=esp">Español</a></li>
+            <li><a href="http://translate.google.com/translate?hl=en&sl=en&tl=zh-CN&u={{ craft.app.request.absoluteUrl }}?lang=chinese">简体中文</a></li>
+            <li><a href="http://translate.google.com/translate?hl=en&sl=en&tl=pl&u={{ craft.app.request.absoluteUrl }}?lang=pol">Polski</a></li>
+            <li><a href="http://translate.google.com/translate?hl=en&sl=en&tl=ar&u={{ craft.app.request.absoluteUrl }}?lang=arabic">عربي</a></li>
           </ul>
         </li>
       </div>
