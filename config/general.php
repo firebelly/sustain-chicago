@@ -25,6 +25,9 @@ return [
 
         // The secure key Craft will use for hashing and encrypting data
         'securityKey' => getenv('SECURITY_KEY'),
+
+        // Additional allowed file extensions for uploads
+        'allowedFileExtensions' => ['ai'],
     ],
 
     // Dev environment settings
@@ -45,6 +48,6 @@ return [
     // Production environment settings
     'production' => [
         // Base site URL
-        'siteUrl' => null,
+        'siteUrl' => 'https://sustainchicago.cityofchicago.org',
     ],
 ];
