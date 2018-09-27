@@ -7,6 +7,9 @@
   <body class="{% if currentUser %}logged-in {% endif %}{% if bodyClass is defined %}{{ bodyClass }} {% endif %}{{ craft.app.request.getSegment(1) ? craft.app.request.getSegment(1) : 'page-home' }} {{ craft.app.request.getSegment(2) ? craft.app.request.getSegment(2) : '' }} {% block pageClass %}{% endblock %}"{% if bodyId is defined %} id="{{ bodyId }}"{% endif %}>
     <a id="skip-to-content" href="#site-main">skip to main content</a>
     <div id="breakpoint-indicator"></div>
+    {% if craft.app.language != "en-US" %}
+      {% include 'partials/_googletranslate.html' %}
+    {% endif %}
 
       <header class="site-header" role="banner">
 
@@ -55,10 +58,6 @@
       </main>
 
       {% include '/partials/_footer' %}
-
-      {% if craft.app.language != "en_US" %}
-        {% include 'partials/_googletranslate.html' %}
-      {% endif %}
 
   </body>
 </html>

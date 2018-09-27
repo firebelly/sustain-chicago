@@ -22,9 +22,9 @@ var SC = (function($) {
       page_at,
       $siteNav,
       $siteHeader,
-      headerSmHeight = '60px',
-      headerMdHeight = '100px',
-      headerLgHeight = '160px',
+      headerSmHeight,
+      headerMdHeight,
+      headerLgHeight,
       $headerSearchForm,
       transitionElements,
       userScrolled,
@@ -44,6 +44,16 @@ var SC = (function($) {
     $siteNav = $('.site-nav-main');
     $siteHeader = $('.site-header');
     $headerSearchForm = $('#header-search-form');
+
+    if ($('#translation').length) {
+      headerSmHeight = '100px';
+      headerMdHeight = '140px';
+      headerLgHeight = '200px';
+    } else {
+      headerSmHeight = '60px';
+      headerMdHeight = '100px';
+      headerLgHeight = '160px';
+    }
 
     // Set screen size vars
     _resize();
@@ -459,6 +469,12 @@ var SC = (function($) {
       cellSelector: 'li',
       arrowShape: 'M99.5,11.4v76.8c0,6.3-5.1,11.4-11.4,11.4c-1.8,0-3.5-0.4-5.1-1.2L6.3,59.9c-5.6-2.8-7.9-9.6-5.1-15.2 c1.1-2.2,2.9-4,5.1-5.1L83.1,1.2c5.6-2.8,12.4-0.5,15.2,5.1C99.1,7.9,99.5,9.6,99.5,11.4z'
     });
+
+    if ($('#translation').length) {
+      setTimeout(function() {
+        $focusAreasNavCarousel.flickity('resize');
+      },1500);
+    }
 
     // Scroll to the nav item when clicked
     $focusAreasNavCarousel.on( 'staticClick.flickity', function(event, pointer, cellElement, cellIndex) {

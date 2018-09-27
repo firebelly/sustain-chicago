@@ -5,7 +5,7 @@
   {% set googleLanguage = currentLanguage %}
 {% endif %}
 
-<script type="text/javascript">
+<script id="translation" type="text/javascript">
 document.cookie = "googtrans=/en/"+"{{ googleLanguage }}";
 function googleTranslateElementInit() {
   new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: '{{ googleLanguage }}', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, gaTrack: true, gaId: 'UA-71596236-1'}, 'google_translate_element');
