@@ -43,7 +43,7 @@
           <div class="nav-parent-label" data-active-toggle>Language: <span class="current-language">{{ currentSite.name }}</span><span class="expand-contract" aria-hidden="true"><svg class="icon icon-arrow"><use xlink:href="#icon-arrow"/></svg></span></div>
           <ul class="nav-sub-level">
             {% for language in craft.app.sites.getAllSites() %}
-              <li{{ currentSite.name == language.name ? ' class="-active"' : '' }}><a href="{{ language.baseUrl }}">{{ language.name }}</a></li>
+              <li{{ currentSite.name == language.name ? ' class="-active"' : '' }}><a href="{{ language.baseUrl }}{% for segment in craft.app.request.getSegments() %}{{ segment }}/{% endfor %}">{{ language.name }}</a></li>
             {% endfor %}
           </ul>
         </li>

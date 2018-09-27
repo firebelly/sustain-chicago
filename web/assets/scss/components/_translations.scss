@@ -62,3 +62,16 @@ html.translated-rtl {
     }
   }
 }
+
+// Specific Translations
+html[lang="zh-CN"] {
+  body.page-home .page-header .page-title {
+    line-height: 1.2;
+  }
+  .page-title {
+    line-height: 1.2; 
+  }
+  .next-page-link-block p {
+    line-height: 1.2;
+  }
+}
