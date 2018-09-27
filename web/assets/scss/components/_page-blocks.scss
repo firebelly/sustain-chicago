@@ -38,13 +38,27 @@
     fill: color(green-dark);
 
     &:not(.downloadable)::after {
-      content: ' >';
+      height: 28px;
+      bottom: -2px;
+      content: " >";
+      line-height: 1.6;
+      padding-left: 10px;
+      padding-right: 4px;
+      position: absolute;
     }
 
     .icon {
       width: 20px;
       height: 20px;
       margin-left: $spacing;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      &::after {
+        background-color: color(blue);
+      }
     }
   }
 }

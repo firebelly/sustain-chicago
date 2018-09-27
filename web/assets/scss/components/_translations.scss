@@ -34,9 +34,18 @@ html.translated-rtl {
 // RTL
 .translated-rtl {
   direction: rtl;
-
+  
+  // General Content
   .icon-link-out {
     transform: scaleX(-1);
+  }
+  .user-content ul li {
+    padding-left: 0;
+    padding-right: 1em;
+  }
+  .user-content ul li:before {
+    right: 0;
+    left: auto;
   }
 
   // Header

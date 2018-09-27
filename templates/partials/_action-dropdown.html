@@ -11,7 +11,7 @@
 
     <ul class="dropdown-actions">
       {% for action in quickActions.actionDropdown.dropdownActions.all() %}
-      <li><a href="{{ action.internalLink is not empty ? action.internalLink.one().url : action.externalLink }}"{{ action.internalLink is empty ? ' target="_blank"' : '' }}>{{ action.actionLabel }}{{ action.internalLink is empty ? ' <svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg>' : '' }}</a></li>
+      <li><a href="{{ action.internalLink is not empty ? action.internalLink.one().url : action.externalLink }}"{{ action.internalLink is empty ? ' target="_blank"' : '' }}>{{ action.actionLabel }}{{ action.internalLink is empty ? '<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg>' : '' }}</a></li>
       {% endfor %}
     </ul>
   </div>

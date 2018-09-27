@@ -195,7 +195,7 @@ body {
       transform: none;
     }
 
-    a,
+    > a,
     .nav-parent-label {
       line-height: 60px;
       padding: 0 #{$spacing * 2};
@@ -258,6 +258,16 @@ body {
         background-color: color(white);
       }
 
+      a {
+        padding: #{$spacing * 2};
+      }
+
+      .nav-sub-level {
+        a {
+          padding-left: 0;
+        }
+      }
+
       .site-language-select {
         .nav-parent-label {
           .icon {
@@ -292,6 +302,8 @@ body {
         }
 
         a {
+          padding: 0;
+
           &:hover,
           &:focus,
           &:active {
@@ -428,6 +440,17 @@ body {
   .nav-sub-level {
     display: none;
     padding: 0 #{$spacing * 2} 0 #{$spacing * 6};
+
+    > li a {
+      padding: #{$spacing * 2} 0;
+    }
+
+    @include media-nav {
+      > li a {      
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
   }
 
   @include media-nav {

@@ -25,6 +25,16 @@
       margin: 0;
     }
 
+    p {
+      margin-top: $spacing;
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      fill: inherit;
+    }
+
     &.with-action {
       display: flex;
 
@@ -48,10 +58,7 @@
         @include fontweight-bold;
       }
       .icon {
-        width: 20px;
-        height: 20px;
         bottom: -2px;
-        fill: inherit;
         position: relative;
         margin-left: #{$spacing * 2};
       }

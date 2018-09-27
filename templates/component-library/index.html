@@ -161,63 +161,6 @@
 
 </div>
 
-<div class="block wrap -extended">
-
-  <div class="grid profile-grid">
-    {% set obamaImage = rev('images/obama.jpg') %}
-    {% set hidalgoImage = rev('images/hidalgo.jpg') %}
-    {% set davisImage = rev('images/naomi-davis.jpg') %}
-    {% set zelechowskiImage = rev('images/elise-zelechowski.jpg') %}
-    {% set obama = craft.imager.transformImage(obamaImage, { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
-    {% set hidalgo = craft.imager.transformImage(hidalgoImage, { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
-    {% set davis = craft.imager.transformImage(davisImage, { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
-    {% set zelechowski = craft.imager.transformImage(zelechowskiImage, { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
-
-    <div class="card profile theme-dark -small one-half med-one-fourth">
-      <header class="card-header">
-        <h3 class="card-title">President Barack Obama</h3>
-        <h4 class="card-tag">44th President of The United States</h4>
-      </header>
-      <p class="card-action social-links">
-        <a href="#"><svg class="icon icon-facebook"><use xlink:href="#icon-facebook" /></svg><span class="sr-only">Facebook</span></a> 
-        <a href="#"><svg class="icon icon-twitter"><use xlink:href="#icon-twitter" /></svg><span class="sr-only">Twitter</span></a> 
-        <a href="#"><svg class="icon icon-instagram"><use xlink:href="#icon-instagram" /></svg><span class="sr-only">Instagram</span></a> 
-      </p>
-      <div class="card-image" style="background-image:url('{{ obama.getUrl() }}');"></div>
-    </div>
-    <div class="card profile theme-light -small one-half med-one-fourth">
-      <header class="card-header">
-        <h3 class="card-title">Anne Hidalgo</h3>
-        <h4 class="card-tag">Mayor of Paris, Chair of C40 Cities Climate Leadership Group</h4>
-      </header>
-      <p class="card-action social-links">
-        <a href="#"><svg class="icon icon-facebook"><use xlink:href="#icon-facebook" /></svg><span class="sr-only">Facebook</span></a> 
-        <a href="#"><svg class="icon icon-twitter"><use xlink:href="#icon-twitter" /></svg><span class="sr-only">Twitter</span></a> 
-        <a href="#"><svg class="icon icon-instagram"><use xlink:href="#icon-instagram" /></svg><span class="sr-only">Instagram</span></a> 
-      </p>
-      <div class="card-image" style="background-image:url('{{ hidalgo.getUrl() }}');"></div>
-    </div>
-    <div class="card profile with-hover theme-dark -small one-half med-one-fourth">
-      <header class="card-header">
-        <h3 class="card-title">Naomi Davis</h3>
-        <h4 class="card-tag">President, BIG: Blacks in Green™</h4>
-      </header>
-      <p class="card-action"><a href="#">Meet Naomi ></a></p>
-      <div class="card-image" style="background-image:url('{{ davis.getUrl() }}');"></div>
-    </div>
-    <div class="card profile with-hover theme-light -small one-half med-one-fourth">
-      <header class="card-header">
-        <h3 class="card-title">Elise Zelechowski</h3>
-        <h4 class="card-tag">Wearer of Many Hats, Elevated chicago, ThoughtWorks, Rebuilding Exchange, Cellar Door Provisions</h4>
-      </header>
-      <p class="card-action"><a href="#">Meet Elise ></a></p>
-      <div class="card-image" style="background-image:url('{{ zelechowski.getUrl() }}');"></div>
-    </div>
-
-  </div>
-
-</div>
-
 <div class="wrap">
   <div class="column-secondary">
       
@@ -236,15 +179,6 @@
     </nav>
 
   </div>
-</div>
-
-  
-<div class="block background-image">
-  {% set image = rev('images/big-sur_coast_01.jpg') %}
-  {% set transformedImage = craft.imager.transformImage(image, {
-    effects: { modulate: [100, 0, 100], clut: 'gradient:#163B37-#E2E8EA' } 
-  }) %}
-  <img src="{{ transformedImage.getUrl() }}" alt="">
 </div>
 
 {% endblock %}
