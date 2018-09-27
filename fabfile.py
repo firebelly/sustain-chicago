@@ -4,15 +4,15 @@ import os
 env.hosts = ['chicagocity.webfactional.com']
 env.user = 'chicagocity'
 env.path = '~/Sites/sustain-chicago'
-env.remotepath = '/home/chicagocity/webapps/sustainchicago'
+env.remotepath = '/home/chicagocity/webapps/sustainchicago_staging'
 env.git_branch = 'master'
 env.warn_only = True
 env.remote_protocol = 'http'
 
 def production():
   env.hosts = ['sustainchicago.cityofchicago.org']
-  env.user = 'coc'
-  env.remotepath = '/home/chicagocity/webapps/sustainchicago_prod'
+  env.user = 'chicagocity'
+  env.remotepath = '/home/chicagocity/webapps/sustainchicago'
   env.git_branch = 'master'
   env.remote_protocol = 'https'
 
