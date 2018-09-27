@@ -33,7 +33,13 @@ return [
     // Dev environment settings
     'dev' => [
         // Base site URL
-        'siteUrl' => 'http://sustain-chicago.localhost',
+        'siteUrl' => array(
+            'en-US' => 'http://sustain-chicago.localhost',
+            'es' => 'http://sustain-chicago.localhost/es/',
+            'zh-Hans-CN' => 'http://sustain-chicago.localhost/cn/',
+            'pl' => 'http://sustain-chicago.localhost/pl/',
+            'ar ' => 'http://sustain-chicago.localhost/ar/',
+        ),
 
         // Dev Mode (see https://craftcms.com/support/dev-mode)
         'devMode' => true,
@@ -42,12 +48,24 @@ return [
     // Staging environment settings
     'staging' => [
         // Base site URL
-        'siteUrl' => 'http://chicagocity.webfactional.com',
+        'siteUrl' => array(
+            'en-US' => 'http://chicagocity.webfactional.com',
+            'es' => 'http://chicagocity.webfactional.com/es/',
+            'zh-Hans-CN' => 'http://chicagocity.webfactional.com/cn/',
+            'pl' => 'http://chicagocity.webfactional.com/pl/',
+            'ar ' => 'http://chicagocity.webfactional.com/ar/',
+        ),
     ],
 
     // Production environment settings
     'production' => [
         // Base site URL
-        'siteUrl' => 'https://sustainchicago.cityofchicago.org',
+        'siteUrl' => array(
+            'en-US' => 'https://sustainchicago.cityofchicago.org',
+            'es' => 'https://sustainchicago.cityofchicago.org/es/',
+            'zh-Hans-CN' => 'https://sustainchicago.cityofchicago.org/cn/',
+            'pl' => 'https://sustainchicago.cityofchicago.org/pl/',
+            'ar ' => 'https://sustainchicago.cityofchicago.org/ar/',
+        ),
     ],
 ];
