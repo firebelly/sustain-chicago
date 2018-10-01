@@ -177,11 +177,11 @@ $column-width: 100% / $columns;
     @include media-lg {
       content: 'lg';
     }
-    @include media-nav {
-      content: 'nav';
-    }
     @include media-xl {
       content: 'xl';
+    }
+    @include media-nav {
+      content: 'nav';
     }
   }
 }

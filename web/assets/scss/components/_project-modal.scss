@@ -4,6 +4,12 @@ $buttonHeightSm: 60px;
 $buttonHeightMd: 100px;
 $imageHeightSm: 200px;
 
+body.modal-open {
+  #site-overlay {
+    z-index: 21;
+  }
+}
+
 #project-modal {
   top: 0;
   left: 0;
@@ -12,21 +18,6 @@ $imageHeightSm: 200px;
   z-index: 100;
   display: none;
   position: fixed;
-
-  &::before {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 0;
-    content: '';
-    position: absolute;
-    background-color: rgba(color(black), .9);
-  }
-
-  &.-active {
-    display: block;
-  }
 
   .wrap {
     height: 100%;

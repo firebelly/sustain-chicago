@@ -20,6 +20,7 @@ var SC = (function($) {
       resizeTimer,
       slideEasing = [0.65, 0, 0.35, 1],
       page_at,
+      $siteOverlay,
       $siteNav,
       $siteHeader,
       headerSmHeight,
@@ -44,6 +45,7 @@ var SC = (function($) {
     $siteNav = $('.site-nav-main');
     $siteHeader = $('.site-header');
     $headerSearchForm = $('#header-search-form');
+    $siteOverlay = '<div id="site-overlay"></div>';
 
     if ($('#translation').length) {
       headerSmHeight = '100px';
@@ -65,10 +67,11 @@ var SC = (function($) {
     $(document).keyup(function(e) {
       // Escape key
       if (e.keyCode === 27) {
-        _closeMobileNav();
         _closeSearchForm();
         _closeActionDropdown();
         _closeProjectModal();
+        _hideSiteOverlay();
+        _closeSiteNav();
       }
 
       // Left Arrow
@@ -201,6 +204,9 @@ var SC = (function($) {
   }
 
   function _closeActionDropdown() {
+    if (!$('.action-dropdown-container').is('.-active')) {
+      return;
+    }
     $('.action-dropdown-container, .action-dropdown-toggle').removeClass('-active');
   }
 
@@ -254,7 +260,8 @@ var SC = (function($) {
     $siteNav.on('click', '.nav-parent-label', function(e) {
       e.preventDefault();
 
-      if (!breakpoint_nav) {      
+      if (!breakpoint_nav) {
+        console.log('hey');
         var $childNav = $(this).next('.nav-sub-level');
 
         if ($(this).is('.-active')) {
@@ -263,6 +270,72 @@ var SC = (function($) {
           $siteNav.find('.nav-parent-label.-active + .nav-sub-level').velocity('slideUp', { duration: 250, easing: 'easeOutSine' });
           $siteNav.find('.nav-parent-label.-active').not($(this)).removeClass('-active');
           $childNav.velocity('slideDown', { duration: 250, easing: 'easeOutSine' });
+        }
+      }
+    });
+
+    // Nav Toggle Functions
+    $('.nav-toggle').on('click', function() {
+      if ($(this).is('.-active')) {
+        _hideSiteOverlay();
+      } else {
+        _showSiteOverlay();
+      }
+    });
+
+    // Close when clicking away from nav
+    $(document).on('click touchend', '.site-nav-main.-active', function(e) {
+      if (!$(e.target).parents('ul').length && !$(e.target).parents('.header-search-wrap').length && !$(e.target).is('ul') && !$(e.target).is('.header-search-wrap')) {
+        _closeSiteNav();
+        _hideSiteOverlay();
+      }
+    });
+  }
+
+  function _closeSiteNav() {
+    if (!$siteNav.is('.-active')) {
+      return;
+    }
+
+    $siteNav.removeClass('-active');
+    $('.nav-toggle').removeClass('-active');
+  }
+
+  function _showSiteOverlay(callback) {
+    // Check if there is already an overlay on the page
+    if (!$('#site-overlay').length) {
+      $body.append($siteOverlay);
+    }
+
+    // Check if it's already active, if not animate showing it
+    if (!$('#site-overlay').is('.-active')) {
+      // Fade in the overlay
+      $('#site-overlay').velocity(
+        { opacity: 1 }, {
+        display: "block",
+          // on complete, fade in the lightbox
+          complete: function() {
+            $('#site-overlay').addClass('-active');
+            if(typeof callback !== 'undefined') {
+              callback();
+            }
+          }
+      });
+    }
+  }
+
+  function _hideSiteOverlay(callback) {
+    if (!$('#site-overlay').length) {
+      return;
+    }
+
+    $('#site-overlay').velocity(
+      { opacity: 0 }, {
+      display: "none",
+      complete: function() {
+        $('#site-overlay').removeClass('-active');
+        if(typeof callback !== 'undefined') {
+          callback();
         }
       }
     });
@@ -371,11 +444,6 @@ var SC = (function($) {
     sectionNavLastScrollTop = st;
   }
 
-  function _closeMobileNav() {
-    $siteNav.removeClass('-active');
-    $('.nav-toggle').removeClass('-active');
-  }
-
   function _initSearchForm() {
     $('.search-toggle').on('click', function(e) {
       if ($(this).is('.-active')) {
@@ -404,6 +472,10 @@ var SC = (function($) {
   }
 
   function _closeSearchForm() {
+    if (!$headerSearchForm.is('.-active')) {
+      return;
+    }
+
     $headerSearchForm.find('input').blur();
     $headerSearchForm.removeClass('-active');
     $('.search-toggle').removeClass('-active');
@@ -614,17 +686,35 @@ var SC = (function($) {
   }
 
   function _openProjectModal($project) {
+    _showSiteOverlay();
     _populateProjectModal($project);
     $body.addClass('modal-open');
     _disableScroll();
-    $('#project-modal').addClass('-active');
+    $('#project-modal').velocity(
+      { opacity: 1 }, {
+      display: "block",
+        complete: function() {
+          $('#project-modal').addClass('-active');
+        }
+    });
   }
 
   function _closeProjectModal() {
+    if (!$body.is('.modal-open')) {
+      return;
+    }
+
     var st = $(window).scrollTop();
     $body.removeClass('modal-open');
+    _hideSiteOverlay();
     _enableScroll();
-    $('#project-modal').removeClass('-active');
+    $('#project-modal').velocity(
+      { opacity: 0 }, {
+      display: "none",
+        complete: function() {
+          $('#project-modal').removeClass('-active');
+        }
+    });
   }
 
   function _changeProjectModal(direction) {
@@ -680,9 +770,9 @@ var SC = (function($) {
     .replace(/['"]+/g, '');
 
     // Determine current breakpoint
-    breakpoint_xl = breakpointIndicatorString === 'xl';
-    breakpoint_nav = breakpointIndicatorString === 'nav' || breakpoint_xl;
-    breakpoint_lg = breakpointIndicatorString === 'lg' || breakpoint_nav;
+    breakpoint_nav = breakpointIndicatorString === 'nav';
+    breakpoint_xl = breakpointIndicatorString === 'xl' || breakpoint_nav;
+    breakpoint_lg = breakpointIndicatorString === 'lg' || breakpoint_xl;
     breakpoint_md = breakpointIndicatorString === 'md' || breakpoint_lg;
     breakpoint_sm = breakpointIndicatorString === 'sm' || breakpoint_md;
     breakpoint_xs = breakpointIndicatorString === 'xs' || breakpoint_sm;
@@ -694,6 +784,13 @@ var SC = (function($) {
       } else {
         _updateSectionNavPos(headerSmHeight);
       }
+    }
+
+    // Close Nav
+    if ($siteNav.is('.-active') && breakpoint_nav) {
+      console.log('hey');
+      _closeSiteNav();
+      _hideSiteOverlay();
     }
 
     // Reset inline styles for navigation for medium breakpoint
