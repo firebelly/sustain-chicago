@@ -126,7 +126,7 @@ body {
     margin: 0;
     @include font-copy;
     color: color(white);
-    @include paragraph-style(10, 10, .0694em, uppercase);
+    @include paragraph-style(10, 10, .056em, uppercase);
   }
 
   .nav-toggle {
