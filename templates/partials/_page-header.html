@@ -55,7 +55,7 @@
         {% if entry['alternateHeadline'] is defined and entry['alternateHeadline'] is not empty %}
          {{ entry.alternateHeadline|nl2br }}
         {% elseif entry is defined %}
-         {% block pageTitlePrefix %}{% endblock %}{{ entry.title }}
+         {{ entry.title }}
         {% elseif craft.app.request.getSegment(1) == 'search' %}
           {% set query = craft.app.request.getParam('q') %}
           {% set results = craft.entries().search(query).orderBy('score') %}
@@ -83,6 +83,15 @@
                 <p><a href="{{ linkUrl }}"{{ link.type == 'externalLink' ? ' target="_blank"' : '' }}>{{ link.linkText }}</a></p>
               </div>
             {% endfor %}
+
+            {% if craft.app.request.getSegment(2) == 'projects' %}
+                
+              <div class="projects-legend">
+                <svg class="icon icon-star"><use xlink:href="#icon-star" /></svg>
+                <p>indicates community project. Community projects featured here are by no means exhaustive—these represent just a snapshot of the work being done at the grassroots level across Chicago.</p>
+              </div>
+              
+            {% endif %}
 
         </div>
       {% endif %}
