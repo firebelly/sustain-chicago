@@ -106,6 +106,12 @@ body {
       background-color: transparent;
       margin: 0 #{$spacing * 5} 0 #{$spacing * 2};
     }
+
+    a {
+      color: color(white);
+      @extend .inline-link;
+      text-decoration: none;
+    }
   }
 
   .site-title {
@@ -114,12 +120,6 @@ body {
     display: inline-block;
     // Manual letter-spacing to align to subtitle
     letter-spacing: .024em;
-
-    a {
-      color: color(white);
-      @extend .inline-link;
-      text-decoration: none;
-    }
   }
 
   .site-subtitle {

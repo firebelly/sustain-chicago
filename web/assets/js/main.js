@@ -258,10 +258,9 @@ var SC = (function($) {
 
   function _initSiteNav() {
     $siteNav.on('click', '.nav-parent-label', function(e) {
-      e.preventDefault();
 
       if (!breakpoint_nav) {
-        console.log('hey');
+        e.preventDefault();
         var $childNav = $(this).next('.nav-sub-level');
 
         if ($(this).is('.-active')) {

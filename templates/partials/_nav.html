@@ -18,7 +18,7 @@
         {% set mappedEntryChildren = mappedEntry.children().level(2) %}
         <li>
           {% if mappedEntryChildren|length %}
-          <div class="nav-parent-label{{ entry is defined and craft.app.request.getSegment(1) == mappedEntry.slug ? ' -current' : '' }}" data-active-toggle>{{ mappedEntry.title }}<span class="expand-contract" aria-hidden="true"></span></div>
+          <a href="{{ mappedEntryChildren.one().url }}" class="nav-parent-label{{ entry is defined and craft.app.request.getSegment(1) == mappedEntry.slug ? ' -current' : '' }}" data-active-toggle>{{ mappedEntry.title }}<span class="expand-contract" aria-hidden="true"></span></a>
           <ul class="nav-sub-level">
             {% for child in mappedEntryChildren.all() %}
               <li><a href="{{ child.url }}"{{ entry is defined and entry.slug == child.slug or craft.app.request.getSegment(2) == child.slug ? ' class="-current"' : '' }}>{{ child.title }}</a></li>
