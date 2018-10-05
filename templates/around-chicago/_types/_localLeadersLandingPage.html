@@ -22,7 +22,7 @@
             <h4 class="card-tag">{{ person.personTitle }}</h4>
           </header>
           <p class="card-action"><a href="{{ person.url }}">Meet {{ person.firstName }} ></a></p>
-          <div class="card-image" style="background-image:url('{{ personImage.getUrl() }}');"></div>
+          <a class="card-image" href="{{ person.url }}" style="background-image:url('{{ personImage.getUrl() }}');"></a>
         </div>
       {% endfor %}
       </div>

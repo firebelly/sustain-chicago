@@ -11,7 +11,7 @@
           <p class="card-action"><a href="{{ featuredProject.url }}">Learn more ></a></p>
           <div class="project-content sr-only">{{ featuredProject.mainContent }}</div>
         </div>
-        <div class="split-container -image" style="background-image:url('{{ projectImage.getUrl() }}');"></div>
+        <a class="split-container -image" href="{{ featuredProject.url }}" style="background-image:url('{{ projectImage.getUrl() }}');"></a>
       </div>
     {% else %}
       <div id="{{ featuredProject.slug }}" class="featured-project card with-hover -small" data-image="{{ projectImage.getUrl() }}" data-project-url="{{ featuredProject.projectUrl }}" data-focus-area="{{ featuredProject.focusArea.one().title }}">
@@ -21,7 +21,7 @@
         </header>
         <p class="card-action"><a href="{{ featuredProject.url }}">Learn more ></a></p>
         <div class="project-content sr-only">{{ featuredProject.mainContent }}</div>
-        <div class="card-image" style="background-image:url('{{ projectImage.getUrl() }}');"></div>
+        <a class="card-image" href="{{ featuredProject.url }}" style="background-image:url('{{ projectImage.getUrl() }}');"></a>
       </div>
     {% endif %}
   {% endfor %}

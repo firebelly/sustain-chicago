@@ -51,6 +51,7 @@
 
   .banner-text {
     width: 100%;
+    min-height: 60px;
     background-color: color(blue-light);
     padding: #{$spacing * 2} #{$spacing * 2} 0;
 

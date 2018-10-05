@@ -212,7 +212,7 @@ var SC = (function($) {
 
   function _initCardFunctions() {
     // Hover style triggered by links in cards
-    $('.card.with-hover .card-title, .card.with-hover .card-action a').on('mouseenter', function(e) {
+    $('.card.with-hover a').on('mouseenter', function(e) {
       $(this).closest('.card').addClass('-hover');
     }).on('mouseleave', function(e) {
       $(this).closest('.card').removeClass('-hover');
@@ -666,9 +666,13 @@ var SC = (function($) {
 
   function _populateProjectModal($project) {
     var $modal = $('#project-modal'),
-        modalMarkup = '<div class="wrap -extended"><div class="modal-container float-grid"><div class="project-image med-one-half"></div><div class="project-content card med-one-half"><div class="content-overflow"><div class="-inner"><header class="card-header"><h4 class="card-tag">Featured <span class="project-focus-area"></span> Project</h4><h3 class="card-title"></h3></header><div class="card-text"></div><p class="card-action"><a href="" target="_blank">Project website<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg></a></p></div></div></div><button class="project-modal-close"><span class="sr-only">Close Project Details</span><svg class="icon icon-close"><use xlink:href="#icon-close"/></svg></button><nav class="project-modal-nav"><ul><li class="prev-project"><button class="prev-project-button"><span class="sr-only">Next Featured Project</span><svg class="icon icon-arrow"><use xlink:href="#icon-arrow"/></svg></button></li><li class="next-project"><button class="next-project-button"><span class="sr-only">Previous Featured Project</span><svg class="icon icon-arrow"><use xlink:href="#icon-arrow"/></svg></button></li></ul></nav></div></div>';
+        modalMarkup = '<div class="wrap -extended"><div class="modal-container float-grid"><div class="project-image med-one-half"></div><div class="project-content card med-one-half"><div class="content-overflow"><div class="-inner"><header class="card-header"><h4 class="card-tag">Featured <span class="project-focus-area"></span> Project</h4><h3 class="card-title"></h3></header><div class="card-text"></div><p class="card-action"><a href="" target="_blank">Project website<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg></a></p></div></div></div><button class="project-modal-close"><span class="sr-only">Close Project Details</span><svg class="icon icon-close"><use xlink:href="#icon-close"/></svg></button></div></div>';
 
     $modal.html(modalMarkup);
+
+    if (!$project.is('.single-project')) {
+      $modal.find('.project-modal-close').after('<nav class="project-modal-nav"><ul><li class="prev-project"><button class="prev-project-button"><span class="sr-only">Next Featured Project</span><svg class="icon icon-arrow"><use xlink:href="#icon-arrow"/></svg></button></li><li class="next-project"><button class="next-project-button"><span class="sr-only">Previous Featured Project</span><svg class="icon icon-arrow"><use xlink:href="#icon-arrow"/></svg></button></li></ul></nav>');
+    }
 
     var projectId = $project.attr('id'),
         projectImage = $project.attr('data-image'),

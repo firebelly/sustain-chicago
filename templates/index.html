@@ -118,13 +118,14 @@
         {% if craft.entries.descendantOf(projectsEntry).search('featured:1').all()|length %}
           {% set featuredProject = random(craft.entries.descendantOf(projectsEntry).search('featured:1').all()) %}
           {% set projectImage = craft.imager.transformImage(featuredProject.postImage.one(), { width: 600, effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
-          <div class="card profile with-hover theme-light -small one-half">
+          <div class="featured-project single-project card profile with-hover theme-light -small one-half" data-image="{{ projectImage.getUrl() }}" data-project-url="{{ featuredProject.projectUrl }}" data-focus-area="{{ featuredProject.focusArea.one().title }}">
             <header class="card-header">
               <h4 class="card-tag">Featured Project</h4>
               <h3 class="card-title"><a href="{{ featuredProject.url }}">{{ featuredProject.title }}</a></h3>
             </header>
             <p class="card-action"><a href="{{ featuredProject.url }}">Learn more ></a></p>
-            <div class="card-image" style="background-image:url('{{ projectImage.getUrl() }}');"></div>
+            <div class="project-content sr-only">{{ featuredProject.mainContent }}</div>
+            <a class="card-image" href="{{ featuredProject.url }}" style="background-image:url('{{ projectImage.getUrl() }}');"></a>
           </div>
         {% endif %}
 

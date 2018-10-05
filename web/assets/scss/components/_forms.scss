@@ -11,6 +11,7 @@ form {
 
       input {
         flex-grow: 1;
+        min-width: 1px;
         border-radius: 5px 0 0 5px;
         &:hover,
         &:focus,

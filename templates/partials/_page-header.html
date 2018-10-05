@@ -2,8 +2,9 @@
   <div class="page-banner wrap">
     <div class="banner-image-carousel">    
       {% for pageBanner in entry.pageBanner.all() %}
-        {% set bannerImage = craft.imager.transformImage(pageBanner.bannerImage.one(), { width: 1400, position: pageBanner.bannerImage.one().getFocalPoint(), effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
-        <div class="banner-image flickity-item" data-flickity-bg-lazyload="{{ bannerImage.getUrl() }}"></div>
+        {% set bannerImage = pageBanner.bannerImage.one() %}
+        {% set treatedImage = craft.imager.transformImage(bannerImage, { width: 1400, position: bannerImage.getFocalPoint(), effects: { colorBlend: ['rgb(255, 255, 255)', 0.15], clut: 'gradient:rgba(22,59,55,.45)-rgba(226,232,234,.4)' } }) %}
+        <div class="banner-image flickity-item" data-flickity-bg-lazyload="{{ treatedImage.getUrl() }}" style="background-position: center {{ bannerImage.getFocalPoint()['y'] * 100 }}%"></div>
       {% endfor %}
     </div>
     <div class="banner-text-container{{ entry.pageBanner.all()|length > 1 ? ' with-nav' : '' }}">
