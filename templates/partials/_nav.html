@@ -1,8 +1,8 @@
 {% set mainEntries = craft.entries.section('navigation').slug('main').one().children().level(2) %}
 {% set utilityEntries = craft.entries.section('navigation').slug('utility').one().children().level(2) %}
 {% set languages = {eng: 'English', esp: 'Español', chinese: '简体中文', pol: 'Polski', arabic: 'عربي'} %}
-{% if craft.request.getParam('lang') is not empty %}
-  {% set currentLanguageCode = craft.request.getParam('lang') %}
+{% if craft.app.request.getParam('lang') is not empty %}
+  {% set currentLanguageCode = craft.app.request.getParam('lang') %}
   {% set currentLanguageTitle = attribute(languages, currentLanguageCode) %}
 {% else %}
   {% set currentLanguageTitle = 'English' %}
