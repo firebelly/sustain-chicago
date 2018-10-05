@@ -64,7 +64,8 @@
   }
 
   &:hover,
-  &:focus {
+  &:focus,
+  &.-hover {
     fill: color(white)!important;
     color: color(white)!important;
     background-color: rgba(color(blue),1);

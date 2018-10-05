@@ -106,12 +106,6 @@ body {
       background-color: transparent;
       margin: 0 #{$spacing * 5} 0 #{$spacing * 2};
     }
-
-    a {
-      color: color(white);
-      @extend .inline-link;
-      text-decoration: none;
-    }
   }
 
   .site-title {
@@ -120,6 +114,12 @@ body {
     display: inline-block;
     // Manual letter-spacing to align to subtitle
     letter-spacing: .024em;
+
+    a {
+      color: color(white);
+      @extend .inline-link;
+      text-decoration: none;
+    }
   }
 
   .site-subtitle {
@@ -127,6 +127,11 @@ body {
     @include font-copy;
     color: color(white);
     @include paragraph-style(10, 10, .056em, uppercase);
+
+    a {
+      padding-top: 2px;
+      text-decoration: none;
+    }
   }
 
   .nav-toggle {

@@ -120,6 +120,7 @@ var SC = (function($) {
 
     _initSmoothScroll();
     _initActiveToggle();
+    _initHoverPairs();
     _initClickToDeactivate();
     _initCardFunctions();
     _initSiteNav();
@@ -189,6 +190,22 @@ var SC = (function($) {
       if ($(this).attr('data-active-toggle') !== '') {
         $($(this).attr('data-active-toggle')).toggleClass('-active');
       }
+    });
+  }
+
+  function _initHoverPairs() {
+    $(document).on('mouseenter', '[data-hover-pair]', function(e) {
+      var hoverPair = $(this).attr('data-hover-pair');
+      $('[data-hover-pair="'+hoverPair+'"]').addClass('-hover');
+    }).on('mouseleave', '[data-hover-pair]', function(e) {
+      var hoverPair = $(this).attr('data-hover-pair');
+      $('[data-hover-pair="'+hoverPair+'"]').removeClass('-hover');
+    });
+
+        $('.card.with-hover a').on('mouseenter', function(e) {
+      $(this).closest('.card').addClass('-hover');
+    }).on('mouseleave', function(e) {
+      $(this).closest('.card').removeClass('-hover');
     });
   }
 
