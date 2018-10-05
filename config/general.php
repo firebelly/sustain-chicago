@@ -27,7 +27,7 @@ return [
         'securityKey' => getenv('SECURITY_KEY'),
 
         // Additional allowed file extensions for uploads
-        'allowedFileExtensions' => ['ai'],
+        'extraAllowedFileExtensions' => ['ai'],
     ],
 
     // Dev environment settings
