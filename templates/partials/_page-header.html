@@ -81,7 +81,7 @@
                 {% set linkUrl = link.externalLink %}
               {% endif %}
               <div class="link-block">
-                <p><a href="{{ linkUrl }}"{{ link.type == 'externalLink' ? ' target="_blank"' : '' }}>{{ link.linkText }}</a></p>
+                <p><a href="{{ linkUrl }}"{{ link.type == 'externalLink' ? ' target="_blank"' : ' class="internal"' }}>{{ link.linkText }}</a></p>
               </div>
             {% endfor %}
 

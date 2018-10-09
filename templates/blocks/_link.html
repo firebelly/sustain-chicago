@@ -4,5 +4,5 @@
   {% else %}
     {% set linkUrl = block.internalLink.one().url %}
   {% endif %}
-  <a href="{{ linkUrl }}"{{ block.externalLink is not empty ? ' target="_blank" rel="noopener"' : '' }}{{ block.downloadableResource ? ' class="downloadable"' : '' }}>{{ block.linkText }}{{ block.downloadableResource ? '<svg class="icon icon-downloadable"><use xlink:href="#icon-downloadable"/></svg>' : '' }}{{ block.externalLink is not empty ? '<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg>' : '' }}</a>
+  <a href="{{ linkUrl }}"{{ block.externalLink is not empty ? ' target="_blank" rel="noopener"' : '' }}{{ not block.downloadableResource and block.externalLink is empty ? ' class="internal"' : '' }}>{{ block.linkText }}{{ block.downloadableResource ? '<svg class="icon icon-downloadable"><use xlink:href="#icon-downloadable"/></svg>' : '' }}{{ block.externalLink is not empty ? '<svg class="icon icon-link-out"><use xlink:href="#icon-link-out"/></svg>' : '' }}</a>
 </div>

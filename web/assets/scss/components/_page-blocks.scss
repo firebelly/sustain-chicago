@@ -37,7 +37,7 @@
     @extend .inline-link;
     fill: color(green-dark);
 
-    &:not(.downloadable)::after {
+    &.internal::after {
       height: 28px;
       bottom: -2px;
       content: " >";
