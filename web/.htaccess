@@ -4,8 +4,11 @@
   RewriteBase /
 
   # Force SSL
-  RewriteCond %{HTTP_HOST} ^sustainchicago\.cityofchicago\.org [NC]
-  RewriteRule ^(.*)$ https://sustainchicago.cityofchicago.org/$1 [R=301,L]
+  RewriteCond %{REQUEST_URI} !\.well-known
+  RewriteCond %{HTTP:X-Forwarded-SSL} !on
+  RewriteCond %{HTTP_HOST} !^chicagocity\.webfactional\.com [NC]
+  RewriteCond %{HTTP_HOST} !^sustain-chicago\.localhost [NC]
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 </IfModule>
 
 # START Craft
