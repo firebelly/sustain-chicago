@@ -808,7 +808,6 @@ var SC = (function($) {
 
     // Close Nav
     if ($siteNav.is('.-active') && breakpoint_nav) {
-      console.log('hey');
       _closeSiteNav();
       _hideSiteOverlay();
     }
