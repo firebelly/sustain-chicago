@@ -6,12 +6,23 @@
   <link rel="canonical" href="{{ siteUrl }}">
   <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:800,800i|Space+Mono:400,400i,700,700i" rel="stylesheet">
 
-  <meta property="og:title" content="{% if seoTitle is defined %}{{ seoTitle }}{% elseif title is defined %}{{ title }} | {{ siteName }}{% else %}{{ siteName }}{% endif %}" />
-  {% if mainImage is defined %}
-    <meta property="og:image" content="{{ mainImage.url }}"/>
-  {% else %}
-    <meta property="og:image" content=""/>
-  {% endif %}
+  <meta property="og:site_name" content="Sustain Chicago">
+  <meta property="og:title" content="{% if not craft.app.request.getSegment(1) %}Sustain Chicago{% elseif entry is defined %}{{ entry.title }} | Sustain Chicago{% elseif title is defined %}{{ title }} | Sustain Chicago{% else %}Sustain Chicago{% endif %}">
+{% if entry['pageDescription'] is defined and entry['pageDescription'] is not empty %}
+  <meta name="description" content="{{ entry.pageDescription }}">
+  <meta property="og:description" content="{{ entry.pageDescription }}">
+{% elseif globalSeoSettings.seoDescription %}
+  <meta name="description" content="{{ globalSeoSettings.seoDescription }}">
+  <meta property="og:description" content="{{ globalSeoSettings.seoDescription }}">
+{% endif %}
+{% if entry['pageBanner'] is defined and entry['pageBanner'] is not empty %}
+  <meta property="og:image" content="{{ entry.pageBanner.one().bannerImage.one().getUrl() }}">
+{% elseif entry['portrait'] is defined and entry['portrait'] is not empty %}
+  <meta property="og:image" content="{{ entry.portrait.one().getUrl() }}">
+{% elseif globalSeoSettings.seoDefaultShareImage %}
+  <meta property="og:image" content="{{ globalSeoSettings.seoDefaultShareImage.one().getUrl() }}">
+{% endif %}
+
 
   <link rel="stylesheet" href="{{ rev('css/main.css') }}">
   <link rel="shortcut icon" type="image/ico" href="{{ '/assets/images/favicon.png' }}">
