@@ -16,11 +16,11 @@
   <meta property="og:description" content="{{ globalSeoSettings.seoDescription }}">
 {% endif %}
 {% if entry['pageBanner'] is defined and entry['pageBanner'] is not empty %}
-  <meta property="og:image" content="{{ siteUrl|slice(0,-1) }}{{ entry.pageBanner.one().bannerImage.one().getUrl() }}">
+  <meta property="og:image" content="{{ alias(craft.app.sites.primarySite.baseUrl)|slice(0,-1) }}{{ entry.pageBanner.one().bannerImage.one().getUrl() }}">
 {% elseif entry['portrait'] is defined and entry['portrait'] is not empty %}
-  <meta property="og:image" content="{{ siteUrl|slice(0,-1) }}{{ entry.portrait.one().getUrl() }}">
+  <meta property="og:image" content="{{ alias(craft.app.sites.primarySite.baseUrl)|slice(0,-1) }}{{ entry.portrait.one().getUrl() }}">
 {% elseif globalSeoSettings.seoDefaultShareImage %}
-  <meta property="og:image" content="{{ siteUrl|slice(0,-1) }}{{ globalSeoSettings.seoDefaultShareImage.one().getUrl() }}">
+  <meta property="og:image" content="{{ alias(craft.app.sites.primarySite.baseUrl)|slice(0,-1) }}{{ globalSeoSettings.seoDefaultShareImage.one().getUrl() }}">
 {% endif %}
 
 
