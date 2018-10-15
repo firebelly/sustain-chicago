@@ -790,9 +790,9 @@ var SC = (function($) {
     .replace(/['"]+/g, '');
 
     // Determine current breakpoint
-    breakpoint_nav = breakpointIndicatorString === 'nav';
-    breakpoint_xl = breakpointIndicatorString === 'xl' || breakpoint_nav;
-    breakpoint_lg = breakpointIndicatorString === 'lg' || breakpoint_xl;
+    breakpoint_xl = breakpointIndicatorString === 'xl';
+    breakpoint_nav = breakpointIndicatorString === 'nav' || breakpoint_xl;
+    breakpoint_lg = breakpointIndicatorString === 'lg' || breakpoint_nav;
     breakpoint_md = breakpointIndicatorString === 'md' || breakpoint_lg;
     breakpoint_sm = breakpointIndicatorString === 'sm' || breakpoint_md;
     breakpoint_xs = breakpointIndicatorString === 'xs' || breakpoint_sm;
