@@ -78,6 +78,7 @@ body.search {
     a {
       @extend .h4;
       @extend .inline-link;
+      word-break: break-all;
     }
   }
 }
