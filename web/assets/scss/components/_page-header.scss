@@ -151,6 +151,10 @@
   .page-intro {
     @extend .top-margin-paras;
 
+    a {
+      @extend .inline-link;
+    }
+
     .link-block {
       p {
         margin-top: 1em;
